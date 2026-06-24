@@ -337,6 +337,44 @@
       "matches": []
     }
   ],
+  "tournament_stats": {
+    "top_scorer_name": "Lionel Messi",
+    "top_scorer_flag": "🇦🇷",
+    "top_scorer_goals": 5,
+    "zero_zero_count": 2
+  },
+  "top_scorers": [
+    {
+      "name": "Lionel Messi",
+      "country": "Argentina",
+      "flag": "🇦🇷",
+      "goals": 5
+    },
+    {
+      "name": "Erling Haaland",
+      "country": "Norway",
+      "flag": "🇳🇴",
+      "goals": 4
+    },
+    {
+      "name": "Jonathan David",
+      "country": "Canada",
+      "flag": "🇨🇦",
+      "goals": 3
+    },
+    {
+      "name": "Cristiano Ronaldo",
+      "country": "Portugal",
+      "flag": "🇵🇹",
+      "goals": 3
+    },
+    {
+      "name": "Kylian Mbappé",
+      "country": "France",
+      "flag": "🇫🇷",
+      "goals": 3
+    }
+  ],
   "bonus_questions": [
     {
       "q": "🏆 World Champion",
@@ -388,45 +426,6 @@
       "current_label": "2 so far"
     }
   ],
-  "top_scorers": [
-    {
-      "name": "Lionel Messi",
-      "country": "Argentina",
-      "flag": "🇦🇷",
-      "goals": 5
-    },
-    {
-      "name": "Erling Haaland",
-      "country": "Norway",
-      "flag": "🇳🇴",
-      "goals": 4
-    },
-    {
-      "name": "Jonathan David",
-      "country": "Canada",
-      "flag": "🇨🇦",
-      "goals": 3
-    },
-    {
-      "name": "Cristiano Ronaldo",
-      "country": "Portugal",
-      "flag": "🇵🇹",
-      "goals": 3
-    },
-    {
-      "name": "Kylian Mbappé",
-      "country": "France",
-      "flag": "🇫🇷",
-      "goals": 3
-    }
-  ],
-  "tournament_stats": {
-    "top_scorer_name": "Lionel Messi",
-    "top_scorer_flag": "🇦🇷",
-    "top_scorer_country": "Argentina",
-    "top_scorer_goals": 5,
-    "zero_zero_count": 2
-  },
   "groups": {},
-  "updated_at": "24.06.2026 15:31 UTC"
+  "updated_at": "24.06.2026 19:00 UTC"
 }
