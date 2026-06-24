@@ -1,10 +1,5 @@
 {
-  "standings": [
-    {"rank": 1, "name": "Sandro S", "points": 226},
-    {"rank": 2, "name": "Alice B", "points": 225},
-    {"rank": 3, "name": "Karin S", "points": 220},
-    {"rank": 4, "name": "Adi S", "points": 210}
-  ],
+  "standings": [],
   "rounds": [],
-  "updated_at": "Noch nicht aktualisiert"
+  "updated_at": "24.06.2026 13:10 UTC"
 }
