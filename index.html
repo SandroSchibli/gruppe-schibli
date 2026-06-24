@@ -120,6 +120,34 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,
 .notif-btn:hover{background:rgba(255,255,255,0.08);color:var(--text)}
 .updated{padding:4px 16px 32px;font-size:11px;color:var(--text2);text-align:center}
 
+/* ── Main nav tabs ── */
+.main-tabs{display:flex;background:var(--card2);border-bottom:2px solid var(--border)}
+.main-tab{flex:1;padding:13px 8px;font-size:12px;font-weight:700;color:var(--text2);text-align:center;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.main-tab.active{color:var(--text);border-bottom-color:var(--accent)}
+.main-view{display:none}
+.main-view.active{display:block}
+
+/* ── Top scorers ── */
+.scorer-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.scorer-row:last-child{border-bottom:none}
+.scorer-rank{font-size:13px;color:var(--text2);width:20px}
+.scorer-flag{font-size:18px}
+.scorer-name{flex:1;font-size:14px;font-weight:600}
+.scorer-team{font-size:11px;color:var(--text2)}
+.scorer-goals{font-size:18px;font-weight:900;color:var(--gold)}
+
+/* ── Group table ── */
+.group-block{margin-bottom:20px}
+.group-name{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px}
+.group-table{width:100%;border-collapse:collapse;font-size:12px}
+.group-table th{color:var(--text2);font-weight:600;padding:4px 6px;text-align:right}
+.group-table th:first-child{text-align:left}
+.group-table td{padding:6px 6px;border-top:1px solid var(--border);text-align:right;font-weight:600}
+.group-table td:first-child{text-align:left;font-size:13px}
+.group-table tr:nth-child(-n+2) td{color:var(--green)}
+
+.empty-state{padding:40px 16px;text-align:center;color:var(--text2);font-size:13px}
+
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
 </style>
 </head>
@@ -133,8 +161,24 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,
 
 <div class="section" id="standings-section"></div>
 
-<div class="tabs" id="tabs"></div>
-<div id="panels"></div>
+<div class="main-tabs">
+  <div class="main-tab active" onclick="switchMain('tipps')">⚽ Tipps</div>
+  <div class="main-tab" onclick="switchMain('torjaeger')">👟 Torjäger</div>
+  <div class="main-tab" onclick="switchMain('tabelle')">📊 Tabelle</div>
+</div>
+
+<div id="view-tipps" class="main-view active">
+  <div class="tabs" id="tabs"></div>
+  <div id="panels"></div>
+</div>
+
+<div id="view-torjaeger" class="main-view" style="padding:16px">
+  <div id="top-scorers-section"></div>
+</div>
+
+<div id="view-tabelle" class="main-view" style="padding:16px">
+  <div id="groups-section"></div>
+</div>
 
 <div class="notif">
   <a class="notif-btn" id="notif-link" href="#" target="_blank">🔔 Push-Notifications aktivieren</a>
@@ -296,6 +340,18 @@ function matchCard(m, isKO, roundIdx, gameIdx) {
 </div>`;
 }
 
+// ── Sort: live first → completed newest first → upcoming soonest first ──
+function sortMatches(matches) {
+  return [...matches].sort((a, b) => {
+    const aLive = isLive(a), bLive = isLive(b);
+    if (aLive !== bLive) return aLive ? -1 : 1;
+    const aFin = a.result?.home != null, bFin = b.result?.home != null;
+    if (aFin && bFin) return new Date(b.kickoff) - new Date(a.kickoff); // newest first
+    if (!aFin && !bFin) return new Date(a.kickoff) - new Date(b.kickoff); // soonest first
+    return aFin ? -1 : 1; // finished above upcoming
+  });
+}
+
 // ── Render ───────────────────────────────────────────────────────────
 function render(DATA) {
   _data = DATA;
@@ -330,10 +386,10 @@ function render(DATA) {
     `<div class="tab${i===_activeTab?' active':''}" onclick="switchTab(${i})">${r.name}</div>`
   ).join('');
 
-  // Panels
+  // Panels — sorted newest first within each round
   document.getElementById('panels').innerHTML = DATA.rounds.map((r,i) => `
 <div class="round-panel${i===_activeTab?' active':''}" id="panel-${i}">
-  ${r.matches.map((m,j) => matchCard(m, r.isKO||false, i, j)).join('')}
+  ${sortMatches(r.matches).map((m,j) => matchCard(m, r.isKO||false, i, j)).join('')}
 </div>`).join('');
 
   // Updated
@@ -342,10 +398,63 @@ function render(DATA) {
       'Aktualisiert: ' + new Date(DATA.updated).toLocaleString('de-CH',{timeZone:'Europe/Zurich'});
   }
 
+  // Top scorers + group tables
+  renderTopScorers(DATA.top_scorers);
+  renderGroups(DATA.groups);
+
   // Gather countdown elements
   document.querySelectorAll('[data-ko]').forEach(el => {
     _countdowns.push({el, ko: +new Date(el.dataset.ko)});
   });
+}
+
+function switchMain(view) {
+  document.querySelectorAll('.main-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['tipps','torjaeger','tabelle'][i] === view);
+  });
+  document.querySelectorAll('.main-view').forEach(v => {
+    v.classList.toggle('active', v.id === 'view-'+view);
+  });
+}
+
+function renderTopScorers(scorers) {
+  const el = document.getElementById('top-scorers-section');
+  if (!scorers || !scorers.length) {
+    el.innerHTML = '<div class="empty-state">Torjäger werden geladen sobald der Scraper läuft ⏳</div>';
+    return;
+  }
+  el.innerHTML = '<div class="section-title">Torschützenkönig</div>' +
+    scorers.map((s,i) => `
+<div class="scorer-row">
+  <span class="scorer-rank">#${i+1}</span>
+  <span class="scorer-flag">${s.flag||''}</span>
+  <div style="flex:1">
+    <div class="scorer-name">${s.name}</div>
+    <div class="scorer-team">${s.team||''}</div>
+  </div>
+  <span class="scorer-goals">${s.goals}</span>
+</div>`).join('');
+}
+
+function renderGroups(groups) {
+  const el = document.getElementById('groups-section');
+  if (!groups || !Object.keys(groups).length) {
+    el.innerHTML = '<div class="empty-state">Gruppentabelle wird geladen sobald der Scraper läuft ⏳</div>';
+    return;
+  }
+  el.innerHTML = Object.entries(groups).map(([name, teams]) => `
+<div class="group-block">
+  <div class="group-name">Gruppe ${name}</div>
+  <table class="group-table">
+    <tr><th>Team</th><th>Sp</th><th>S</th><th>U</th><th>N</th><th>Tore</th><th>Pkt</th></tr>
+    ${teams.map(t => `<tr>
+      <td>${t.flag||''} ${t.name}</td>
+      <td>${t.played||0}</td><td>${t.won||0}</td><td>${t.drawn||0}</td><td>${t.lost||0}</td>
+      <td>${t.gf||0}:${t.ga||0}</td>
+      <td style="color:var(--gold);font-weight:900">${t.points||0}</td>
+    </tr>`).join('')}
+  </table>
+</div>`).join('');
 }
 
 function switchTab(i) {
