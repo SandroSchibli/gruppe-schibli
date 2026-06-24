@@ -68,8 +68,10 @@ async def run():
         )
 
         # Block Usercentrics consent manager — prevents cookie banner entirely
+        # Only block Usercentrics domains, NOT generic "consent" (breaks SRF OAuth)
         await ctx.route("**/*usercentrics*", lambda route: route.abort())
-        await ctx.route("**/*consent*", lambda route: route.abort())
+        await ctx.route("**/app.usercentrics.eu/**", lambda route: route.abort())
+        await ctx.route("**/aggregator.service.usercentrics.eu/**", lambda route: route.abort())
 
         page = await ctx.new_page()
 
