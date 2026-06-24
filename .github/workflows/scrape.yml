@@ -1,17 +1,15 @@
 name: Scrape SRF Tippspiel
 
 on:
-  # Run every 30 minutes during match hours (17:00–23:30 UTC = 19:00–01:30 Swiss time)
   schedule:
     - cron: '0,30 17-23 * * *'
-  # Also allow manual trigger from GitHub website
   workflow_dispatch:
 
 jobs:
   scrape:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
-      contents: write   # needed to commit data.json back to repo
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -34,7 +32,7 @@ jobs:
           SRF_PASSWORD: ${{ secrets.SRF_PASSWORD }}
         run: python scrape.py
 
-      - name: Upload debug screenshots (always, even on failure)
+      - name: Upload debug screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -47,5 +45,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "GitHub Actions"
           git add data/data.json
-          git diff --staged --quiet || git commit -m "🔄 Update data $(date -u '+%H:%M UTC')"
+          git diff --staged --quiet || git commit -m "Update data"
           git push
