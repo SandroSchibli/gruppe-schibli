@@ -144,7 +144,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,
 .group-table th:first-child{text-align:left}
 .group-table td{padding:6px 6px;border-top:1px solid var(--border);text-align:right;font-weight:600}
 .group-table td:first-child{text-align:left;font-size:13px}
-.group-table tr:nth-child(-n+2) td{color:var(--green)}
+.group-table .q-advance td{color:var(--green)}
+.pts-cell{color:var(--gold)!important;font-weight:900!important}
+.rank-badge{display:inline-block;width:16px;height:16px;line-height:16px;text-align:center;border-radius:50%;background:rgba(255,255,255,0.1);font-size:10px;font-weight:700;margin-right:4px;vertical-align:middle}
 
 .empty-state{padding:40px 16px;text-align:center;color:var(--text2);font-size:13px}
 
@@ -438,20 +440,21 @@ function renderTopScorers(scorers) {
 
 function renderGroups(groups) {
   const el = document.getElementById('groups-section');
-  if (!groups || !Object.keys(groups).length) {
-    el.innerHTML = '<div class="empty-state">Gruppentabelle wird geladen sobald der Scraper läuft ⏳</div>';
+  if (!groups || !groups.length) {
+    el.innerHTML = '<div class="empty-state">Gruppentabelle wird berechnet… ⏳</div>';
     return;
   }
-  el.innerHTML = Object.entries(groups).map(([name, teams]) => `
+  el.innerHTML = groups.map(g => `
 <div class="group-block">
-  <div class="group-name">Gruppe ${name}</div>
+  <div class="group-name">${g.name}</div>
   <table class="group-table">
-    <tr><th>Team</th><th>Sp</th><th>S</th><th>U</th><th>N</th><th>Tore</th><th>Pkt</th></tr>
-    ${teams.map(t => `<tr>
-      <td>${t.flag||''} ${t.name}</td>
+    <tr><th>Team</th><th>Sp</th><th>S</th><th>U</th><th>N</th><th>Tore</th><th>TD</th><th>Pkt</th></tr>
+    ${g.teams.map((t,i) => `<tr class="${i<2?'q-advance':''}">
+      <td><span class="rank-badge">${t.rank}</span>${t.flag||''} ${t.name}</td>
       <td>${t.played||0}</td><td>${t.won||0}</td><td>${t.drawn||0}</td><td>${t.lost||0}</td>
       <td>${t.gf||0}:${t.ga||0}</td>
-      <td style="color:var(--gold);font-weight:900">${t.points||0}</td>
+      <td>${t.gd>0?'+':''}${t.gd||0}</td>
+      <td class="pts-cell">${t.points||0}</td>
     </tr>`).join('')}
   </table>
 </div>`).join('');

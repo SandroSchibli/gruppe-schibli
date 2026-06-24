@@ -102,6 +102,98 @@ async def dismiss_cookie_banner(page):
         pass
 
 
+def compute_groups(rounds):
+    """Derive group standings from match results — no external API needed."""
+    # Build adjacency graph: teams that played each other are in same group
+    from collections import defaultdict
+    adj = defaultdict(set)
+    all_matches = [m for r in rounds for m in r.get("matches", [])]
+    flags = {}
+    for m in all_matches:
+        h, a = m["home"], m["away"]
+        adj[h].add(a)
+        adj[a].add(h)
+        flags[h] = m.get("homeFlag", "🏳")
+        flags[a] = m.get("awayFlag", "🏳")
+
+    # BFS to find groups of 4
+    visited = set()
+    group_sets = []
+    for team in sorted(adj.keys()):
+        if team in visited:
+            continue
+        group = set()
+        q = [team]
+        while q:
+            t = q.pop()
+            if t in group:
+                continue
+            group.add(t)
+            for n in adj[t]:
+                if n not in group:
+                    q.append(n)
+        visited |= group
+        group_sets.append(sorted(group))
+
+    # Initialize stats
+    team_stats = {}
+    for g in group_sets:
+        for t in g:
+            team_stats[t] = {"P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "GD": 0, "Pts": 0}
+
+    # Process finished matches
+    for m in all_matches:
+        res = m.get("result") or {}
+        if res.get("home") is None:
+            continue
+        h, a = m["home"], m["away"]
+        gh, ga = res["home"], res["away"]
+        for team, gf, ga2 in [(h, gh, ga), (a, ga, gh)]:
+            if team not in team_stats:
+                continue
+            s = team_stats[team]
+            s["P"] += 1
+            s["GF"] += gf
+            s["GA"] += ga2
+            s["GD"] += gf - ga2
+            if gf > ga2:
+                s["W"] += 1
+                s["Pts"] += 3
+            elif gf == ga2:
+                s["D"] += 1
+                s["Pts"] += 1
+            else:
+                s["L"] += 1
+
+    # Build output sorted by Pts, GD, GF
+    groups_out = []
+    for i, grp in enumerate(group_sets):
+        rows = sorted(
+            [{"team": t, **team_stats[t]} for t in grp],
+            key=lambda x: (-x["Pts"], -x["GD"], -x["GF"])
+        )
+        groups_out.append({
+            "name": f"Group {chr(65 + i)}",
+            "teams": [
+                {
+                    "name": r["team"],
+                    "flag": flags.get(r["team"], "🏳"),
+                    "rank": j + 1,
+                    "played": r["P"],
+                    "won": r["W"],
+                    "drawn": r["D"],
+                    "lost": r["L"],
+                    "gf": r["GF"],
+                    "ga": r["GA"],
+                    "gd": r["GD"],
+                    "points": r["Pts"],
+                }
+                for j, r in enumerate(rows)
+            ],
+        })
+    return groups_out
+
+
 async def run():
     username = os.environ["SRF_USERNAME"]
     password = os.environ["SRF_PASSWORD"]
@@ -208,13 +300,15 @@ async def run():
         if not bonus:
             bonus = existing.get("bonus_questions", [])
 
+        groups = compute_groups(rounds)
+
         data = {
             "standings": standings,
             "rounds": rounds,
             "bonus_questions": bonus,
             "top_scorers": existing.get("top_scorers", []),
             "tournament_stats": existing.get("tournament_stats", {}),
-            "groups": existing.get("groups", {}),
+            "groups": groups,
             "updated": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
         }
 
