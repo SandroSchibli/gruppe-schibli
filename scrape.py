@@ -302,11 +302,21 @@ async def run():
 
         groups = compute_groups(rounds)
 
+        # ── Live scores + top scorers from football-data.org ───────────────
+        football_api_key = os.environ.get("FOOTBALL_API_KEY", "")
+        if football_api_key:
+            rounds = apply_live_scores(football_api_key, rounds)
+            top_scorers = get_top_scorers_api(football_api_key)
+            log.info(f"Live scores applied, {len(top_scorers)} top scorers fetched")
+        else:
+            top_scorers = existing.get("top_scorers", [])
+            log.info("FOOTBALL_API_KEY not set — skipping live scores API")
+
         data = {
             "standings": standings,
             "rounds": rounds,
             "bonus_questions": bonus,
-            "top_scorers": existing.get("top_scorers", []),
+            "top_scorers": top_scorers,
             "tournament_stats": existing.get("tournament_stats", {}),
             "groups": groups,
             "updated": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -316,11 +326,171 @@ async def run():
         ep.write_text(json.dumps(data, ensure_ascii=False, indent=2))
         log.info(f"Saved: {len(standings)} standings, {len(rounds)} rounds")
 
-        # ── Push notifications for games starting now ──────────────────────
+        # ── Push notifications ─────────────────────────────────────────────
         send_kickoff_notifications(data)
+        send_result_notifications(data, existing)
 
         await browser.close()
     return data
+
+
+# ── football-data.org API ─────────────────────────────────────────────────
+# Team name map: football-data.org names → our names
+FD_TEAM_MAP = {
+    "Bosnia and Herzegovina": "Bosnia-Herzeg.",
+    "Côte d'Ivoire": "Ivory Coast", "Cote d'Ivoire": "Ivory Coast",
+    "Korea Republic": "South Korea", "Republic of Korea": "South Korea",
+    "DR Congo": "DR Congo", "Congo DR": "DR Congo",
+    "New Zealand": "New Zealand", "USA": "USA",
+    "Saudi Arabia": "Saudi Arabia", "Cape Verde": "Cape Verde",
+}
+
+def _fd_request(endpoint: str, api_key: str) -> dict:
+    url = f"https://api.football-data.org/v4/{endpoint}"
+    req = urllib.request.Request(url, headers={"X-Auth-Token": api_key})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        return json.loads(r.read())
+
+def _fd_name(raw: str) -> str:
+    return FD_TEAM_MAP.get(raw, raw)
+
+def apply_live_scores(api_key: str, rounds: list) -> list:
+    """Fetch live + today's results from football-data.org and patch rounds."""
+    try:
+        today = datetime.utcnow().strftime("%Y-%m-%d")
+        live_data  = _fd_request("competitions/WC/matches?status=IN_PLAY", api_key)
+        today_data = _fd_request(f"competitions/WC/matches?dateFrom={today}&dateTo={today}", api_key)
+        fd_matches = live_data.get("matches", []) + today_data.get("matches", [])
+    except Exception as e:
+        log.warning(f"football-data.org fetch failed: {e}")
+        return rounds
+
+    # Index fd_matches by home+away team
+    fd_idx = {}
+    for m in fd_matches:
+        h = _fd_name(m["homeTeam"]["name"])
+        a = _fd_name(m["awayTeam"]["name"])
+        fd_idx[(h, a)] = m
+
+    for rnd in rounds:
+        for match in rnd.get("matches", []):
+            key = (match["home"], match["away"])
+            fd = fd_idx.get(key)
+            if not fd:
+                continue
+            score = fd.get("score", {})
+            full  = score.get("fullTime", {})
+            curr  = score.get("currentPeriod") or score.get("halfTime", {})
+            status = fd.get("status", "")
+
+            if status == "FINISHED" and full.get("home") is not None:
+                match["result"] = {"home": full["home"], "away": full["away"]}
+                match.pop("liveScore", None)
+            elif status in ("IN_PLAY", "PAUSED", "HALFTIME"):
+                live_h = full.get("home") if full.get("home") is not None else (curr.get("home") or 0)
+                live_a = full.get("away") if full.get("away") is not None else (curr.get("away") or 0)
+                match["liveScore"] = {"home": live_h, "away": live_a}
+    return rounds
+
+
+def get_top_scorers_api(api_key: str) -> list:
+    """Fetch tournament top scorers from football-data.org."""
+    try:
+        data = _fd_request("competitions/WC/scorers?limit=10", api_key)
+        out = []
+        for s in data.get("scorers", []):
+            team_name = _fd_name(s.get("team", {}).get("name", ""))
+            out.append({
+                "name":  s["player"]["name"],
+                "team":  team_name,
+                "flag":  FLAGS.get(team_name, "🏳"),
+                "goals": s.get("goals", 0),
+            })
+        return out
+    except Exception as e:
+        log.warning(f"Top scorers fetch failed: {e}")
+        return []
+
+
+def send_result_notifications(data: dict, existing: dict):
+    """Send a notification when a game finishes that didn't have a result before."""
+    topic = os.environ.get("NTFY_TOPIC", "")
+    if not topic:
+        return
+
+    members = ["Sandro S", "Alice B", "Karin S", "Adi S"]
+    first   = {"Sandro S": "Sandro", "Alice B": "Alice", "Karin S": "Karin", "Adi S": "Adi"}
+
+    # Build index of existing results
+    old_results = {}
+    for rnd in existing.get("rounds", []):
+        for m in rnd.get("matches", []):
+            key = (m["home"], m["away"])
+            if m.get("result") and m["result"].get("home") is not None:
+                old_results[key] = m["result"]
+
+    standings = {s["name"]: s["points"] for s in data.get("standings", [])}
+
+    for rnd in data.get("rounds", []):
+        isKO = rnd.get("isKO", False)
+        for match in rnd.get("matches", []):
+            res = match.get("result", {})
+            if not res or res.get("home") is None:
+                continue
+            key = (match["home"], match["away"])
+            if key in old_results:
+                continue  # already knew this result
+
+            # New result — send notification
+            home, away = match["home"], match["away"]
+            hf, af = match.get("homeFlag", ""), match.get("awayFlag", "")
+            rh, ra = res["home"], res["away"]
+            preds = match.get("predictions", {})
+
+            def _pts(mb):
+                tip = preds.get(mb, {})
+                if tip.get("home") is None: return None
+                return _calc_pts_simple(tip, res, isKO)
+
+            def _calc_pts_simple(tip, res, isKO):
+                p = 0
+                to = 1 if tip["home"]>tip["away"] else (-1 if tip["home"]<tip["away"] else 0)
+                ro = 1 if res["home"]>res["away"] else (-1 if res["home"]<res["away"] else 0)
+                if to == ro: p += 5
+                if tip["home"] == res["home"]: p += 1
+                if tip["away"] == res["away"]: p += 1
+                if (tip["home"]-tip["away"]) == (res["home"]-res["away"]): p += 3
+                return p * 2 if isKO else p
+
+            tip_lines = []
+            for mb in members:
+                tip = preds.get(mb, {})
+                h_t, a_t = tip.get("home"), tip.get("away")
+                pts = _pts(mb)
+                if h_t is None:
+                    tip_lines.append(f"{first[mb]}: – (kein Tipp)")
+                else:
+                    pts_str = f"+{pts}" if pts else "0"
+                    tip_lines.append(f"{first[mb]}: {h_t}:{a_t} ({pts_str} Pkt)")
+
+            # Standings line
+            sorted_standings = sorted(standings.items(), key=lambda x: -x[1])
+            rank_str = " | ".join(f"{first.get(n,n)} {p}" for n,p in sorted_standings if n in first)
+
+            title   = f"🏁 {hf} {home} {rh}:{ra} {away} {af}"
+            message = "\n".join(tip_lines) + f"\n\nRangliste: {rank_str}"
+
+            try:
+                req = urllib.request.Request(
+                    f"https://ntfy.sh/{topic}",
+                    data=message.encode("utf-8"),
+                    headers={"Title": title, "Priority": "default", "Tags": "soccer,checkered_flag"},
+                    method="POST",
+                )
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    log.info(f"Result notification sent for {home} vs {away}: {resp.status}")
+            except Exception as e:
+                log.warning(f"Result notification failed: {e}")
 
 
 # ── Push notifications via ntfy.sh ────────────────────────────────────────

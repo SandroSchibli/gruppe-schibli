@@ -92,16 +92,19 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,
 .tcn{font-size:11px;color:var(--text2);font-weight:500;margin-bottom:3px}
 .tcr{display:flex;align-items:center;justify-content:space-between}
 .tcs{font-size:15px;font-weight:700}
-.tcs.exact{color:var(--gold)}
-.tcs.correct{color:var(--green)}
-.tcs.wrong{color:var(--text2)}
-.tcs.open{color:var(--text)}
-.tcs.future{color:var(--text2);opacity:0.35}
+.tcs.exact  {color:#00ffcc;text-shadow:0 0 10px rgba(0,255,200,0.45)}  /* strong green – perfect */
+.tcs.correct{color:var(--green)}                                        /* green – right winner */
+.tcs.partial{color:#ff9500}                                             /* orange – 1pt, wrong winner */
+.tcs.wrong  {color:var(--accent)}                                       /* red – wrong winner */
+.tcs.open   {color:var(--text)}
+.tcs.future {color:var(--text2);opacity:0.35}
 .tcp{font-size:11px;font-weight:700;padding:2px 5px;border-radius:4px}
-.tcp.won{background:rgba(244,196,48,0.15);color:var(--gold)}
-.tcp.live{background:rgba(6,214,160,0.2);color:var(--green)}
-.tcp.nope{color:var(--text2)}
-.tcp.dash{color:var(--text2);opacity:0.4}
+.tcp.exact  {background:rgba(0,255,204,0.15);color:#00ffcc}
+.tcp.correct{background:rgba(6,214,160,0.15);color:var(--green)}
+.tcp.partial{background:rgba(255,149,0,0.15);color:#ff9500}
+.tcp.live   {background:rgba(6,214,160,0.2);color:var(--green)}
+.tcp.nope   {color:var(--text2)}
+.tcp.dash   {color:var(--text2);opacity:0.4}
 
 /* ── Live sim ── */
 .sim{border-top:1px solid var(--border);padding:10px 14px}
@@ -151,6 +154,42 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,
 .empty-state{padding:40px 16px;text-align:center;color:var(--text2);font-size:13px}
 
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Live ranking widget ── */
+#live-widget{
+  margin:0 16px 12px;
+  background:linear-gradient(135deg,rgba(6,214,160,0.12) 0%,rgba(6,214,160,0.04) 100%);
+  border:1px solid rgba(6,214,160,0.3);
+  border-radius:14px;
+  overflow:hidden;
+  animation:fadeIn .4s ease;
+}
+.lw-header{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 14px 8px;
+  border-bottom:1px solid rgba(6,214,160,0.15);
+}
+.lw-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse .9s ease infinite;flex-shrink:0}
+.lw-title{font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--green);text-transform:uppercase}
+.lw-game{font-size:11px;color:var(--text2);flex:1;text-align:right}
+.lw-rows{padding:6px 0 4px}
+.lw-row{display:flex;align-items:center;gap:10px;padding:5px 14px;transition:background .2s}
+.lw-row.gaining{background:rgba(6,214,160,0.08)}
+.lw-rank{font-size:11px;color:var(--text2);width:16px;font-weight:600}
+.lw-name{font-size:14px;font-weight:700;flex:1}
+.lw-total{font-size:13px;font-weight:700;color:var(--text2)}
+.lw-gain{font-size:12px;font-weight:800;padding:2px 6px;border-radius:6px;background:rgba(6,214,160,0.2);color:var(--green);min-width:32px;text-align:center}
+.lw-nogain{font-size:12px;color:var(--text2);min-width:32px;text-align:center}
+
+/* ── Bonus questions ── */
+.bonus-q{background:var(--card);border-radius:12px;padding:14px;margin-bottom:12px}
+.bonus-text{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text)}
+.bonus-answers{display:flex;flex-direction:column;gap:6px}
+.bonus-ans{display:flex;align-items:center;gap:8px;font-size:12px}
+.bonus-member{color:var(--text2);width:54px;font-weight:600}
+.bonus-val{color:var(--text);font-weight:700}
+.bonus-live{font-size:12px;color:var(--green);margin-bottom:8px;font-weight:600}
 </style>
 </head>
 <body>
@@ -163,10 +202,21 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,
 
 <div class="section" id="standings-section"></div>
 
+<!-- Live ranking widget — visible only during live games -->
+<div id="live-widget" style="display:none">
+  <div class="lw-header">
+    <span class="lw-dot"></span>
+    <span class="lw-title">Live Ranking</span>
+    <span class="lw-game" id="lw-game"></span>
+  </div>
+  <div class="lw-rows" id="lw-rows"></div>
+</div>
+
 <div class="main-tabs">
   <div class="main-tab active" onclick="switchMain('tipps')">⚽ Tipps</div>
   <div class="main-tab" onclick="switchMain('torjaeger')">👟 Torjäger</div>
   <div class="main-tab" onclick="switchMain('tabelle')">📊 Tabelle</div>
+  <div class="main-tab" onclick="switchMain('bonus')">🎯 Bonus</div>
 </div>
 
 <div id="view-tipps" class="main-view active">
@@ -180,6 +230,10 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,
 
 <div id="view-tabelle" class="main-view" style="padding:16px">
   <div id="groups-section"></div>
+</div>
+
+<div id="view-bonus" class="main-view" style="padding:16px">
+  <div id="bonus-section"></div>
 </div>
 
 <div class="notif">
@@ -212,10 +266,10 @@ function calcPts(tip, res, isKO) {
 function tipCls(tip, res, isKO) {
   if (!tip || tip.home == null || !res || res.home == null) return 'open';
   const p = calcPts(tip, res, isKO);
-  if (p >= 10) return 'exact';
-  if (p >= 5)  return 'correct';
-  if (p > 0)   return 'correct';
-  return 'wrong';
+  if (p >= 10) return 'exact';   // strong green
+  if (p >= 5)  return 'correct'; // green – right winner
+  if (p > 0)   return 'partial'; // orange – 1pt, wrong winner
+  return 'wrong';                 // red
 }
 
 // ── Timing helpers ───────────────────────────────────────────────────
@@ -291,11 +345,13 @@ function matchCard(m, isKO, roundIdx, gameIdx) {
       pts = calcPts(tip, m.result, isKO);
       cls = tipCls(tip, m.result, isKO);
       if (pts === null)   ptBadge = `<span class="tcp dash">–</span>`;
-      else if (pts > 0)   ptBadge = `<span class="tcp won">+${pts}</span>`;
+      else if (pts >= 10) ptBadge = `<span class="tcp exact">+${pts}</span>`;
+      else if (pts >= 5)  ptBadge = `<span class="tcp correct">+${pts}</span>`;
+      else if (pts > 0)   ptBadge = `<span class="tcp partial">+${pts}</span>`;
       else                ptBadge = `<span class="tcp nope">0</span>`;
     } else if (live && ls) {
       pts = calcPts(tip, ls, isKO);
-      cls = hasTip ? (pts > 0 ? (pts >= 10 ? 'exact' : 'correct') : 'wrong') : 'future';
+      cls = hasTip ? tipCls(tip, ls, isKO) : 'future';
       if (hasTip) ptBadge = pts > 0 ? `<span class="tcp live">+${pts}</span>` : `<span class="tcp nope">+0</span>`;
       else        ptBadge = `<span class="tcp dash">–</span>`;
     } else {
@@ -371,13 +427,32 @@ function render(DATA) {
   <span class="s-pts">${s.points} Pkt</span>
 </div>`).join('');
 
-  // Decide default active tab: last round with a live game, or most recent with results
-  let defaultTab = DATA.rounds.length - 1;
-  DATA.rounds.forEach((r,i) => { if (r.matches.some(m => isLive(m))) defaultTab = i; });
+  // Decide default active tab: live → soonest upcoming → latest with results
+  let defaultTab = 0;
+  const _now = Date.now();
 
-  // If no live, default to the last round with any results
-  if (!DATA.rounds[defaultTab].matches.some(m => isLive(m))) {
-    DATA.rounds.forEach((r,i) => { if (r.matches.some(m => m.result)) defaultTab = i; });
+  // 1. Round with live game
+  let _foundLive = false;
+  DATA.rounds.forEach((r,i) => {
+    if (r.matches.some(m => isLive(m))) { defaultTab = i; _foundLive = true; }
+  });
+
+  if (!_foundLive) {
+    // 2. Round containing the next upcoming game
+    let _soonest = Infinity;
+    let _foundUpcoming = false;
+    DATA.rounds.forEach((r,i) => {
+      r.matches.forEach(m => {
+        if (!(m.result && m.result.home != null) && m.kickoff) {
+          const ko = +new Date(m.kickoff);
+          if (ko > _now && ko < _soonest) { _soonest = ko; defaultTab = i; _foundUpcoming = true; }
+        }
+      });
+    });
+    // 3. Fall back to latest round with any result
+    if (!_foundUpcoming) {
+      DATA.rounds.forEach((r,i) => { if (r.matches.some(m => m.result && m.result.home != null)) defaultTab = i; });
+    }
   }
 
   if (_activeTab < 0) _activeTab = defaultTab;
@@ -400,9 +475,13 @@ function render(DATA) {
       'Aktualisiert: ' + new Date(DATA.updated).toLocaleString('de-CH',{timeZone:'Europe/Zurich'});
   }
 
-  // Top scorers + group tables
+  // Live ranking widget
+  renderLiveWidget();
+
+  // Top scorers + group tables + bonus
   renderTopScorers(DATA.top_scorers);
   renderGroups(DATA.groups);
+  renderBonus(DATA.bonus_questions);
 
   // Gather countdown elements
   document.querySelectorAll('[data-ko]').forEach(el => {
@@ -412,11 +491,89 @@ function render(DATA) {
 
 function switchMain(view) {
   document.querySelectorAll('.main-tab').forEach((t,i) => {
-    t.classList.toggle('active', ['tipps','torjaeger','tabelle'][i] === view);
+    t.classList.toggle('active', ['tipps','torjaeger','tabelle','bonus'][i] === view);
   });
   document.querySelectorAll('.main-view').forEach(v => {
     v.classList.toggle('active', v.id === 'view-'+view);
   });
+}
+
+function renderLiveWidget() {
+  const widget = document.getElementById('live-widget');
+  if (!_data) { widget.style.display = 'none'; return; }
+
+  const liveGames = [];
+  for (const rnd of _data.rounds) {
+    for (const m of rnd.matches) {
+      if (isLive(m)) liveGames.push({m, isKO: rnd.isKO || false});
+    }
+  }
+
+  if (!liveGames.length) { widget.style.display = 'none'; return; }
+  widget.style.display = 'block';
+
+  // Build provisional totals: confirmed points + what each member earns from live game(s)
+  const confirmed = {};
+  (_data.standings || []).forEach(s => confirmed[s.name] = s.points);
+
+  const proj = MEMBERS.map(mb => {
+    let gain = 0;
+    for (const {m, isKO} of liveGames) {
+      const tip = (m.predictions || {})[mb] || {};
+      const score = m.liveScore || {home: 0, away: 0};
+      if (tip.home != null) gain += calcPts(tip, score, isKO) || 0;
+    }
+    return { name: mb, first: FIRST[mb] || mb, gain, total: (confirmed[mb] || 0) + gain };
+  }).sort((a,b) => b.total - a.total || b.gain - a.gain);
+
+  document.getElementById('lw-game').textContent =
+    liveGames.map(({m}) => {
+      const s = m.liveScore || {home:0, away:0};
+      return `${m.home} ${s.home}:${s.away} ${m.away}`;
+    }).join(' · ');
+
+  document.getElementById('lw-rows').innerHTML = proj.map((p,i) => `
+<div class="lw-row${p.gain > 0 ? ' gaining' : ''}">
+  <span class="lw-rank">${i+1}</span>
+  <span class="lw-name">${p.first}</span>
+  <span class="lw-total">${p.total} Pkt</span>
+  ${p.gain > 0
+    ? `<span class="lw-gain">+${p.gain}</span>`
+    : `<span class="lw-nogain">+0</span>`}
+</div>`).join('');
+}
+
+function renderBonus(questions) {
+  const el = document.getElementById('bonus-section');
+  if (!questions || !questions.length) {
+    el.innerHTML = '<div class="empty-state">Bonusfragen werden geladen… ⏳</div>';
+    return;
+  }
+  const stats = (_data && _data.tournament_stats) || {};
+
+  // Current live values per question key
+  const currentVals = {
+    'Tore der Schweiz':      stats.swiss_goals != null ? `${stats.swiss_goals} Tore` : null,
+    'Tore Torschützenkönig': stats.top_scorer_goals != null ? `${stats.top_scorer_goals} Tore` : null,
+    'Anzahl 0:0-Spiele':     stats.zero_zero_count != null ? `${stats.zero_zero_count} Spiele` : null,
+  };
+
+  el.innerHTML = `<div class="section-title" style="padding:0 0 14px">🎯 Bonusfragen</div>` +
+    questions.map(bq => {
+      const live = currentVals[bq.q];
+      return `
+<div class="bonus-q">
+  <div class="bonus-text">${bq.label || bq.q}</div>
+  ${live ? `<div class="bonus-live">📊 Aktuell: <strong>${live}</strong></div>` : ''}
+  <div class="bonus-answers">
+    ${MEMBERS.map(mb => {
+      const ans = (bq.a || {})[mb];
+      if (!ans) return '';
+      return `<div class="bonus-ans"><span class="bonus-member">${FIRST[mb]||mb}</span><span class="bonus-val">${ans}</span></div>`;
+    }).join('')}
+  </div>
+</div>`;
+    }).join('');
 }
 
 function renderTopScorers(scorers) {
@@ -511,15 +668,15 @@ document.getElementById('notif-link').href = NTFY;
 // Countdown every second
 setInterval(tickCountdowns, 1000);
 
-// Data refresh every 60s; faster when live game running
+// Data refresh: 30s during live games, 2min otherwise
 setInterval(() => {
   const hasLive = _data?.rounds?.some(r => r.matches.some(m => isLive(m)));
-  if (hasLive) refresh(); // always refresh during live
-}, 60000);
+  if (hasLive) { refresh(); renderLiveWidget(); }
+}, 30000);
 setInterval(() => {
   const hasLive = _data?.rounds?.some(r => r.matches.some(m => isLive(m)));
   if (!hasLive) refresh();
-}, 5 * 60000);
+}, 2 * 60000);
 
 // Refresh on tab focus
 document.addEventListener('visibilitychange', () => {

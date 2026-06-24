@@ -2307,5 +2307,62 @@
         }
       ]
     }
-  ]
+  ],
+  "bonus_questions": [
+    {
+      "q": "Weltmeister",
+      "label": "🏆 Weltmeister",
+      "a": {
+        "Sandro S": "Spanien 🇪🇸",
+        "Alice B": "Spanien 🇪🇸",
+        "Karin S": "Spanien 🇪🇸",
+        "Adi S": "Spanien 🇪🇸"
+      }
+    },
+    {
+      "q": "Wie weit kommt die Schweiz?",
+      "label": "🇨🇭 Wie weit kommt die Schweiz?",
+      "a": {
+        "Sandro S": "Achtelfinal",
+        "Alice B": "Achtelfinal",
+        "Karin S": "Achtelfinal",
+        "Adi S": "Viertelfinal"
+      }
+    },
+    {
+      "q": "Tore der Schweiz",
+      "label": "⚽ Tore Schweiz (total, ohne ET/Penaltys)",
+      "a": {
+        "Sandro S": "7",
+        "Alice B": "7",
+        "Karin S": "4",
+        "Adi S": "9"
+      }
+    },
+    {
+      "q": "Tore Torschützenkönig",
+      "label": "👟 Tore Torschützenkönig (ohne ET/Penaltys)",
+      "a": {
+        "Sandro S": "5",
+        "Alice B": "7",
+        "Karin S": "8",
+        "Adi S": "7"
+      }
+    },
+    {
+      "q": "Anzahl 0:0-Spiele",
+      "label": "🔒 Partien mit 0:0 (Resultat nach Verlängerung)",
+      "a": {
+        "Sandro S": "4",
+        "Alice B": "10",
+        "Karin S": "9",
+        "Adi S": "8"
+      }
+    }
+  ],
+  "tournament_stats": {
+    "swiss_goals": 5,
+    "zero_zero_count": 4,
+    "top_scorer_goals": null
+  }
 }
