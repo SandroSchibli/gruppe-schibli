@@ -181,6 +181,21 @@ async def run():
         rounds = await get_all_rounds(page)
 
         # ── Save ───────────────────────────────────────────────────────────
+        # Guard: never overwrite with empty data — preserve last good state
+        existing = {}
+        existing_path = Path("data/data.json")
+        if existing_path.exists():
+            try:
+                existing = json.loads(existing_path.read_text())
+            except Exception:
+                pass
+
+        if not standings:
+            log.warning("No standings scraped — keeping existing data to avoid overwrite")
+            standings = existing.get("standings", [])
+        if not rounds:
+            rounds = existing.get("rounds", [])
+
         data = {
             "standings": standings,
             "rounds": rounds,
@@ -188,7 +203,7 @@ async def run():
         }
 
         Path("data").mkdir(exist_ok=True)
-        Path("data/data.json").write_text(json.dumps(data, ensure_ascii=False, indent=2))
+        existing_path.write_text(json.dumps(data, ensure_ascii=False, indent=2))
         log.info(f"Saved: {len(standings)} standings, {len(rounds)} rounds")
 
         await browser.close()

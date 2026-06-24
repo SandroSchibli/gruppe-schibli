@@ -1,10 +1,42 @@
 {
   "standings": [
     {"rank": 1, "name": "Sandro S", "points": 226},
-    {"rank": 2, "name": "Alice B", "points": 225},
-    {"rank": 3, "name": "Karin S", "points": 220},
-    {"rank": 4, "name": "Adi S", "points": 210}
+    {"rank": 2, "name": "Alice B",  "points": 225},
+    {"rank": 3, "name": "Karin S",  "points": 220},
+    {"rank": 4, "name": "Adi S",    "points": 210}
   ],
   "rounds": [],
-  "updated_at": "Noch nicht aktualisiert"
+  "schedule": [
+    {
+      "home": "Switzerland", "away": "Canada",
+      "homeFlag": "🇨🇭", "awayFlag": "🇨🇦",
+      "kickoff": "2026-06-24T19:00:00Z",
+      "group": "Group B", "isKO": false
+    }
+  ],
+  "bonus_questions": [
+    {
+      "q": "🏆 World Champion",
+      "a": {"Sandro S": "Spain", "Alice B": "Spain", "Karin S": "Spain", "Adi S": "Spain"}
+    },
+    {
+      "q": "🇨🇭 How far does Switzerland go?",
+      "a": {"Sandro S": "Round of 16", "Alice B": "Round of 16", "Karin S": "Round of 16", "Adi S": "Quarter-final"}
+    },
+    {
+      "q": "⚽ Switzerland total goals (excl. shootouts)",
+      "a": {"Sandro S": "7", "Alice B": "7", "Karin S": "4", "Adi S": "9"}
+    },
+    {
+      "q": "👟 Top scorer total goals (excl. shootouts)",
+      "a": {"Sandro S": "5", "Alice B": "7", "Karin S": "8", "Adi S": "7"}
+    },
+    {
+      "q": "0️⃣ Matches ending 0-0 in tournament",
+      "a": {"Sandro S": "4", "Alice B": "10", "Karin S": "9", "Adi S": "8"}
+    }
+  ],
+  "groups": {},
+  "top_scorers": [],
+  "updated_at": "Placeholder – live data loads every 30 min"
 }
