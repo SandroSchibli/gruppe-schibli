@@ -102,6 +102,8 @@
     .tcs.future{color:var(--text2);font-size:12px;}
     .tcp{font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;background:rgba(255,255,255,.04);color:var(--text2);}
     .tcp.won{background:rgba(6,214,160,.15);color:var(--green);}
+    .tc.scoring{background:rgba(6,214,160,.06);}
+    .tcp.live{background:rgba(6,214,160,.2);color:#06d6a0;font-size:10px;}
 
     /* Countdown inside match card */
     .mc-cd{padding:10px 14px;display:flex;align-items:center;justify-content:center;gap:6px;border-bottom:1px solid var(--border);}
@@ -126,8 +128,9 @@
     .simnm{flex:1;font-size:13px;font-weight:700;}
     .simtot{font-size:14px;font-weight:900;color:var(--gold);}
     .simd{font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;min-width:32px;text-align:center;}
-    .simd.pos{background:rgba(6,214,160,.15);color:var(--green);}
+    .simd.pos{background:rgba(6,214,160,.2);color:#06d6a0;font-weight:900;}
     .simd.nul{background:rgba(255,255,255,.04);color:var(--text2);}
+    .simd.zero{background:rgba(230,57,70,.08);color:var(--text2);}
 
     /* Standings */
     .str{display:flex;align-items:center;gap:12px;padding:14px;
@@ -365,13 +368,25 @@ function matchCard(m,ctx,std){
   h+=`<div class="tg">`;
   MEMBERS.forEach(mb=>{
     const tip=preds[mb]||{};
-    const p=hasRes?calcPts(tip,m.result,isKO):null;
-    const cls=hasRes?tipCls(tip,m.result):(tip.home!=null?'open':'future');
+    let p=null,cls,ptBadge;
+    if(hasRes){
+      p=calcPts(tip,m.result,isKO);
+      cls=tipCls(tip,m.result);
+      ptBadge=p!=null?`<div class="tcp won">+${p}</div>`:(tip.home==null?`<div class="tcp">–</div>`:`<div class="tcp">0</div>`);
+    } else if(live){
+      // Show live delta based on current live score
+      p=calcPts(tip,ls,isKO);
+      cls=tip.home!=null?(p>0?(p>=8?'exact':'correct'):'wrong'):'future';
+      ptBadge=tip.home!=null?(p>0?`<div class="tcp live">+${p}</div>`:`<div class="tcp">+0</div>`):`<div class="tcp">?</div>`;
+    } else {
+      cls=tip.home!=null?'open':'future';
+      ptBadge=`<div class="tcp">?</div>`;
+    }
     const str=tip.home!=null&&tip.away!=null?`${tip.home}:${tip.away}`:'—';
-    h+=`<div class="tc">
+    h+=`<div class="tc${live&&p>0?' scoring':''}">
       <div class="tcn">${FIRST[mb]||mb}</div>
       <div class="tcs ${cls}">${str}</div>
-      ${p!=null?`<div class="tcp won">+${p}</div>`:(hasRes&&tip.home==null?`<div class="tcp">–</div>`:`<div class="tcp">?</div>`)}
+      ${ptBadge}
     </div>`;
   });
   h+=`</div>`;
@@ -390,9 +405,11 @@ function simBox(m,mkey,std,isKO){
   window._sm=window._sm||{}; window._sm[safe]={mkey,m,isKO};
   const preds=m.predictions||{};
   const proj=MEMBERS.map(mb=>{
-    const g=calcPts(preds[mb]||{},ls,isKO)||0;
+    const tip=preds[mb]||{};
+    const hasTip=tip.home!=null&&tip.away!=null;
+    const g=hasTip?(calcPts(tip,ls,isKO)||0):0;
     const cur=(DATA?.standings||[]).find(s=>s.name===mb)?.points||0;
-    return{name:mb,g,tot:cur+g};
+    return{name:mb,g,tip:hasTip,tot:cur+g};
   }).sort((a,b)=>b.tot-a.tot);
   let h=`<div class="sim">
     <div class="simt"><span class="ld"></span> Live Simulation</div>
@@ -411,11 +428,13 @@ function simBox(m,mkey,std,isKO){
     </div>
     <div class="simrows">`;
   proj.forEach((p,i)=>{
+    const dCls=p.g>0?'pos':(p.tip?'zero':'nul');
+    const dTxt=p.g>0?'+'+p.g:(p.tip?'+0':'–');
     h+=`<div class="simrow">
       <div class="simrk ${i===0?'g':''}">${i+1}</div>
       <div class="simnm">${FIRST[p.name]||p.name}</div>
       <div class="simtot">${p.tot}</div>
-      <div class="simd ${p.g>0?'pos':'nul'}">${p.g>0?'+'+p.g:'–'}</div>
+      <div class="simd ${dCls}">${dTxt}</div>
     </div>`;
   });
   return h+`</div></div>`;
@@ -533,7 +552,7 @@ function renderStd(){
       h+=`<div class="bqc"><div class="bqcn">${FIRST[mb]||mb}</div><div class="bqcv">${ans}</div></div>`;
     });
     h+=`</div>`;
-    if(bq.current!=null)h+=`<div class="bq-stat">📊 Current: ${bq.current_label||bq.current}</div>`;
+    if(bq.current!=null)h+=`<div class="bq-stat">Current status: ${bq.current_label||bq.current}</div>`;
     h+=`</div>`;
   });
 
