@@ -1,7 +1,6 @@
 """
 SRF Tippspiel Scraper — runs as a GitHub Action.
-Logs in as Sandro, fetches standings + predictions for Gruppe Schibli,
-saves results to data/data.json which GitHub Pages serves to the frontend.
+URL: https://wmtippspiel.srf.ch/
 """
 
 import asyncio
@@ -9,7 +8,6 @@ import json
 import logging
 import os
 import re
-import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -18,7 +16,7 @@ from playwright.async_api import async_playwright
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-BASE = "https://www.srf.ch/sport/fussball/tippspiel"
+BASE = "https://wmtippspiel.srf.ch"
 MEMBERS = ["Sandro S", "Alice B", "Karin S", "Adi S"]
 
 FLAGS = {
@@ -39,6 +37,18 @@ FLAGS = {
 }
 
 
+async def dismiss_cookie_banner(page):
+    """Accept cookies if the banner appears."""
+    try:
+        btn = page.locator("text=Alle akzeptieren").first
+        if await btn.is_visible(timeout=5000):
+            await btn.click()
+            log.info("Dismissed cookie banner")
+            await page.wait_for_timeout(1000)
+    except Exception:
+        pass  # No banner, continue
+
+
 async def run():
     username = os.environ["SRF_USERNAME"]
     password = os.environ["SRF_PASSWORD"]
@@ -52,42 +62,120 @@ async def run():
             user_agent=(
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                 "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/120.0.0.0 Safari/537.36"
+                "Chrome/124.0.0.0 Safari/537.36"
             ),
             locale="de-CH",
         )
+
+        # Block Usercentrics consent manager — prevents cookie banner entirely
+        await ctx.route("**/*usercentrics*", lambda route: route.abort())
+        await ctx.route("**/*consent*", lambda route: route.abort())
+
         page = await ctx.new_page()
 
-        # ── Login ──────────────────────────────────────────────────────────
-        log.info("Loading Tippspiel...")
+        # ── Load page ──────────────────────────────────────────────────────
+        log.info(f"Loading {BASE} ...")
         await page.goto(BASE, wait_until="networkidle", timeout=30000)
+        await dismiss_cookie_banner(page)  # fallback in case banner still appears
         await page.screenshot(path="/tmp/01_loaded.png")
 
+        # ── Login ──────────────────────────────────────────────────────────
         # Check if already logged in
-        if not await page.locator("text=Willkommen").count():
-            log.info("Logging in...")
-            # Find and click login — SRF sites use various patterns
-            for sel in ["text=Anmelden", "[data-testid='login-button']", "a[href*='login']"]:
-                if await page.locator(sel).count():
-                    await page.click(sel)
-                    break
+        if await page.locator("text=Willkommen").count() == 0:
+            log.info("Not logged in — clicking login button...")
+
+            # The page shows "JETZT ANMELDEN" when logged out
+            # Click it to get to the login/registration page
+            for sel in [
+                "text=JETZT ANMELDEN",
+                "text=Anmelden",
+                "text=Jetzt anmelden",
+                "a[href*='login']",
+                "button[class*='login']",
+            ]:
+                try:
+                    if await page.locator(sel).count() > 0:
+                        await page.locator(sel).first.click()
+                        log.info(f"Clicked login via: {sel}")
+                        break
+                except Exception:
+                    continue
 
             await page.wait_for_load_state("networkidle", timeout=20000)
-            await page.screenshot(path="/tmp/02_login_page.png")
+            await dismiss_cookie_banner(page)
+            await page.screenshot(path="/tmp/02_after_click.png")
+            log.info(f"Now at: {page.url}")
 
-            await page.fill("input[type='email'], input[name='email']", username)
-            await page.fill("input[type='password']", password)
-            await page.screenshot(path="/tmp/03_filled.png")
-            await page.click("button[type='submit'], input[type='submit']")
+            # If we're now on a login/register page, look for "Anmelden" tab
+            # SRF often has a toggle between Register and Login
+            for sel in [
+                "text=Ich habe bereits ein Konto",
+                "text=Bereits registriert",
+                "text=Einloggen",
+                "text=Login",
+                "a[href*='login']",
+            ]:
+                try:
+                    if await page.locator(sel).count() > 0:
+                        await page.locator(sel).first.click()
+                        await page.wait_for_load_state("networkidle", timeout=10000)
+                        log.info(f"Switched to login tab via: {sel}")
+                        break
+                except Exception:
+                    continue
+
+            await page.screenshot(path="/tmp/03_login_form.png")
+
+            # Fill credentials
+            email_filled = False
+            for sel in ["input[type='email']", "input[name='email']", "input[id*='email']", "input[placeholder*='Mail']", "input[placeholder*='mail']"]:
+                try:
+                    if await page.locator(sel).count() > 0:
+                        await page.locator(sel).first.fill(username)
+                        email_filled = True
+                        log.info(f"Filled email via: {sel}")
+                        break
+                except Exception:
+                    continue
+
+            for sel in ["input[type='password']", "input[name='password']"]:
+                try:
+                    if await page.locator(sel).count() > 0:
+                        await page.locator(sel).first.fill(password)
+                        log.info(f"Filled password via: {sel}")
+                        break
+                except Exception:
+                    continue
+
+            await page.screenshot(path="/tmp/04_filled.png")
+
+            # Submit
+            for sel in ["button[type='submit']", "input[type='submit']", "text=Anmelden", "text=Login", "text=Einloggen"]:
+                try:
+                    if await page.locator(sel).count() > 0:
+                        await page.locator(sel).first.click()
+                        log.info(f"Submitted via: {sel}")
+                        break
+                except Exception:
+                    continue
+
             await page.wait_for_load_state("networkidle", timeout=20000)
-            await page.screenshot(path="/tmp/04_after_login.png")
+            await page.screenshot(path="/tmp/05_after_login.png")
+            log.info(f"After login URL: {page.url}")
 
-        log.info("Logged in, collecting data...")
+        log.info("Login complete — collecting data...")
+
+        # Navigate back to Tippspiel if we got redirected elsewhere
+        if BASE not in page.url:
+            await page.goto(BASE, wait_until="networkidle", timeout=20000)
+            await dismiss_cookie_banner(page)
+
+        await page.screenshot(path="/tmp/06_tippspiel.png")
 
         # ── Standings ──────────────────────────────────────────────────────
         standings = await get_standings(page)
 
-        # ── Tips per member ────────────────────────────────────────────────
+        # ── Rounds ────────────────────────────────────────────────────────
         rounds = await get_all_rounds(page)
 
         # ── Save ───────────────────────────────────────────────────────────
@@ -99,41 +187,41 @@ async def run():
 
         Path("data").mkdir(exist_ok=True)
         Path("data/data.json").write_text(json.dumps(data, ensure_ascii=False, indent=2))
-        log.info("Saved data/data.json")
+        log.info(f"Saved: {len(standings)} standings, {len(rounds)} rounds")
 
         await browser.close()
     return data
 
 
 async def get_standings(page) -> list:
-    """Navigate to group page and extract leaderboard."""
-    log.info("Getting standings...")
+    log.info("Getting group standings...")
+
     try:
         await page.click("text=Tippgruppen", timeout=8000)
         await page.wait_for_load_state("networkidle")
+        await page.screenshot(path="/tmp/07_tippgruppen.png")
+
         await page.click("text=Gruppe Schibli", timeout=8000)
         await page.wait_for_load_state("networkidle")
-        await page.screenshot(path="/tmp/05_group.png")
+        await page.screenshot(path="/tmp/08_gruppe.png")
     except Exception as e:
-        log.warning(f"Could not navigate to group via clicks: {e}")
-        await page.screenshot(path="/tmp/05_group_fail.png")
+        log.warning(f"Navigation failed: {e}")
+        await page.screenshot(path="/tmp/07_nav_fail.png")
 
-    # Extract from page text — look for known names + points
     body = await page.inner_text("body")
-    log.info(f"Page text snippet: {body[:500]}")
+    log.info(f"Page snippet: {body[:300]}")
 
     standings = []
     seen = set()
     for name in MEMBERS:
         if name in body and name not in seen:
             idx = body.find(name)
-            snippet = body[idx: idx + 150]
+            snippet = body[idx: idx + 200]
             pts = re.search(r"(\d{2,3})\s*Pkt", snippet)
             if pts:
                 standings.append({"name": name, "points": int(pts.group(1))})
                 seen.add(name)
 
-    # Sort by points descending and assign ranks
     standings.sort(key=lambda x: x["points"], reverse=True)
     for i, s in enumerate(standings):
         s["rank"] = i + 1
@@ -143,18 +231,11 @@ async def get_standings(page) -> list:
 
 
 async def get_all_rounds(page) -> list:
-    """
-    Visit each member's tip page and collect all rounds.
-    Returns list of round dicts, each with a list of match dicts.
-    """
-    # Collect tips per member
     member_data = {}
     for member in MEMBERS:
         tips = await get_member_tips(page, member)
         member_data[member] = tips
 
-    # Merge into rounds structure
-    # Use Sandro's data as the base (he's always accessible)
     base = member_data.get("Sandro S", [])
     rounds_out = []
 
@@ -170,7 +251,6 @@ async def get_all_rounds(page) -> list:
                 "result": match.get("result"),
                 "predictions": {},
             }
-            # Add predictions from all members
             for member in MEMBERS:
                 member_rounds = member_data.get(member, [])
                 if round_idx < len(member_rounds):
@@ -193,37 +273,29 @@ async def get_all_rounds(page) -> list:
 
 
 async def get_member_tips(page, member: str) -> list:
-    """Navigate to a member's profile and extract their tips for all visible rounds."""
     log.info(f"Getting tips for {member}...")
-
-    # Navigate: Tippgruppen → Gruppe Schibli → click member name
     try:
         await page.goto(BASE, wait_until="networkidle", timeout=20000)
+        await dismiss_cookie_banner(page)
         await page.click("text=Tippgruppen", timeout=8000)
         await page.wait_for_load_state("networkidle")
         await page.click("text=Gruppe Schibli", timeout=8000)
         await page.wait_for_load_state("networkidle")
-
-        # Click the member name in the leaderboard
         await page.click(f"text={member}", timeout=8000)
         await page.wait_for_load_state("networkidle")
-        await page.screenshot(path=f"/tmp/member_{member.replace(' ', '_')}.png")
     except Exception as e:
         log.warning(f"Could not navigate to {member}: {e}")
         return []
 
     rounds = []
-    # Collect current round + navigate backwards through available rounds
-    for attempt in range(5):  # Up to 5 rounds
-        round_data = await extract_round_from_page(page)
+    for _ in range(5):
+        round_data = await extract_round(page)
         if round_data and round_data.get("matches"):
-            rounds.insert(0, round_data)  # Insert at front (chronological order)
-
-        # Try to go to previous round
+            rounds.insert(0, round_data)
         try:
-            prev_btn = page.locator("button:has-text('‹'), [aria-label*='vorig'], [aria-label*='prev']").first
-            if await prev_btn.count():
-                await prev_btn.click()
+            prev = page.locator("button:has-text('‹'), [aria-label*='vorig']").first
+            if await prev.count():
+                await prev.click()
                 await page.wait_for_load_state("networkidle")
             else:
                 break
@@ -233,81 +305,44 @@ async def get_member_tips(page, member: str) -> list:
     return rounds
 
 
-async def extract_round_from_page(page) -> dict:
-    """Extract all match tips from the currently displayed round page."""
+async def extract_round(page) -> dict:
     await page.wait_for_timeout(800)
-
-    result = await page.evaluate("""
+    return await page.evaluate("""
     () => {
         const out = { name: '', matches: [] };
+        const roundEl = document.querySelector('select option:checked, h2, h3, [class*="round"]');
+        if (roundEl) out.name = roundEl.innerText.trim();
 
-        // Round name — look in selects, h2, h3 or specific round header elements
-        const roundEl = document.querySelector('select option:checked, [class*="round-header"], h2, h3');
-        if (roundEl) out.name = roundEl.innerText.trim().replace(/\\s+/g, ' ');
-
-        // Find all match/tip blocks — they contain two teams, a predicted score, and a result
-        // SRF renders these as card-like components
-        const allText = document.body.innerText;
-
-        // Heuristic: find date lines like "18. Juni | 18:00"
-        const datePattern = /(\\d{1,2})\\.\\s*(\\w+)\\s*\\|?\\s*(\\d{2}:\\d{2})/g;
-        const dates = [...allText.matchAll(datePattern)].map(m => m[0]);
-
-        // Find team blocks — pairs of team names
-        // Look for containers that have two country names side by side
-        const containers = document.querySelectorAll(
-            '[class*="match"], [class*="game"], [class*="spiel"], [class*="tip-item"], [class*="tipitem"], article'
-        );
-
-        containers.forEach((c, idx) => {
+        const containers = document.querySelectorAll('[class*="match"], [class*="game"], [class*="tip"], article');
+        containers.forEach(c => {
             const text = c.innerText || '';
-            if (!text.trim()) return;
-
-            // Extract tip score like "2 : 1" or "2:1"
             const tipMatch = text.match(/(\\d+)\\s*:\\s*(\\d+)/g);
-            if (!tipMatch || tipMatch.length === 0) return;
+            if (!tipMatch) return;
 
-            // Extract result — often shown below as "Ergebnis X:Y"
             const resultIdx = text.indexOf('Ergebnis');
             let result = null;
             if (resultIdx >= 0) {
-                const afterResult = text.slice(resultIdx, resultIdx + 30);
-                const rm = afterResult.match(/(\\d+)\\s*:\\s*(\\d+)/);
+                const rm = text.slice(resultIdx, resultIdx+30).match(/(\\d+)\\s*:\\s*(\\d+)/);
                 if (rm) result = { home: parseInt(rm[1]), away: parseInt(rm[2]) };
             }
 
-            // Extract points earned for this match
             const ptsMatch = text.match(/Gesamtpunkte[:\\s]*(\\d+)/);
-            const points = ptsMatch ? parseInt(ptsMatch[1]) : null;
-
-            // First score = tip
-            const tipScores = tipMatch[0].split(':').map(s => parseInt(s.trim()));
-
-            // Extract team names — usually strong/span elements or just text
-            const teamEls = c.querySelectorAll('[class*="team-name"], [class*="teamname"], strong, b, [class*="club"]');
-            const teams = Array.from(teamEls)
-                .map(el => el.innerText.trim())
-                .filter(t => t.length > 2 && !/^\\d/.test(t) && !t.includes(':'));
+            const scores = tipMatch[0].split(':').map(s => parseInt(s.trim()));
+            const teamEls = c.querySelectorAll('[class*="team"], strong, b');
+            const teams = Array.from(teamEls).map(el => el.innerText.trim()).filter(t => t.length > 2 && !/^\\d/.test(t));
 
             if (teams.length >= 2) {
                 out.matches.push({
-                    home: teams[0],
-                    away: teams[1],
-                    tip_home: tipScores[0] ?? null,
-                    tip_away: tipScores[1] ?? null,
-                    result: result,
-                    points: points,
-                    date: dates[idx] || '',
+                    home: teams[0], away: teams[1],
+                    tip_home: scores[0] ?? null, tip_away: scores[1] ?? null,
+                    result, points: ptsMatch ? parseInt(ptsMatch[1]) : null,
+                    date: ''
                 });
             }
         });
-
         return out;
     }
     """)
-
-    log.info(f"Round '{result.get('name')}': {len(result.get('matches', []))} matches")
-    return result
 
 
 if __name__ == "__main__":
