@@ -1621,693 +1621,6 @@
       ]
     }
   ],
-  "updated": "2026-06-24T17:04:10Z",
-  "groups": [
-    {
-      "name": "Group A",
-      "teams": [
-        {
-          "name": "Argentina",
-          "flag": "🇦🇷",
-          "played": 2,
-          "won": 2,
-          "drawn": 0,
-          "lost": 0,
-          "gf": 5,
-          "ga": 0,
-          "gd": 5,
-          "points": 6,
-          "rank": 1
-        },
-        {
-          "name": "Austria",
-          "flag": "🇦🇹",
-          "played": 2,
-          "won": 1,
-          "drawn": 0,
-          "lost": 1,
-          "gf": 3,
-          "ga": 3,
-          "gd": 0,
-          "points": 3,
-          "rank": 2
-        },
-        {
-          "name": "Algeria",
-          "flag": "🇩🇿",
-          "played": 2,
-          "won": 1,
-          "drawn": 0,
-          "lost": 1,
-          "gf": 2,
-          "ga": 4,
-          "gd": -2,
-          "points": 3,
-          "rank": 3
-        },
-        {
-          "name": "Jordan",
-          "flag": "🇯🇴",
-          "played": 2,
-          "won": 0,
-          "drawn": 0,
-          "lost": 2,
-          "gf": 2,
-          "ga": 5,
-          "gd": -3,
-          "points": 0,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group B",
-      "teams": [
-        {
-          "name": "USA",
-          "flag": "🇺🇸",
-          "played": 2,
-          "won": 2,
-          "drawn": 0,
-          "lost": 0,
-          "gf": 6,
-          "ga": 1,
-          "gd": 5,
-          "points": 6,
-          "rank": 1
-        },
-        {
-          "name": "Australia",
-          "flag": "🇦🇺",
-          "played": 2,
-          "won": 1,
-          "drawn": 0,
-          "lost": 1,
-          "gf": 2,
-          "ga": 2,
-          "gd": 0,
-          "points": 3,
-          "rank": 2
-        },
-        {
-          "name": "Paraguay",
-          "flag": "🇵🇾",
-          "played": 2,
-          "won": 1,
-          "drawn": 0,
-          "lost": 1,
-          "gf": 2,
-          "ga": 4,
-          "gd": -2,
-          "points": 3,
-          "rank": 3
-        },
-        {
-          "name": "Turkey",
-          "flag": "🇹🇷",
-          "played": 2,
-          "won": 0,
-          "drawn": 0,
-          "lost": 2,
-          "gf": 0,
-          "ga": 3,
-          "gd": -3,
-          "points": 0,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group C",
-      "teams": [
-        {
-          "name": "Egypt",
-          "flag": "🇪🇬",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 4,
-          "ga": 2,
-          "gd": 2,
-          "points": 4,
-          "rank": 1
-        },
-        {
-          "name": "Iran",
-          "flag": "🇮🇷",
-          "played": 2,
-          "won": 0,
-          "drawn": 2,
-          "lost": 0,
-          "gf": 2,
-          "ga": 2,
-          "gd": 0,
-          "points": 2,
-          "rank": 2
-        },
-        {
-          "name": "Belgium",
-          "flag": "🇧🇪",
-          "played": 2,
-          "won": 0,
-          "drawn": 2,
-          "lost": 0,
-          "gf": 1,
-          "ga": 1,
-          "gd": 0,
-          "points": 2,
-          "rank": 3
-        },
-        {
-          "name": "New Zealand",
-          "flag": "🇳🇿",
-          "played": 2,
-          "won": 0,
-          "drawn": 1,
-          "lost": 1,
-          "gf": 3,
-          "ga": 5,
-          "gd": -2,
-          "points": 1,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group D",
-      "teams": [
-        {
-          "name": "Canada",
-          "flag": "🇨🇦",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 7,
-          "ga": 1,
-          "gd": 6,
-          "points": 4,
-          "rank": 1
-        },
-        {
-          "name": "Switzerland",
-          "flag": "🇨🇭",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 5,
-          "ga": 2,
-          "gd": 3,
-          "points": 4,
-          "rank": 2
-        },
-        {
-          "name": "Bosnia-Herzeg.",
-          "flag": "🇧🇦",
-          "played": 2,
-          "won": 0,
-          "drawn": 1,
-          "lost": 1,
-          "gf": 2,
-          "ga": 5,
-          "gd": -3,
-          "points": 1,
-          "rank": 3
-        },
-        {
-          "name": "Qatar",
-          "flag": "🇶🇦",
-          "played": 2,
-          "won": 0,
-          "drawn": 1,
-          "lost": 1,
-          "gf": 1,
-          "ga": 7,
-          "gd": -6,
-          "points": 1,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group E",
-      "teams": [
-        {
-          "name": "Brazil",
-          "flag": "🇧🇷",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 4,
-          "ga": 1,
-          "gd": 3,
-          "points": 4,
-          "rank": 1
-        },
-        {
-          "name": "Morocco",
-          "flag": "🇲🇦",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 2,
-          "ga": 1,
-          "gd": 1,
-          "points": 4,
-          "rank": 2
-        },
-        {
-          "name": "Scotland",
-          "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
-          "played": 2,
-          "won": 1,
-          "drawn": 0,
-          "lost": 1,
-          "gf": 1,
-          "ga": 1,
-          "gd": 0,
-          "points": 3,
-          "rank": 3
-        },
-        {
-          "name": "Haiti",
-          "flag": "🇭🇹",
-          "played": 2,
-          "won": 0,
-          "drawn": 0,
-          "lost": 2,
-          "gf": 0,
-          "ga": 4,
-          "gd": -4,
-          "points": 0,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group F",
-      "teams": [
-        {
-          "name": "Spain",
-          "flag": "🇪🇸",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 4,
-          "ga": 0,
-          "gd": 4,
-          "points": 4,
-          "rank": 1
-        },
-        {
-          "name": "Uruguay",
-          "flag": "🇺🇾",
-          "played": 2,
-          "won": 0,
-          "drawn": 2,
-          "lost": 0,
-          "gf": 3,
-          "ga": 3,
-          "gd": 0,
-          "points": 2,
-          "rank": 2
-        },
-        {
-          "name": "Cape Verde",
-          "flag": "🇨🇻",
-          "played": 2,
-          "won": 0,
-          "drawn": 2,
-          "lost": 0,
-          "gf": 2,
-          "ga": 2,
-          "gd": 0,
-          "points": 2,
-          "rank": 3
-        },
-        {
-          "name": "Saudi Arabia",
-          "flag": "🇸🇦",
-          "played": 2,
-          "won": 0,
-          "drawn": 1,
-          "lost": 1,
-          "gf": 1,
-          "ga": 5,
-          "gd": -4,
-          "points": 1,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group G",
-      "teams": [
-        {
-          "name": "Colombia",
-          "flag": "🇨🇴",
-          "played": 2,
-          "won": 2,
-          "drawn": 0,
-          "lost": 0,
-          "gf": 4,
-          "ga": 1,
-          "gd": 3,
-          "points": 6,
-          "rank": 1
-        },
-        {
-          "name": "Portugal",
-          "flag": "🇵🇹",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 6,
-          "ga": 1,
-          "gd": 5,
-          "points": 4,
-          "rank": 2
-        },
-        {
-          "name": "DR Congo",
-          "flag": "🇨🇩",
-          "played": 2,
-          "won": 0,
-          "drawn": 1,
-          "lost": 1,
-          "gf": 1,
-          "ga": 2,
-          "gd": -1,
-          "points": 1,
-          "rank": 3
-        },
-        {
-          "name": "Uzbekistan",
-          "flag": "🇺🇿",
-          "played": 2,
-          "won": 0,
-          "drawn": 0,
-          "lost": 2,
-          "gf": 1,
-          "ga": 8,
-          "gd": -7,
-          "points": 0,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group H",
-      "teams": [
-        {
-          "name": "England",
-          "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 4,
-          "ga": 2,
-          "gd": 2,
-          "points": 4,
-          "rank": 1
-        },
-        {
-          "name": "Ghana",
-          "flag": "🇬🇭",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 1,
-          "ga": 0,
-          "gd": 1,
-          "points": 4,
-          "rank": 2
-        },
-        {
-          "name": "Croatia",
-          "flag": "🇭🇷",
-          "played": 2,
-          "won": 1,
-          "drawn": 0,
-          "lost": 1,
-          "gf": 3,
-          "ga": 4,
-          "gd": -1,
-          "points": 3,
-          "rank": 3
-        },
-        {
-          "name": "Panama",
-          "flag": "🇵🇦",
-          "played": 2,
-          "won": 0,
-          "drawn": 0,
-          "lost": 2,
-          "gf": 0,
-          "ga": 2,
-          "gd": -2,
-          "points": 0,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group I",
-      "teams": [
-        {
-          "name": "Germany",
-          "flag": "🇩🇪",
-          "played": 2,
-          "won": 2,
-          "drawn": 0,
-          "lost": 0,
-          "gf": 9,
-          "ga": 2,
-          "gd": 7,
-          "points": 6,
-          "rank": 1
-        },
-        {
-          "name": "Ivory Coast",
-          "flag": "🇨🇮",
-          "played": 2,
-          "won": 1,
-          "drawn": 0,
-          "lost": 1,
-          "gf": 2,
-          "ga": 2,
-          "gd": 0,
-          "points": 3,
-          "rank": 2
-        },
-        {
-          "name": "Ecuador",
-          "flag": "🇪🇨",
-          "played": 2,
-          "won": 0,
-          "drawn": 1,
-          "lost": 1,
-          "gf": 0,
-          "ga": 1,
-          "gd": -1,
-          "points": 1,
-          "rank": 3
-        },
-        {
-          "name": "Curaçao",
-          "flag": "🇨🇼",
-          "played": 2,
-          "won": 0,
-          "drawn": 1,
-          "lost": 1,
-          "gf": 1,
-          "ga": 7,
-          "gd": -6,
-          "points": 1,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group J",
-      "teams": [
-        {
-          "name": "Mexico",
-          "flag": "🇲🇽",
-          "played": 2,
-          "won": 2,
-          "drawn": 0,
-          "lost": 0,
-          "gf": 3,
-          "ga": 0,
-          "gd": 3,
-          "points": 6,
-          "rank": 1
-        },
-        {
-          "name": "South Korea",
-          "flag": "🇰🇷",
-          "played": 2,
-          "won": 1,
-          "drawn": 0,
-          "lost": 1,
-          "gf": 2,
-          "ga": 2,
-          "gd": 0,
-          "points": 3,
-          "rank": 2
-        },
-        {
-          "name": "Czechia",
-          "flag": "🇨🇿",
-          "played": 2,
-          "won": 0,
-          "drawn": 1,
-          "lost": 1,
-          "gf": 2,
-          "ga": 3,
-          "gd": -1,
-          "points": 1,
-          "rank": 3
-        },
-        {
-          "name": "South Africa",
-          "flag": "🇿🇦",
-          "played": 2,
-          "won": 0,
-          "drawn": 1,
-          "lost": 1,
-          "gf": 1,
-          "ga": 3,
-          "gd": -2,
-          "points": 1,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group K",
-      "teams": [
-        {
-          "name": "France",
-          "flag": "🇫🇷",
-          "played": 2,
-          "won": 2,
-          "drawn": 0,
-          "lost": 0,
-          "gf": 6,
-          "ga": 1,
-          "gd": 5,
-          "points": 6,
-          "rank": 1
-        },
-        {
-          "name": "Norway",
-          "flag": "🇳🇴",
-          "played": 2,
-          "won": 2,
-          "drawn": 0,
-          "lost": 0,
-          "gf": 7,
-          "ga": 3,
-          "gd": 4,
-          "points": 6,
-          "rank": 2
-        },
-        {
-          "name": "Senegal",
-          "flag": "🇸🇳",
-          "played": 2,
-          "won": 0,
-          "drawn": 0,
-          "lost": 2,
-          "gf": 3,
-          "ga": 6,
-          "gd": -3,
-          "points": 0,
-          "rank": 3
-        },
-        {
-          "name": "Iraq",
-          "flag": "🇮🇶",
-          "played": 2,
-          "won": 0,
-          "drawn": 0,
-          "lost": 2,
-          "gf": 1,
-          "ga": 7,
-          "gd": -6,
-          "points": 0,
-          "rank": 4
-        }
-      ]
-    },
-    {
-      "name": "Group L",
-      "teams": [
-        {
-          "name": "Netherlands",
-          "flag": "🇳🇱",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 7,
-          "ga": 3,
-          "gd": 4,
-          "points": 4,
-          "rank": 1
-        },
-        {
-          "name": "Japan",
-          "flag": "🇯🇵",
-          "played": 2,
-          "won": 1,
-          "drawn": 1,
-          "lost": 0,
-          "gf": 6,
-          "ga": 2,
-          "gd": 4,
-          "points": 4,
-          "rank": 2
-        },
-        {
-          "name": "Sweden",
-          "flag": "🇸🇪",
-          "played": 2,
-          "won": 1,
-          "drawn": 0,
-          "lost": 1,
-          "gf": 6,
-          "ga": 6,
-          "gd": 0,
-          "points": 3,
-          "rank": 3
-        },
-        {
-          "name": "Tunisia",
-          "flag": "🇹🇳",
-          "played": 2,
-          "won": 0,
-          "drawn": 0,
-          "lost": 2,
-          "gf": 1,
-          "ga": 9,
-          "gd": -8,
-          "points": 0,
-          "rank": 4
-        }
-      ]
-    }
-  ],
   "bonus_questions": [
     {
       "q": "Weltmeister",
@@ -2360,9 +1673,697 @@
       }
     }
   ],
+  "top_scorers": [],
   "tournament_stats": {
     "swiss_goals": 5,
     "zero_zero_count": 4,
     "top_scorer_goals": null
-  }
+  },
+  "groups": [
+    {
+      "name": "Group A",
+      "teams": [
+        {
+          "name": "Argentina",
+          "flag": "🇦🇷",
+          "rank": 1,
+          "played": 2,
+          "won": 2,
+          "drawn": 0,
+          "lost": 0,
+          "gf": 5,
+          "ga": 0,
+          "gd": 5,
+          "points": 6
+        },
+        {
+          "name": "Austria",
+          "flag": "🇦🇹",
+          "rank": 2,
+          "played": 2,
+          "won": 1,
+          "drawn": 0,
+          "lost": 1,
+          "gf": 3,
+          "ga": 3,
+          "gd": 0,
+          "points": 3
+        },
+        {
+          "name": "Algeria",
+          "flag": "🇩🇿",
+          "rank": 3,
+          "played": 2,
+          "won": 1,
+          "drawn": 0,
+          "lost": 1,
+          "gf": 2,
+          "ga": 4,
+          "gd": -2,
+          "points": 3
+        },
+        {
+          "name": "Jordan",
+          "flag": "🇯🇴",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 0,
+          "lost": 2,
+          "gf": 2,
+          "ga": 5,
+          "gd": -3,
+          "points": 0
+        }
+      ]
+    },
+    {
+      "name": "Group B",
+      "teams": [
+        {
+          "name": "USA",
+          "flag": "🇺🇸",
+          "rank": 1,
+          "played": 2,
+          "won": 2,
+          "drawn": 0,
+          "lost": 0,
+          "gf": 6,
+          "ga": 1,
+          "gd": 5,
+          "points": 6
+        },
+        {
+          "name": "Australia",
+          "flag": "🇦🇺",
+          "rank": 2,
+          "played": 2,
+          "won": 1,
+          "drawn": 0,
+          "lost": 1,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "points": 3
+        },
+        {
+          "name": "Paraguay",
+          "flag": "🇵🇾",
+          "rank": 3,
+          "played": 2,
+          "won": 1,
+          "drawn": 0,
+          "lost": 1,
+          "gf": 2,
+          "ga": 4,
+          "gd": -2,
+          "points": 3
+        },
+        {
+          "name": "Turkey",
+          "flag": "🇹🇷",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 0,
+          "lost": 2,
+          "gf": 0,
+          "ga": 3,
+          "gd": -3,
+          "points": 0
+        }
+      ]
+    },
+    {
+      "name": "Group C",
+      "teams": [
+        {
+          "name": "Egypt",
+          "flag": "🇪🇬",
+          "rank": 1,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 4,
+          "ga": 2,
+          "gd": 2,
+          "points": 4
+        },
+        {
+          "name": "Iran",
+          "flag": "🇮🇷",
+          "rank": 2,
+          "played": 2,
+          "won": 0,
+          "drawn": 2,
+          "lost": 0,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "points": 2
+        },
+        {
+          "name": "Belgium",
+          "flag": "🇧🇪",
+          "rank": 3,
+          "played": 2,
+          "won": 0,
+          "drawn": 2,
+          "lost": 0,
+          "gf": 1,
+          "ga": 1,
+          "gd": 0,
+          "points": 2
+        },
+        {
+          "name": "New Zealand",
+          "flag": "🇳🇿",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "gf": 3,
+          "ga": 5,
+          "gd": -2,
+          "points": 1
+        }
+      ]
+    },
+    {
+      "name": "Group D",
+      "teams": [
+        {
+          "name": "Canada",
+          "flag": "🇨🇦",
+          "rank": 1,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 7,
+          "ga": 1,
+          "gd": 6,
+          "points": 4
+        },
+        {
+          "name": "Switzerland",
+          "flag": "🇨🇭",
+          "rank": 2,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 5,
+          "ga": 2,
+          "gd": 3,
+          "points": 4
+        },
+        {
+          "name": "Bosnia-Herzeg.",
+          "flag": "🇧🇦",
+          "rank": 3,
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "gf": 2,
+          "ga": 5,
+          "gd": -3,
+          "points": 1
+        },
+        {
+          "name": "Qatar",
+          "flag": "🇶🇦",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "gf": 1,
+          "ga": 7,
+          "gd": -6,
+          "points": 1
+        }
+      ]
+    },
+    {
+      "name": "Group E",
+      "teams": [
+        {
+          "name": "Brazil",
+          "flag": "🇧🇷",
+          "rank": 1,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 4,
+          "ga": 1,
+          "gd": 3,
+          "points": 4
+        },
+        {
+          "name": "Morocco",
+          "flag": "🇲🇦",
+          "rank": 2,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 2,
+          "ga": 1,
+          "gd": 1,
+          "points": 4
+        },
+        {
+          "name": "Scotland",
+          "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+          "rank": 3,
+          "played": 2,
+          "won": 1,
+          "drawn": 0,
+          "lost": 1,
+          "gf": 1,
+          "ga": 1,
+          "gd": 0,
+          "points": 3
+        },
+        {
+          "name": "Haiti",
+          "flag": "🇭🇹",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 0,
+          "lost": 2,
+          "gf": 0,
+          "ga": 4,
+          "gd": -4,
+          "points": 0
+        }
+      ]
+    },
+    {
+      "name": "Group F",
+      "teams": [
+        {
+          "name": "Spain",
+          "flag": "🇪🇸",
+          "rank": 1,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 4,
+          "ga": 0,
+          "gd": 4,
+          "points": 4
+        },
+        {
+          "name": "Uruguay",
+          "flag": "🇺🇾",
+          "rank": 2,
+          "played": 2,
+          "won": 0,
+          "drawn": 2,
+          "lost": 0,
+          "gf": 3,
+          "ga": 3,
+          "gd": 0,
+          "points": 2
+        },
+        {
+          "name": "Cape Verde",
+          "flag": "🇨🇻",
+          "rank": 3,
+          "played": 2,
+          "won": 0,
+          "drawn": 2,
+          "lost": 0,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "points": 2
+        },
+        {
+          "name": "Saudi Arabia",
+          "flag": "🇸🇦",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "gf": 1,
+          "ga": 5,
+          "gd": -4,
+          "points": 1
+        }
+      ]
+    },
+    {
+      "name": "Group G",
+      "teams": [
+        {
+          "name": "Colombia",
+          "flag": "🇨🇴",
+          "rank": 1,
+          "played": 2,
+          "won": 2,
+          "drawn": 0,
+          "lost": 0,
+          "gf": 4,
+          "ga": 1,
+          "gd": 3,
+          "points": 6
+        },
+        {
+          "name": "Portugal",
+          "flag": "🇵🇹",
+          "rank": 2,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 6,
+          "ga": 1,
+          "gd": 5,
+          "points": 4
+        },
+        {
+          "name": "DR Congo",
+          "flag": "🇨🇩",
+          "rank": 3,
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "gf": 1,
+          "ga": 2,
+          "gd": -1,
+          "points": 1
+        },
+        {
+          "name": "Uzbekistan",
+          "flag": "🇺🇿",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 0,
+          "lost": 2,
+          "gf": 1,
+          "ga": 8,
+          "gd": -7,
+          "points": 0
+        }
+      ]
+    },
+    {
+      "name": "Group H",
+      "teams": [
+        {
+          "name": "England",
+          "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+          "rank": 1,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 4,
+          "ga": 2,
+          "gd": 2,
+          "points": 4
+        },
+        {
+          "name": "Ghana",
+          "flag": "🇬🇭",
+          "rank": 2,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 1,
+          "ga": 0,
+          "gd": 1,
+          "points": 4
+        },
+        {
+          "name": "Croatia",
+          "flag": "🇭🇷",
+          "rank": 3,
+          "played": 2,
+          "won": 1,
+          "drawn": 0,
+          "lost": 1,
+          "gf": 3,
+          "ga": 4,
+          "gd": -1,
+          "points": 3
+        },
+        {
+          "name": "Panama",
+          "flag": "🇵🇦",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 0,
+          "lost": 2,
+          "gf": 0,
+          "ga": 2,
+          "gd": -2,
+          "points": 0
+        }
+      ]
+    },
+    {
+      "name": "Group I",
+      "teams": [
+        {
+          "name": "Germany",
+          "flag": "🇩🇪",
+          "rank": 1,
+          "played": 2,
+          "won": 2,
+          "drawn": 0,
+          "lost": 0,
+          "gf": 9,
+          "ga": 2,
+          "gd": 7,
+          "points": 6
+        },
+        {
+          "name": "Ivory Coast",
+          "flag": "🇨🇮",
+          "rank": 2,
+          "played": 2,
+          "won": 1,
+          "drawn": 0,
+          "lost": 1,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "points": 3
+        },
+        {
+          "name": "Ecuador",
+          "flag": "🇪🇨",
+          "rank": 3,
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "gf": 0,
+          "ga": 1,
+          "gd": -1,
+          "points": 1
+        },
+        {
+          "name": "Curaçao",
+          "flag": "🇨🇼",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "gf": 1,
+          "ga": 7,
+          "gd": -6,
+          "points": 1
+        }
+      ]
+    },
+    {
+      "name": "Group J",
+      "teams": [
+        {
+          "name": "Mexico",
+          "flag": "🇲🇽",
+          "rank": 1,
+          "played": 2,
+          "won": 2,
+          "drawn": 0,
+          "lost": 0,
+          "gf": 3,
+          "ga": 0,
+          "gd": 3,
+          "points": 6
+        },
+        {
+          "name": "South Korea",
+          "flag": "🇰🇷",
+          "rank": 2,
+          "played": 2,
+          "won": 1,
+          "drawn": 0,
+          "lost": 1,
+          "gf": 2,
+          "ga": 2,
+          "gd": 0,
+          "points": 3
+        },
+        {
+          "name": "Czechia",
+          "flag": "🇨🇿",
+          "rank": 3,
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "gf": 2,
+          "ga": 3,
+          "gd": -1,
+          "points": 1
+        },
+        {
+          "name": "South Africa",
+          "flag": "🇿🇦",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 1,
+          "lost": 1,
+          "gf": 1,
+          "ga": 3,
+          "gd": -2,
+          "points": 1
+        }
+      ]
+    },
+    {
+      "name": "Group K",
+      "teams": [
+        {
+          "name": "France",
+          "flag": "🇫🇷",
+          "rank": 1,
+          "played": 2,
+          "won": 2,
+          "drawn": 0,
+          "lost": 0,
+          "gf": 6,
+          "ga": 1,
+          "gd": 5,
+          "points": 6
+        },
+        {
+          "name": "Norway",
+          "flag": "🇳🇴",
+          "rank": 2,
+          "played": 2,
+          "won": 2,
+          "drawn": 0,
+          "lost": 0,
+          "gf": 7,
+          "ga": 3,
+          "gd": 4,
+          "points": 6
+        },
+        {
+          "name": "Senegal",
+          "flag": "🇸🇳",
+          "rank": 3,
+          "played": 2,
+          "won": 0,
+          "drawn": 0,
+          "lost": 2,
+          "gf": 3,
+          "ga": 6,
+          "gd": -3,
+          "points": 0
+        },
+        {
+          "name": "Iraq",
+          "flag": "🇮🇶",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 0,
+          "lost": 2,
+          "gf": 1,
+          "ga": 7,
+          "gd": -6,
+          "points": 0
+        }
+      ]
+    },
+    {
+      "name": "Group L",
+      "teams": [
+        {
+          "name": "Netherlands",
+          "flag": "🇳🇱",
+          "rank": 1,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 7,
+          "ga": 3,
+          "gd": 4,
+          "points": 4
+        },
+        {
+          "name": "Japan",
+          "flag": "🇯🇵",
+          "rank": 2,
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "gf": 6,
+          "ga": 2,
+          "gd": 4,
+          "points": 4
+        },
+        {
+          "name": "Sweden",
+          "flag": "🇸🇪",
+          "rank": 3,
+          "played": 2,
+          "won": 1,
+          "drawn": 0,
+          "lost": 1,
+          "gf": 6,
+          "ga": 6,
+          "gd": 0,
+          "points": 3
+        },
+        {
+          "name": "Tunisia",
+          "flag": "🇹🇳",
+          "rank": 4,
+          "played": 2,
+          "won": 0,
+          "drawn": 0,
+          "lost": 2,
+          "gf": 1,
+          "ga": 9,
+          "gd": -8,
+          "points": 0
+        }
+      ]
+    }
+  ],
+  "updated": "2026-06-24T18:21:21Z"
 }
