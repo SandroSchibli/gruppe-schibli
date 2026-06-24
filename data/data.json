@@ -1621,7 +1621,9 @@
       ]
     }
   ],
-  "updated": "2026-06-24T17:04:10Z",
+  "bonus_questions": [],
+  "top_scorers": [],
+  "tournament_stats": {},
   "groups": [
     {
       "name": "Group A",
@@ -1629,6 +1631,7 @@
         {
           "name": "Argentina",
           "flag": "🇦🇷",
+          "rank": 1,
           "played": 2,
           "won": 2,
           "drawn": 0,
@@ -1636,12 +1639,12 @@
           "gf": 5,
           "ga": 0,
           "gd": 5,
-          "points": 6,
-          "rank": 1
+          "points": 6
         },
         {
           "name": "Austria",
           "flag": "🇦🇹",
+          "rank": 2,
           "played": 2,
           "won": 1,
           "drawn": 0,
@@ -1649,12 +1652,12 @@
           "gf": 3,
           "ga": 3,
           "gd": 0,
-          "points": 3,
-          "rank": 2
+          "points": 3
         },
         {
           "name": "Algeria",
           "flag": "🇩🇿",
+          "rank": 3,
           "played": 2,
           "won": 1,
           "drawn": 0,
@@ -1662,12 +1665,12 @@
           "gf": 2,
           "ga": 4,
           "gd": -2,
-          "points": 3,
-          "rank": 3
+          "points": 3
         },
         {
           "name": "Jordan",
           "flag": "🇯🇴",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 0,
@@ -1675,8 +1678,7 @@
           "gf": 2,
           "ga": 5,
           "gd": -3,
-          "points": 0,
-          "rank": 4
+          "points": 0
         }
       ]
     },
@@ -1686,6 +1688,7 @@
         {
           "name": "USA",
           "flag": "🇺🇸",
+          "rank": 1,
           "played": 2,
           "won": 2,
           "drawn": 0,
@@ -1693,12 +1696,12 @@
           "gf": 6,
           "ga": 1,
           "gd": 5,
-          "points": 6,
-          "rank": 1
+          "points": 6
         },
         {
           "name": "Australia",
           "flag": "🇦🇺",
+          "rank": 2,
           "played": 2,
           "won": 1,
           "drawn": 0,
@@ -1706,12 +1709,12 @@
           "gf": 2,
           "ga": 2,
           "gd": 0,
-          "points": 3,
-          "rank": 2
+          "points": 3
         },
         {
           "name": "Paraguay",
           "flag": "🇵🇾",
+          "rank": 3,
           "played": 2,
           "won": 1,
           "drawn": 0,
@@ -1719,12 +1722,12 @@
           "gf": 2,
           "ga": 4,
           "gd": -2,
-          "points": 3,
-          "rank": 3
+          "points": 3
         },
         {
           "name": "Turkey",
           "flag": "🇹🇷",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 0,
@@ -1732,8 +1735,7 @@
           "gf": 0,
           "ga": 3,
           "gd": -3,
-          "points": 0,
-          "rank": 4
+          "points": 0
         }
       ]
     },
@@ -1743,6 +1745,7 @@
         {
           "name": "Egypt",
           "flag": "🇪🇬",
+          "rank": 1,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -1750,12 +1753,12 @@
           "gf": 4,
           "ga": 2,
           "gd": 2,
-          "points": 4,
-          "rank": 1
+          "points": 4
         },
         {
           "name": "Iran",
           "flag": "🇮🇷",
+          "rank": 2,
           "played": 2,
           "won": 0,
           "drawn": 2,
@@ -1763,12 +1766,12 @@
           "gf": 2,
           "ga": 2,
           "gd": 0,
-          "points": 2,
-          "rank": 2
+          "points": 2
         },
         {
           "name": "Belgium",
           "flag": "🇧🇪",
+          "rank": 3,
           "played": 2,
           "won": 0,
           "drawn": 2,
@@ -1776,12 +1779,12 @@
           "gf": 1,
           "ga": 1,
           "gd": 0,
-          "points": 2,
-          "rank": 3
+          "points": 2
         },
         {
           "name": "New Zealand",
           "flag": "🇳🇿",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 1,
@@ -1789,8 +1792,7 @@
           "gf": 3,
           "ga": 5,
           "gd": -2,
-          "points": 1,
-          "rank": 4
+          "points": 1
         }
       ]
     },
@@ -1800,6 +1802,7 @@
         {
           "name": "Canada",
           "flag": "🇨🇦",
+          "rank": 1,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -1807,12 +1810,12 @@
           "gf": 7,
           "ga": 1,
           "gd": 6,
-          "points": 4,
-          "rank": 1
+          "points": 4
         },
         {
           "name": "Switzerland",
           "flag": "🇨🇭",
+          "rank": 2,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -1820,12 +1823,12 @@
           "gf": 5,
           "ga": 2,
           "gd": 3,
-          "points": 4,
-          "rank": 2
+          "points": 4
         },
         {
           "name": "Bosnia-Herzeg.",
           "flag": "🇧🇦",
+          "rank": 3,
           "played": 2,
           "won": 0,
           "drawn": 1,
@@ -1833,12 +1836,12 @@
           "gf": 2,
           "ga": 5,
           "gd": -3,
-          "points": 1,
-          "rank": 3
+          "points": 1
         },
         {
           "name": "Qatar",
           "flag": "🇶🇦",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 1,
@@ -1846,8 +1849,7 @@
           "gf": 1,
           "ga": 7,
           "gd": -6,
-          "points": 1,
-          "rank": 4
+          "points": 1
         }
       ]
     },
@@ -1857,6 +1859,7 @@
         {
           "name": "Brazil",
           "flag": "🇧🇷",
+          "rank": 1,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -1864,12 +1867,12 @@
           "gf": 4,
           "ga": 1,
           "gd": 3,
-          "points": 4,
-          "rank": 1
+          "points": 4
         },
         {
           "name": "Morocco",
           "flag": "🇲🇦",
+          "rank": 2,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -1877,12 +1880,12 @@
           "gf": 2,
           "ga": 1,
           "gd": 1,
-          "points": 4,
-          "rank": 2
+          "points": 4
         },
         {
           "name": "Scotland",
           "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+          "rank": 3,
           "played": 2,
           "won": 1,
           "drawn": 0,
@@ -1890,12 +1893,12 @@
           "gf": 1,
           "ga": 1,
           "gd": 0,
-          "points": 3,
-          "rank": 3
+          "points": 3
         },
         {
           "name": "Haiti",
           "flag": "🇭🇹",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 0,
@@ -1903,8 +1906,7 @@
           "gf": 0,
           "ga": 4,
           "gd": -4,
-          "points": 0,
-          "rank": 4
+          "points": 0
         }
       ]
     },
@@ -1914,6 +1916,7 @@
         {
           "name": "Spain",
           "flag": "🇪🇸",
+          "rank": 1,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -1921,12 +1924,12 @@
           "gf": 4,
           "ga": 0,
           "gd": 4,
-          "points": 4,
-          "rank": 1
+          "points": 4
         },
         {
           "name": "Uruguay",
           "flag": "🇺🇾",
+          "rank": 2,
           "played": 2,
           "won": 0,
           "drawn": 2,
@@ -1934,12 +1937,12 @@
           "gf": 3,
           "ga": 3,
           "gd": 0,
-          "points": 2,
-          "rank": 2
+          "points": 2
         },
         {
           "name": "Cape Verde",
           "flag": "🇨🇻",
+          "rank": 3,
           "played": 2,
           "won": 0,
           "drawn": 2,
@@ -1947,12 +1950,12 @@
           "gf": 2,
           "ga": 2,
           "gd": 0,
-          "points": 2,
-          "rank": 3
+          "points": 2
         },
         {
           "name": "Saudi Arabia",
           "flag": "🇸🇦",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 1,
@@ -1960,8 +1963,7 @@
           "gf": 1,
           "ga": 5,
           "gd": -4,
-          "points": 1,
-          "rank": 4
+          "points": 1
         }
       ]
     },
@@ -1971,6 +1973,7 @@
         {
           "name": "Colombia",
           "flag": "🇨🇴",
+          "rank": 1,
           "played": 2,
           "won": 2,
           "drawn": 0,
@@ -1978,12 +1981,12 @@
           "gf": 4,
           "ga": 1,
           "gd": 3,
-          "points": 6,
-          "rank": 1
+          "points": 6
         },
         {
           "name": "Portugal",
           "flag": "🇵🇹",
+          "rank": 2,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -1991,12 +1994,12 @@
           "gf": 6,
           "ga": 1,
           "gd": 5,
-          "points": 4,
-          "rank": 2
+          "points": 4
         },
         {
           "name": "DR Congo",
           "flag": "🇨🇩",
+          "rank": 3,
           "played": 2,
           "won": 0,
           "drawn": 1,
@@ -2004,12 +2007,12 @@
           "gf": 1,
           "ga": 2,
           "gd": -1,
-          "points": 1,
-          "rank": 3
+          "points": 1
         },
         {
           "name": "Uzbekistan",
           "flag": "🇺🇿",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 0,
@@ -2017,8 +2020,7 @@
           "gf": 1,
           "ga": 8,
           "gd": -7,
-          "points": 0,
-          "rank": 4
+          "points": 0
         }
       ]
     },
@@ -2028,6 +2030,7 @@
         {
           "name": "England",
           "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+          "rank": 1,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -2035,12 +2038,12 @@
           "gf": 4,
           "ga": 2,
           "gd": 2,
-          "points": 4,
-          "rank": 1
+          "points": 4
         },
         {
           "name": "Ghana",
           "flag": "🇬🇭",
+          "rank": 2,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -2048,12 +2051,12 @@
           "gf": 1,
           "ga": 0,
           "gd": 1,
-          "points": 4,
-          "rank": 2
+          "points": 4
         },
         {
           "name": "Croatia",
           "flag": "🇭🇷",
+          "rank": 3,
           "played": 2,
           "won": 1,
           "drawn": 0,
@@ -2061,12 +2064,12 @@
           "gf": 3,
           "ga": 4,
           "gd": -1,
-          "points": 3,
-          "rank": 3
+          "points": 3
         },
         {
           "name": "Panama",
           "flag": "🇵🇦",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 0,
@@ -2074,8 +2077,7 @@
           "gf": 0,
           "ga": 2,
           "gd": -2,
-          "points": 0,
-          "rank": 4
+          "points": 0
         }
       ]
     },
@@ -2085,6 +2087,7 @@
         {
           "name": "Germany",
           "flag": "🇩🇪",
+          "rank": 1,
           "played": 2,
           "won": 2,
           "drawn": 0,
@@ -2092,12 +2095,12 @@
           "gf": 9,
           "ga": 2,
           "gd": 7,
-          "points": 6,
-          "rank": 1
+          "points": 6
         },
         {
           "name": "Ivory Coast",
           "flag": "🇨🇮",
+          "rank": 2,
           "played": 2,
           "won": 1,
           "drawn": 0,
@@ -2105,12 +2108,12 @@
           "gf": 2,
           "ga": 2,
           "gd": 0,
-          "points": 3,
-          "rank": 2
+          "points": 3
         },
         {
           "name": "Ecuador",
           "flag": "🇪🇨",
+          "rank": 3,
           "played": 2,
           "won": 0,
           "drawn": 1,
@@ -2118,12 +2121,12 @@
           "gf": 0,
           "ga": 1,
           "gd": -1,
-          "points": 1,
-          "rank": 3
+          "points": 1
         },
         {
           "name": "Curaçao",
           "flag": "🇨🇼",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 1,
@@ -2131,8 +2134,7 @@
           "gf": 1,
           "ga": 7,
           "gd": -6,
-          "points": 1,
-          "rank": 4
+          "points": 1
         }
       ]
     },
@@ -2142,6 +2144,7 @@
         {
           "name": "Mexico",
           "flag": "🇲🇽",
+          "rank": 1,
           "played": 2,
           "won": 2,
           "drawn": 0,
@@ -2149,12 +2152,12 @@
           "gf": 3,
           "ga": 0,
           "gd": 3,
-          "points": 6,
-          "rank": 1
+          "points": 6
         },
         {
           "name": "South Korea",
           "flag": "🇰🇷",
+          "rank": 2,
           "played": 2,
           "won": 1,
           "drawn": 0,
@@ -2162,12 +2165,12 @@
           "gf": 2,
           "ga": 2,
           "gd": 0,
-          "points": 3,
-          "rank": 2
+          "points": 3
         },
         {
           "name": "Czechia",
           "flag": "🇨🇿",
+          "rank": 3,
           "played": 2,
           "won": 0,
           "drawn": 1,
@@ -2175,12 +2178,12 @@
           "gf": 2,
           "ga": 3,
           "gd": -1,
-          "points": 1,
-          "rank": 3
+          "points": 1
         },
         {
           "name": "South Africa",
           "flag": "🇿🇦",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 1,
@@ -2188,8 +2191,7 @@
           "gf": 1,
           "ga": 3,
           "gd": -2,
-          "points": 1,
-          "rank": 4
+          "points": 1
         }
       ]
     },
@@ -2199,6 +2201,7 @@
         {
           "name": "France",
           "flag": "🇫🇷",
+          "rank": 1,
           "played": 2,
           "won": 2,
           "drawn": 0,
@@ -2206,12 +2209,12 @@
           "gf": 6,
           "ga": 1,
           "gd": 5,
-          "points": 6,
-          "rank": 1
+          "points": 6
         },
         {
           "name": "Norway",
           "flag": "🇳🇴",
+          "rank": 2,
           "played": 2,
           "won": 2,
           "drawn": 0,
@@ -2219,12 +2222,12 @@
           "gf": 7,
           "ga": 3,
           "gd": 4,
-          "points": 6,
-          "rank": 2
+          "points": 6
         },
         {
           "name": "Senegal",
           "flag": "🇸🇳",
+          "rank": 3,
           "played": 2,
           "won": 0,
           "drawn": 0,
@@ -2232,12 +2235,12 @@
           "gf": 3,
           "ga": 6,
           "gd": -3,
-          "points": 0,
-          "rank": 3
+          "points": 0
         },
         {
           "name": "Iraq",
           "flag": "🇮🇶",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 0,
@@ -2245,8 +2248,7 @@
           "gf": 1,
           "ga": 7,
           "gd": -6,
-          "points": 0,
-          "rank": 4
+          "points": 0
         }
       ]
     },
@@ -2256,6 +2258,7 @@
         {
           "name": "Netherlands",
           "flag": "🇳🇱",
+          "rank": 1,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -2263,12 +2266,12 @@
           "gf": 7,
           "ga": 3,
           "gd": 4,
-          "points": 4,
-          "rank": 1
+          "points": 4
         },
         {
           "name": "Japan",
           "flag": "🇯🇵",
+          "rank": 2,
           "played": 2,
           "won": 1,
           "drawn": 1,
@@ -2276,12 +2279,12 @@
           "gf": 6,
           "ga": 2,
           "gd": 4,
-          "points": 4,
-          "rank": 2
+          "points": 4
         },
         {
           "name": "Sweden",
           "flag": "🇸🇪",
+          "rank": 3,
           "played": 2,
           "won": 1,
           "drawn": 0,
@@ -2289,12 +2292,12 @@
           "gf": 6,
           "ga": 6,
           "gd": 0,
-          "points": 3,
-          "rank": 3
+          "points": 3
         },
         {
           "name": "Tunisia",
           "flag": "🇹🇳",
+          "rank": 4,
           "played": 2,
           "won": 0,
           "drawn": 0,
@@ -2302,10 +2305,10 @@
           "gf": 1,
           "ga": 9,
           "gd": -8,
-          "points": 0,
-          "rank": 4
+          "points": 0
         }
       ]
     }
-  ]
+  ],
+  "updated": "2026-06-24T17:58:21Z"
 }
