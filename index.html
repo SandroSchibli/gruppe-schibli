@@ -21,9 +21,15 @@
     html,body{height:100%;background:var(--bg);color:var(--text);
       font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif;overflow:hidden;}
     body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-      background:radial-gradient(ellipse 90% 50% at 50% -5%,rgba(67,97,238,.18) 0%,transparent 65%),
-                 radial-gradient(ellipse 70% 40% at 95% 100%,rgba(240,180,41,.12) 0%,transparent 60%),
-                 radial-gradient(ellipse 60% 35% at 5% 100%,rgba(230,57,70,.08) 0%,transparent 60%);}
+      background:
+        radial-gradient(ellipse 110% 55% at 50% -10%,rgba(67,97,238,.35) 0%,transparent 60%),
+        radial-gradient(ellipse 80% 50% at 100% 0%,rgba(240,180,41,.22) 0%,transparent 55%),
+        radial-gradient(ellipse 70% 45% at 0% 100%,rgba(230,57,70,.18) 0%,transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 100%,rgba(6,214,160,.1) 0%,transparent 50%),
+        repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0px,rgba(255,255,255,.012) 1px,transparent 1px,transparent 60px);}
+    body::after{content:'2026';position:fixed;right:-20px;top:50%;transform:translateY(-50%) rotate(90deg);
+      font-size:180px;font-weight:900;color:rgba(255,255,255,.025);letter-spacing:-8px;
+      pointer-events:none;z-index:0;white-space:nowrap;}
 
     /* Header */
     header{position:fixed;top:0;left:0;right:0;height:var(--hh);
@@ -281,10 +287,10 @@ function renderLive(){
   const allMatches=[];
   rounds.forEach((r,ri)=>(r.matches||[]).forEach(m=>allMatches.push({...m,_round:r,_ri:ri})));
 
-  const live    =allMatches.filter(m=>m.kickoff&&isLive(m.kickoff));
-  const upcoming=allMatches.filter(m=>m.kickoff&&new Date(m.kickoff)>now)
+  const live    =allMatches.filter(m=>m.kickoff&&isLive(m.kickoff,m.result));
+  const upcoming=allMatches.filter(m=>m.kickoff&&new Date(m.kickoff)>now&&!m.result)
                            .sort((a,b)=>new Date(a.kickoff)-new Date(b.kickoff));
-  const today   =allMatches.filter(m=>m.kickoff&&sameDay(new Date(m.kickoff),new Date())&&!isLive(m.kickoff)&&new Date(m.kickoff)<=now);
+  const today   =allMatches.filter(m=>m.kickoff&&sameDay(new Date(m.kickoff),new Date())&&!isLive(m.kickoff,m.result)&&new Date(m.kickoff)<=now);
 
   let h='';
 
@@ -310,7 +316,8 @@ function renderLive(){
   startCDs();
 }
 
-function isLive(kickoff){
+function isLive(kickoff,result){
+  if(result&&result.home!=null)return false; // already has result = finished
   const e=(Date.now()-new Date(kickoff))/6e4;
   return e>=0&&e<=110;
 }
@@ -374,6 +381,10 @@ function matchCard(m,ctx,std){
 }
 
 function simBox(m,mkey,std,isKO){
+  // Init sim score from actual result if available
+  if(m.result&&m.result.home!=null&&!liveGoals[mkey]){
+    liveGoals[mkey]={home:m.result.home,away:m.result.away};
+  }
   const ls=liveGoals[mkey]||{home:0,away:0};
   const safe=mkey.replace(/\W/g,'_');
   window._sm=window._sm||{}; window._sm[safe]={mkey,m,isKO};
@@ -447,8 +458,8 @@ function renderMatches(){
     h+=`<div class="date-lbl">${d}</div>`;
     matches.forEach(m=>{
       const hasRes=m.result&&m.result.home!=null;
-      const future=m.kickoff&&new Date(m.kickoff)>now;
-      const live=m.kickoff&&isLive(m.kickoff);
+      const future=m.kickoff&&new Date(m.kickoff)>now&&!hasRes;
+      const live=m.kickoff&&isLive(m.kickoff,m.result);
       const preds=m.predictions||{};
       const hasTips=MEMBERS.some(mb=>preds[mb]&&preds[mb].home!=null);
 
