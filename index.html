@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0d1b2a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Schibli WM" />
+  <title>⚽ Gruppe Schibli – WM 2026</title>
+  <link rel="manifest" href="manifest.json" />
+  <style>
+    :root {
+      --bg: #0d1b2a;
+      --surface: #162032;
+      --card: #1e2d40;
+      --border: #2a3d54;
+      --accent: #e8173a;
+      --green: #22c55e;
+      --gold: #f59e0b;
+      --blue: #3b82f6;
+      --text: #f0f4f8;
+      --muted: #8899aa;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a2940 100%);
+      padding: 20px 16px 16px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    header p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    #updated {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ── Tabs ── */
+    nav {
+      display: flex;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    nav button {
+      flex: 1;
+      padding: 12px 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    nav button.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── Sections ── */
+    section { display: none; padding: 16px; }
+    section.visible { display: block; }
+
+    /* ── Standings ── */
+    .standings-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .standing-row {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      transition: background 0.15s;
+    }
+    .standing-row:last-child { border-bottom: none; }
+    .standing-row:active { background: var(--border); }
+
+    .rank-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .rank-1 { background: #f59e0b22; color: #f59e0b; border: 1.5px solid #f59e0b; }
+    .rank-2 { background: #9ca3af22; color: #9ca3af; border: 1.5px solid #9ca3af; }
+    .rank-3 { background: #cd7c3422; color: #cd7c34; border: 1.5px solid #cd7c34; }
+    .rank-other { background: var(--border); color: var(--muted); }
+
+    .standing-name { flex: 1; font-weight: 600; font-size: 16px; }
+    .standing-pts { font-size: 22px; font-weight: 700; color: var(--text); }
+    .standing-pts span { font-size: 11px; color: var(--muted); font-weight: 400; margin-left: 2px; }
+
+    .gap-badge {
+      font-size: 11px;
+      color: var(--accent);
+      background: #e8173a18;
+      padding: 2px 6px;
+      border-radius: 20px;
+    }
+
+    /* ── Round section ── */
+    .round-header {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 20px 0 10px;
+    }
+    .round-header:first-child { margin-top: 0; }
+
+    /* ── Match card ── */
+    .match-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .match-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .teams {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .team-name {
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .vs { color: var(--muted); font-size: 12px; }
+
+    .result-badge {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text);
+      background: var(--bg);
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .result-badge.pending { color: var(--muted); font-size: 13px; font-weight: 400; }
+
+    .match-time {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ── Prediction grid ── */
+    .predictions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .pred-cell {
+      padding: 10px 8px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .pred-cell:last-child { border-right: none; }
+
+    .pred-name {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pred-score {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .pred-score.unknown { color: var(--muted); font-size: 13px; font-weight: 400; }
+    .pred-pts {
+      font-size: 11px;
+      margin-top: 3px;
+      font-weight: 600;
+    }
+
+    /* Point coloring */
+    .pts-max { color: var(--gold); }
+    .pts-good { color: var(--green); }
+    .pts-some { color: var(--blue); }
+    .pts-zero { color: var(--muted); }
+
+    /* Correct outcome highlight */
+    .pred-cell.correct-winner { background: #22c55e0a; }
+    .pred-cell.exact-score { background: #f59e0b0f; }
+
+    /* ── Empty state ── */
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty .emoji { font-size: 48px; display: block; margin-bottom: 12px; }
+
+    /* ── Bottom nav ── */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      padding: 8px 0 env(safe-area-inset-bottom, 8px);
+      z-index: 100;
+    }
+    .bottom-nav button {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 6px 0;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      transition: color 0.2s;
+    }
+    .bottom-nav button .icon { font-size: 22px; }
+    .bottom-nav button.active { color: var(--accent); }
+
+    /* ── Refresh button ── */
+    .refresh-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .refresh-btn:active { background: var(--border); }
+
+    /* ── Loading ── */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      color: var(--muted);
+      gap: 10px;
+    }
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Pill badge ── */
+    .live-badge {
+      background: var(--accent);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex;justify-content:space-between;align-items:flex-start">
+    <div>
+      <h1>⚽ Gruppe Schibli</h1>
+      <p>FIFA WM 2026</p>
+    </div>
+    <button class="refresh-btn" onclick="loadData(true)">⟳ Aktualisieren</button>
+  </div>
+  <p id="updated" style="margin-top:6px">Lade Daten…</p>
+</header>
+
+<nav>
+  <button class="active" onclick="switchTab('tipps')">🎯 Tipps</button>
+  <button onclick="switchTab('results')">📋 Ergebnisse</button>
+  <button onclick="switchTab('standings')">🏆 Rangliste</button>
+</nav>
+
+<!-- TIPPS TAB: current/upcoming round -->
+<section id="tab-tipps" class="visible">
+  <div id="tipps-content"><div class="loading"><div class="spinner"></div> Lade…</div></div>
+</section>
+
+<!-- RESULTS TAB: past rounds -->
+<section id="tab-results">
+  <div id="results-content"><div class="loading"><div class="spinner"></div> Lade…</div></div>
+</section>
+
+<!-- STANDINGS TAB -->
+<section id="tab-standings">
+  <div id="standings-content"><div class="loading"><div class="spinner"></div> Lade…</div></div>
+</section>
+
+<div class="bottom-nav">
+  <button class="active" onclick="switchTab('tipps')">
+    <span class="icon">🎯</span>Tipps
+  </button>
+  <button onclick="switchTab('results')">
+    <span class="icon">📋</span>Ergebnisse
+  </button>
+  <button onclick="switchTab('standings')">
+    <span class="icon">🏆</span>Rangliste
+  </button>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+let appData = null;
+let activeTab = 'tipps';
+
+// Short display names for the 4-column grid
+const SHORT_NAMES = {
+  'Sandro S': 'Sandro',
+  'Alice B':  'Alice',
+  'Karin S':  'Karin',
+  'Adi S':    'Adi',
+};
+
+// ── Tab switching ──────────────────────────────────────────────────────────
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('nav button, .bottom-nav button').forEach((b, i) => {
+    b.classList.remove('active');
+  });
+  document.getElementById(`tab-${tab}`).classList.add('visible');
+
+  // Sync both nav bars
+  const tabs = ['tipps', 'results', 'standings'];
+  const idx = tabs.indexOf(tab);
+  document.querySelectorAll('nav button')[idx]?.classList.add('active');
+  document.querySelectorAll('.bottom-nav button')[idx]?.classList.add('active');
+
+  if (appData) renderAll(appData);
+}
+
+// ── Data loading ───────────────────────────────────────────────────────────
+async function loadData(force = false) {
+  try {
+    const url = `data/data.json?t=${force ? Date.now() : Math.floor(Date.now()/60000)}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    appData = await res.json();
+    document.getElementById('updated').textContent = `Aktualisiert: ${appData.updated_at || '—'}`;
+    renderAll(appData);
+  } catch (e) {
+    console.error('Load failed:', e);
+    document.getElementById('updated').textContent = 'Fehler beim Laden';
+  }
+}
+
+// ── Rendering ──────────────────────────────────────────────────────────────
+function renderAll(data) {
+  renderStandings(data.standings || []);
+  renderRounds(data.rounds || []);
+}
+
+function renderStandings(standings) {
+  const el = document.getElementById('standings-content');
+  if (!standings.length) {
+    el.innerHTML = '<div class="empty"><span class="emoji">📊</span>Noch keine Daten</div>';
+    return;
+  }
+
+  const maxPts = standings[0]?.points || 0;
+
+  el.innerHTML = `
+    <div class="standings-card">
+      ${standings.map(s => {
+        const gap = s.rank > 1 ? maxPts - s.points : 0;
+        const rankClass = s.rank <= 3 ? `rank-${s.rank}` : 'rank-other';
+        const medal = s.rank === 1 ? '🥇' : s.rank === 2 ? '🥈' : s.rank === 3 ? '🥉' : `#${s.rank}`;
+        return `
+          <div class="standing-row">
+            <div class="rank-badge ${rankClass}">${medal.length > 2 ? medal : s.rank}</div>
+            <div class="standing-name">${s.name}</div>
+            ${gap > 0 ? `<div class="gap-badge">-${gap}</div>` : ''}
+            <div class="standing-pts">${s.points}<span>Pkt</span></div>
+          </div>`;
+      }).join('')}
+    </div>
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px">
+      Punkte gemäss SRF Tippspiel
+    </p>`;
+}
+
+function renderRounds(rounds) {
+  const now = new Date();
+
+  // Split into "current/upcoming" and "past"
+  // For now, show all in tipps tab (latest round) and all in results
+  const tippsEl = document.getElementById('tipps-content');
+  const resultsEl = document.getElementById('results-content');
+
+  if (!rounds.length) {
+    const empty = '<div class="empty"><span class="emoji">⏳</span>Noch keine Tipps — <br>wird beim nächsten Anpfiff aktualisiert</div>';
+    tippsEl.innerHTML = empty;
+    resultsEl.innerHTML = empty;
+    return;
+  }
+
+  // Latest round → Tipps tab; all rounds → Results tab
+  const latestRound = rounds[rounds.length - 1];
+  tippsEl.innerHTML = renderRound(latestRound);
+  resultsEl.innerHTML = rounds.map(r => renderRound(r)).reverse().join('');
+}
+
+function renderRound(round) {
+  const matches = round.matches || [];
+  if (!matches.length) return '';
+
+  return `
+    <div class="round-header">${round.name || 'Runde'}</div>
+    ${matches.map(m => renderMatch(m)).join('')}
+  `;
+}
+
+function renderMatch(match) {
+  const hasResult = match.result && match.result.home !== undefined;
+  const resultHtml = hasResult
+    ? `<div class="result-badge">${match.result.home} : ${match.result.away}</div>`
+    : `<div class="result-badge pending">–</div>`;
+
+  const preds = match.predictions || {};
+  const members = ['Sandro S', 'Alice B', 'Karin S', 'Adi S'];
+
+  // Find max points for this match (for gold highlight)
+  const allPts = members.map(m => preds[m]?.points).filter(p => p != null);
+  const maxPts = allPts.length ? Math.max(...allPts) : 0;
+
+  const predCells = members.map(member => {
+    const p = preds[member];
+    const hasTip = p && p.home !== undefined && p.home !== null;
+    const tipStr = hasTip ? `${p.home} : ${p.away}` : '–';
+    const tipClass = hasTip ? '' : 'unknown';
+
+    let ptsHtml = '';
+    let cellClass = '';
+
+    if (hasResult && hasTip) {
+      const pts = p.points ?? 0;
+      const ptsCls = pts >= 8 ? 'pts-max' : pts >= 5 ? 'pts-good' : pts >= 1 ? 'pts-some' : 'pts-zero';
+
+      // Check if correct winner
+      const predOutcome = p.home > p.away ? 'H' : p.home < p.away ? 'A' : 'D';
+      const realOutcome = match.result.home > match.result.away ? 'H' : match.result.home < match.result.away ? 'A' : 'D';
+      const exactScore = p.home === match.result.home && p.away === match.result.away;
+
+      cellClass = exactScore ? 'exact-score' : predOutcome === realOutcome ? 'correct-winner' : '';
+      ptsHtml = `<div class="pred-pts ${ptsCls}">${pts} Pkt</div>`;
+    }
+
+    return `
+      <div class="pred-cell ${cellClass}">
+        <div class="pred-name">${SHORT_NAMES[member] || member}</div>
+        <div class="pred-score ${tipClass}">${tipStr}</div>
+        ${ptsHtml}
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="match-card">
+      <div class="match-header">
+        <div class="teams">
+          <span style="font-size:20px">${match.home_flag || ''}</span>
+          <span class="team-name">${match.home}</span>
+          <span class="vs">vs</span>
+          <span class="team-name">${match.away}</span>
+          <span style="font-size:20px">${match.away_flag || ''}</span>
+        </div>
+        <div style="text-align:right;margin-left:8px">
+          ${resultHtml}
+          <div class="match-time">${match.date || ''}</div>
+        </div>
+      </div>
+      <div class="predictions">${predCells}</div>
+    </div>`;
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+loadData();
+
+// Auto-refresh every 5 minutes
+setInterval(() => loadData(), 5 * 60 * 1000);
+
+// PWA service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(console.error);
+}
+</script>
+</body>
+</html>
