@@ -77,7 +77,7 @@ async def run():
 
         # ── Load page ──────────────────────────────────────────────────────
         log.info(f"Loading {BASE} ...")
-        await page.goto(BASE, wait_until="networkidle", timeout=30000)
+        await page.goto(BASE, wait_until="domcontentloaded", timeout=30000)
         await dismiss_cookie_banner(page)  # fallback in case banner still appears
         await page.screenshot(path="/tmp/01_loaded.png")
 
@@ -103,7 +103,7 @@ async def run():
                 except Exception:
                     continue
 
-            await page.wait_for_load_state("networkidle", timeout=20000)
+            await page.wait_for_load_state("domcontentloaded", timeout=20000)
             await dismiss_cookie_banner(page)
             await page.screenshot(path="/tmp/02_after_click.png")
             log.info(f"Now at: {page.url}")
@@ -120,7 +120,7 @@ async def run():
                 try:
                     if await page.locator(sel).count() > 0:
                         await page.locator(sel).first.click()
-                        await page.wait_for_load_state("networkidle", timeout=10000)
+                        await page.wait_for_load_state("domcontentloaded", timeout=10000)
                         log.info(f"Switched to login tab via: {sel}")
                         break
                 except Exception:
@@ -161,7 +161,7 @@ async def run():
                 except Exception:
                     continue
 
-            await page.wait_for_load_state("networkidle", timeout=20000)
+            await page.wait_for_load_state("domcontentloaded", timeout=20000)
             await page.screenshot(path="/tmp/05_after_login.png")
             log.info(f"After login URL: {page.url}")
 
@@ -169,7 +169,7 @@ async def run():
 
         # Navigate back to Tippspiel if we got redirected elsewhere
         if BASE not in page.url:
-            await page.goto(BASE, wait_until="networkidle", timeout=20000)
+            await page.goto(BASE, wait_until="domcontentloaded", timeout=20000)
             await dismiss_cookie_banner(page)
 
         await page.screenshot(path="/tmp/06_tippspiel.png")
@@ -200,11 +200,11 @@ async def get_standings(page) -> list:
 
     try:
         await page.click("text=Tippgruppen", timeout=8000)
-        await page.wait_for_load_state("networkidle")
+        await page.wait_for_load_state("domcontentloaded")
         await page.screenshot(path="/tmp/07_tippgruppen.png")
 
         await page.click("text=Gruppe Schibli", timeout=8000)
-        await page.wait_for_load_state("networkidle")
+        await page.wait_for_load_state("domcontentloaded")
         await page.screenshot(path="/tmp/08_gruppe.png")
     except Exception as e:
         log.warning(f"Navigation failed: {e}")
@@ -277,14 +277,14 @@ async def get_all_rounds(page) -> list:
 async def get_member_tips(page, member: str) -> list:
     log.info(f"Getting tips for {member}...")
     try:
-        await page.goto(BASE, wait_until="networkidle", timeout=20000)
+        await page.goto(BASE, wait_until="domcontentloaded", timeout=20000)
         await dismiss_cookie_banner(page)
         await page.click("text=Tippgruppen", timeout=8000)
-        await page.wait_for_load_state("networkidle")
+        await page.wait_for_load_state("domcontentloaded")
         await page.click("text=Gruppe Schibli", timeout=8000)
-        await page.wait_for_load_state("networkidle")
+        await page.wait_for_load_state("domcontentloaded")
         await page.click(f"text={member}", timeout=8000)
-        await page.wait_for_load_state("networkidle")
+        await page.wait_for_load_state("domcontentloaded")
     except Exception as e:
         log.warning(f"Could not navigate to {member}: {e}")
         return []
@@ -298,7 +298,7 @@ async def get_member_tips(page, member: str) -> list:
             prev = page.locator("button:has-text('‹'), [aria-label*='vorig']").first
             if await prev.count():
                 await prev.click()
-                await page.wait_for_load_state("networkidle")
+                await page.wait_for_load_state("domcontentloaded")
             else:
                 break
         except Exception:
