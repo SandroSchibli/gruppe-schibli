@@ -18,7 +18,7 @@ from playwright.async_api import async_playwright
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
-BASE = "https://www.srf.ch/sport/fussball/tippspiel"
+BASE = "https://wmtippspiel.srf.ch"
 MEMBERS = ["Sandro S", "Alice B", "Karin S", "Adi S"]
 
 FLAGS = {
