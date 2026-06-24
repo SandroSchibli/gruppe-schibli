@@ -1,684 +1,423 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Gruppe Schibli · FIFA WC 2026</title>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#04091a" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="WC Tipps" />
-  <style>
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    :root {
-      --bg:#04091a; --bg2:#080f24; --card:#0d1830; --card2:#121f3a;
-      --gold:#f0b429; --red:#e63946; --green:#06d6a0; --blue:#4361ee;
-      --text:#eef2ff; --text2:#6b84b8; --border:rgba(255,255,255,0.07);
-      --radius:14px; --hh:60px; --nh:64px;
-    }
-    html,body{height:100%;background:var(--bg);color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif;overflow:hidden;}
-    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-      background:
-        radial-gradient(ellipse 110% 55% at 50% -10%,rgba(67,97,238,.35) 0%,transparent 60%),
-        radial-gradient(ellipse 80% 50% at 100% 0%,rgba(240,180,41,.22) 0%,transparent 55%),
-        radial-gradient(ellipse 70% 45% at 0% 100%,rgba(230,57,70,.18) 0%,transparent 55%),
-        radial-gradient(ellipse 60% 40% at 100% 100%,rgba(6,214,160,.1) 0%,transparent 50%),
-        repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0px,rgba(255,255,255,.012) 1px,transparent 1px,transparent 60px);}
-    body::after{content:'2026';position:fixed;right:-20px;top:50%;transform:translateY(-50%) rotate(90deg);
-      font-size:180px;font-weight:900;color:rgba(255,255,255,.025);letter-spacing:-8px;
-      pointer-events:none;z-index:0;white-space:nowrap;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Gruppe Schibli – WM 2026</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0d0d1a">
+<link rel="manifest" href="manifest.json">
+<style>
+:root{
+  --bg:#0d0d1a;
+  --card:#1a1a2e;
+  --card2:#16213e;
+  --accent:#e63946;
+  --gold:#f4c430;
+  --green:#06d6a0;
+  --text:#f0f0f0;
+  --text2:#888;
+  --border:rgba(255,255,255,0.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,system-ui,sans-serif;min-height:100vh;max-width:600px;margin:0 auto}
 
-    /* Header */
-    header{position:fixed;top:0;left:0;right:0;height:var(--hh);
-      background:rgba(4,9,26,.93);backdrop-filter:blur(24px);
-      border-bottom:1px solid var(--border);
-      display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:100;}
-    .hbrand{display:flex;align-items:center;gap:10px;}
-    .hbadge{width:38px;height:38px;border-radius:10px;
-      background:linear-gradient(135deg,#1a3a6e,#0a1628);
-      border:1px solid rgba(240,180,41,.35);
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;}
-    .hbadge span:nth-child(1){font-size:7px;font-weight:800;color:#fff;letter-spacing:.5px;}
-    .hbadge span:nth-child(2){font-size:5px;font-weight:700;color:var(--gold);}
-    .hbadge span:nth-child(3){font-size:9px;font-weight:900;color:var(--gold);}
-    .htitles h1{font-size:15px;font-weight:800;}
-    .htitles p{font-size:10px;color:var(--text2);}
-    .hright{display:flex;align-items:center;gap:8px;}
-    #upd{font-size:9px;color:var(--text2);text-align:right;max-width:90px;line-height:1.3;}
-    .btnr{width:30px;height:30px;border-radius:8px;background:var(--card);
-      border:1px solid var(--border);color:var(--text2);font-size:16px;
-      cursor:pointer;display:flex;align-items:center;justify-content:center;}
+/* ── Header ── */
+.header{
+  background:linear-gradient(160deg,#0f3460 0%,#16213e 50%,#1a1a2e 100%);
+  padding:env(safe-area-inset-top,16px) 16px 16px;
+  text-align:center;
+  border-bottom:2px solid var(--accent);
+  position:relative;
+  overflow:hidden;
+}
+.header::before{
+  content:'⚽';
+  position:absolute;
+  font-size:120px;
+  opacity:0.04;
+  top:-10px;right:-20px;
+}
+.wm-badge{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+.title{font-size:24px;font-weight:900;letter-spacing:-0.5px}
+.subtitle{font-size:12px;color:var(--text2);margin-top:2px}
 
-    /* Main scroll area */
-    main{position:fixed;top:var(--hh);bottom:var(--nh);left:0;right:0;
-      overflow-y:auto;-webkit-overflow-scrolling:touch;z-index:1;}
-    .tab{display:none;padding:14px 14px 24px;}
-    .tab.active{display:block;}
+/* ── Standings ── */
+.section{padding:14px 16px}
+.section-title{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--text2);font-weight:700;margin-bottom:10px}
+.s-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.s-row:last-child{border-bottom:none}
+.s-rank{font-size:11px;color:var(--text2);width:18px;flex-shrink:0;font-weight:600}
+.s-name{flex:1;font-size:14px;font-weight:700}
+.s-bar-wrap{flex:1;height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+.s-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:2px;transition:width .6s ease}
+.s-pts{font-size:13px;font-weight:700;color:var(--gold);min-width:56px;text-align:right}
 
-    /* Nav */
-    nav{position:fixed;bottom:0;left:0;right:0;height:var(--nh);
-      background:rgba(4,9,26,.97);backdrop-filter:blur(24px);
-      border-top:1px solid var(--border);display:flex;align-items:center;
-      padding-bottom:env(safe-area-inset-bottom,0);z-index:100;}
-    .nb{flex:1;display:flex;flex-direction:column;align-items:center;
-      justify-content:center;gap:3px;padding:8px 4px;cursor:pointer;
-      color:var(--text2);font-size:9px;font-weight:700;
-      text-transform:uppercase;letter-spacing:.6px;}
-    .nb .ni{font-size:22px;line-height:1;}
-    .nb.active{color:var(--gold);}
+/* ── Tabs ── */
+.tabs{display:flex;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:20;padding:0 12px}
+.tab{padding:13px 14px;font-size:13px;font-weight:600;color:var(--text2);border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;flex:1;text-align:center}
+.tab.active{color:var(--text);border-bottom-color:var(--accent)}
 
-    /* Section headers */
-    .sh{display:flex;align-items:center;gap:8px;margin:18px 0 10px;}
-    .sh:first-child{margin-top:0;}
-    .sh h2{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:var(--text2);white-space:nowrap;}
-    .sh::after{content:'';flex:1;height:1px;background:var(--border);}
+/* ── Round panel ── */
+.round-panel{display:none;padding:12px 16px 24px}
+.round-panel.active{display:block}
 
-    /* Cards */
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;}
+/* ── Match card ── */
+.match-card{background:var(--card);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--border)}
+.match-card.is-live{border-color:rgba(6,214,160,0.35);background:rgba(6,214,160,0.02)}
 
-    /* Match card header */
-    .mch{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
-    .mct{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;flex:1;min-width:0;}
-    .mct-names{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
-    .mcvs{font-size:10px;color:var(--text2);}
-    .mcres{font-size:15px;font-weight:900;color:var(--gold);background:rgba(240,180,41,.1);padding:4px 10px;border-radius:8px;flex-shrink:0;}
-    .mctime{font-size:11px;color:var(--text2);flex-shrink:0;text-align:right;}
-    .mclive{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:var(--red);flex-shrink:0;}
-    .ld{width:6px;height:6px;border-radius:50%;background:var(--red);animation:blink 1s infinite;}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.match-top{padding:10px 14px 0;display:flex;align-items:center;gap:8px}
+.live-badge{background:var(--accent);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:0.8px;animation:pulse 1.5s infinite}
+.match-time{font-size:11px;color:var(--text2)}
+.match-date{font-size:11px;color:var(--text2)}
 
-    /* Tips grid — 4 columns */
-    .tg{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
-    .tc{background:var(--card);padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;}
-    .tcn{font-size:8px;font-weight:700;color:var(--text2);text-align:center;}
-    .tcs{font-size:16px;font-weight:900;}
-    .tcs.exact{color:var(--gold);}
-    .tcs.correct{color:var(--green);}
-    .tcs.wrong{color:var(--text2);}
-    .tcs.open{color:var(--text);}
-    .tcs.future{color:var(--text2);font-size:12px;}
-    .tcp{font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;background:rgba(255,255,255,.04);color:var(--text2);}
-    .tcp.won{background:rgba(6,214,160,.15);color:var(--green);}
-    .tc.scoring{background:rgba(6,214,160,.06);}
-    .tcp.live{background:rgba(6,214,160,.2);color:#06d6a0;font-size:10px;}
+.match-body{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 12px}
+.team{display:flex;flex-direction:column;align-items:center;gap:3px;width:36%}
+.flag{font-size:30px;line-height:1}
+.tname{font-size:11px;font-weight:600;color:var(--text2);text-align:center;line-height:1.2}
+.score-area{display:flex;flex-direction:column;align-items:center;gap:3px}
+.score{font-size:28px;font-weight:900;letter-spacing:3px;line-height:1}
+.score.live-score{color:var(--green)}
+.score.upcoming{font-size:20px;color:var(--text2)}
+.cd{font-size:12px;color:var(--green);font-weight:600;font-variant-numeric:tabular-nums}
+.final-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text2)}
 
-    /* Countdown inside match card */
-    .mc-cd{padding:10px 14px;display:flex;align-items:center;justify-content:center;gap:6px;border-bottom:1px solid var(--border);}
-    .mc-cd-unit{display:flex;flex-direction:column;align-items:center;min-width:36px;}
-    .mc-cd-val{font-size:20px;font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1;}
-    .mc-cd-sep{font-size:20px;font-weight:900;color:var(--gold);opacity:.3;line-height:1;}
-    .mc-cd-lbl{font-size:7px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+/* ── Tips grid ── */
+.tips{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
+.tc{padding:9px 14px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.tc:nth-child(2n){border-right:none}
+.tc:nth-child(n+3){border-bottom:none}
+.tc.scoring{background:rgba(6,214,160,0.07)}
+.tcn{font-size:11px;color:var(--text2);font-weight:500;margin-bottom:3px}
+.tcr{display:flex;align-items:center;justify-content:space-between}
+.tcs{font-size:15px;font-weight:700}
+.tcs.exact{color:var(--gold)}
+.tcs.correct{color:var(--green)}
+.tcs.wrong{color:var(--text2)}
+.tcs.open{color:var(--text)}
+.tcs.future{color:var(--text2);opacity:0.35}
+.tcp{font-size:11px;font-weight:700;padding:2px 5px;border-radius:4px}
+.tcp.won{background:rgba(244,196,48,0.15);color:var(--gold)}
+.tcp.live{background:rgba(6,214,160,0.2);color:var(--green)}
+.tcp.nope{color:var(--text2)}
+.tcp.dash{color:var(--text2);opacity:0.4}
 
-    /* Live sim */
-    .sim{background:rgba(230,57,70,.08);border-top:1px solid rgba(230,57,70,.2);padding:12px 14px;}
-    .simt{font-size:10px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:.8px;display:flex;align-items:center;gap:5px;margin-bottom:10px;}
-    .simsr{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;}
-    .simtn{font-size:11px;font-weight:700;flex:1;}
-    .simtn.r{text-align:right;}
-    .simn{font-size:24px;font-weight:900;color:var(--gold);min-width:24px;text-align:center;}
-    .simc{font-size:24px;font-weight:900;color:var(--text2);}
-    .sb{width:28px;height:28px;border-radius:7px;background:var(--card2);border:1px solid var(--border);color:var(--text);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-    .simrows{display:flex;flex-direction:column;gap:5px;}
-    .simrow{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--card2);border-radius:8px;}
-    .simrk{font-size:12px;font-weight:800;width:18px;color:var(--text2);}
-    .simrk.g{color:var(--gold);}
-    .simnm{flex:1;font-size:13px;font-weight:700;}
-    .simtot{font-size:14px;font-weight:900;color:var(--gold);}
-    .simd{font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;min-width:32px;text-align:center;}
-    .simd.pos{background:rgba(6,214,160,.2);color:#06d6a0;font-weight:900;}
-    .simd.nul{background:rgba(255,255,255,.04);color:var(--text2);}
-    .simd.zero{background:rgba(230,57,70,.08);color:var(--text2);}
+/* ── Live sim ── */
+.sim{border-top:1px solid var(--border);padding:10px 14px}
+.sim-title{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text2);font-weight:600;margin-bottom:7px}
+.simr{display:flex;align-items:center;gap:8px;padding:3px 0}
+.simr-rank{font-size:11px;color:var(--text2);width:14px}
+.simr-name{font-size:13px;font-weight:600;flex:1}
+.simd{font-size:12px;font-weight:700;padding:1px 5px;border-radius:3px;min-width:32px;text-align:right}
+.simd.pos{background:rgba(6,214,160,0.18);color:var(--green)}
+.simd.zero{color:var(--text2)}
+.simd.nul{color:var(--text2);opacity:0.4}
 
-    /* Standings */
-    .str{display:flex;align-items:center;gap:12px;padding:14px;
-      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;}
-    .str.first{border-color:rgba(240,180,41,.35);background:linear-gradient(to right,rgba(240,180,41,.07),var(--card));}
-    .rr{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;}
-    .rr1{border:2px solid var(--gold);color:var(--gold);background:rgba(240,180,41,.12);}
-    .rr2{border:2px solid #94a3b8;color:#94a3b8;background:rgba(148,163,184,.1);}
-    .rr3{border:2px solid #cd7f32;color:#cd7f32;background:rgba(205,127,50,.1);}
-    .rr4{border:2px solid var(--border);color:var(--text2);background:rgba(255,255,255,.03);}
-    .stn{flex:1;font-size:15px;font-weight:700;}
-    .stg{font-size:11px;color:var(--red);font-weight:700;}
-    .stp{font-size:20px;font-weight:900;color:var(--gold);}
-    .stpl{font-size:9px;color:var(--text2);text-align:right;}
+/* ── Notif bar ── */
+.notif{padding:4px 16px 16px}
+.notif-btn{display:block;padding:13px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-size:13px;text-align:center;text-decoration:none;cursor:pointer}
+.notif-btn:hover{background:rgba(255,255,255,0.08);color:var(--text)}
+.updated{padding:4px 16px 32px;font-size:11px;color:var(--text2);text-align:center}
 
-    /* Round pills */
-    .pills{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;scrollbar-width:none;}
-    .pills::-webkit-scrollbar{display:none;}
-    .pill{padding:6px 14px;border-radius:20px;background:var(--card);border:1px solid var(--border);
-      font-size:11px;font-weight:700;color:var(--text2);cursor:pointer;white-space:nowrap;flex-shrink:0;}
-    .pill.active{background:var(--gold);border-color:var(--gold);color:#000;}
-
-    /* Bonus */
-    .bqq{padding:11px 14px;font-size:12px;font-weight:700;color:var(--text2);border-bottom:1px solid var(--border);}
-    .bqg{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);}
-    .bqc{background:var(--card);padding:10px 10px;}
-    .bqcn{font-size:8px;font-weight:700;color:var(--text2);margin-bottom:3px;}
-    .bqcv{font-size:13px;font-weight:800;}
-    .bq-stat{padding:8px 14px;font-size:11px;color:var(--green);background:rgba(6,214,160,.06);border-top:1px solid rgba(6,214,160,.12);}
-
-    /* Countdown card (big) */
-    .cdc{background:linear-gradient(135deg,rgba(67,97,238,.12),rgba(240,180,41,.08));
-      border:1px solid rgba(240,180,41,.2);border-radius:var(--radius);padding:14px;margin-bottom:10px;}
-    .cdlbl{font-size:10px;color:var(--text2);text-align:center;margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;}
-    .cdteams{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px;}
-    .cdteam{display:flex;flex-direction:column;align-items:center;gap:4px;}
-    .cdflag{font-size:30px;line-height:1;}
-    .cdname{font-size:12px;font-weight:700;}
-    .vspill{font-size:10px;font-weight:800;color:var(--text2);background:var(--card);padding:4px 10px;border-radius:6px;}
-    .cdtimer{display:flex;justify-content:center;align-items:flex-start;gap:4px;}
-    .cdunit{display:flex;flex-direction:column;align-items:center;min-width:44px;}
-    .cdval{font-size:26px;font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1;}
-    .cdsep{font-size:26px;font-weight:900;color:var(--gold);opacity:.35;line-height:1;}
-    .cdulbl{font-size:7px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
-
-    /* Scorers */
-    .sc-row{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--border);}
-
-    /* Empty */
-    .empty{text-align:center;padding:40px 20px;color:var(--text2);}
-    .empty .ei{font-size:40px;margin-bottom:12px;}
-    .empty p{font-size:13px;line-height:1.6;}
-    .infobar{display:flex;gap:8px;align-items:flex-start;background:rgba(67,97,238,.1);
-      border:1px solid rgba(67,97,238,.25);border-radius:10px;padding:10px 12px;
-      font-size:12px;color:#93a8f4;margin-bottom:10px;}
-
-    /* Group date label */
-    .date-lbl{font-size:10px;font-weight:800;color:var(--text2);letter-spacing:.5px;
-      text-transform:uppercase;padding:6px 0 8px;margin-top:4px;}
-  </style>
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+</style>
 </head>
 <body>
 
-<header>
-  <div class="hbrand">
-    <div class="hbadge"><span>FIFA</span><span>WORLD CUP</span><span>2026</span></div>
-    <div class="htitles"><h1>Gruppe Schibli</h1><p>FIFA World Cup 2026</p></div>
-  </div>
-  <div class="hright">
-    <div id="upd">–</div>
-    <button class="btnr" onclick="loadData()" title="Refresh">↻</button>
-  </div>
+<header class="header">
+  <div class="wm-badge">⚽ FIFA World Cup 2026</div>
+  <div class="title">Gruppe Schibli</div>
+  <div class="subtitle">Tippspiel-Tracker</div>
 </header>
 
-<main>
-  <div id="tab-live"     class="tab active"><div id="c-live"><div class="empty"><div class="ei">⏳</div><p>Loading…</p></div></div></div>
-  <div id="tab-matches"  class="tab"><div id="c-matches"><div class="empty"><div class="ei">📋</div><p>Loading…</p></div></div></div>
-  <div id="tab-std"      class="tab"><div id="c-std"><div class="empty"><div class="ei">🏆</div><p>Loading…</p></div></div></div>
-  <div id="tab-more"     class="tab"><div id="c-more"><div class="empty"><div class="ei">📊</div><p>Loading…</p></div></div></div>
-</main>
+<div class="section" id="standings-section"></div>
 
-<nav>
-  <div class="nb active" onclick="go('live')"><span class="ni">⚡</span><span>Live</span></div>
-  <div class="nb" onclick="go('matches')"><span class="ni">📋</span><span>Matches</span></div>
-  <div class="nb" onclick="go('std')"><span class="ni">🏆</span><span>Standings</span></div>
-  <div class="nb" onclick="go('more')"><span class="ni">📊</span><span>More</span></div>
-</nav>
+<div class="tabs" id="tabs"></div>
+<div id="panels"></div>
+
+<div class="notif">
+  <a class="notif-btn" id="notif-link" href="#" target="_blank">🔔 Push-Notifications aktivieren</a>
+</div>
+<div class="updated" id="updated"></div>
 
 <script>
 const MEMBERS = ['Sandro S','Alice B','Karin S','Adi S'];
 const FIRST   = {'Sandro S':'Sandro','Alice B':'Alice','Karin S':'Karin','Adi S':'Adi'};
+const NTFY    = 'https://ntfy.sh/gruppe-schibli-wm26';
 
-let DATA=null, curRound=0, liveGoals={};
+let _countdowns = []; // [{el, kickoff}]
+let _data = null;
+let _activeTab = -1;
 
-// ── Scoring ──────────────────────────────────────────────────────────────
-function calcPts(tip,res,isKO){
-  if(!tip||!res||tip.home==null||tip.away==null)return null;
-  const th=+tip.home,ta=+tip.away,rh=+res.home,ra=+res.away;
-  if([th,ta,rh,ra].some(isNaN))return null;
-  let p=0;
-  if(th===rh)p+=1; if(ta===ra)p+=1;
-  if(Math.sign(th-ta)===Math.sign(rh-ra))p+=5;
-  if((th-ta)===(rh-ra))p+=3;
-  return isKO?p*2:p;
-}
-function tipCls(tip,res){
-  if(!res||tip.home==null||tip.away==null)return'open';
-  const th=+tip.home,ta=+tip.away,rh=+res.home,ra=+res.away;
-  if(th===rh&&ta===ra)return'exact';
-  if(Math.sign(th-ta)===Math.sign(rh-ra))return'correct';
-  return'wrong';
+// ── Scoring ──────────────────────────────────────────────────────────
+function calcPts(tip, res, isKO) {
+  if (!tip || tip.home == null || !res || res.home == null) return null;
+  let p = 0;
+  const to = tip.home > tip.away ? 1 : tip.home < tip.away ? -1 : 0;
+  const ro = res.home  > res.away  ? 1 : res.home  < res.away  ? -1 : 0;
+  if (to === ro) p += 5;
+  if (tip.home === res.home) p += 1;
+  if (tip.away === res.away) p += 1;
+  if ((tip.home - tip.away) === (res.home - res.away)) p += 3;
+  return isKO ? p * 2 : p;
 }
 
-// ── Data ─────────────────────────────────────────────────────────────────
-async function loadData(){
-  try{
-    const r=await fetch('data/data.json?t='+Date.now());
-    DATA=await r.json();
-    // Auto-select current round
-    curRound=bestRound();
-    renderAll();
-  }catch(e){console.error(e);}
+function tipCls(tip, res, isKO) {
+  if (!tip || tip.home == null || !res || res.home == null) return 'open';
+  const p = calcPts(tip, res, isKO);
+  if (p >= 10) return 'exact';
+  if (p >= 5)  return 'correct';
+  if (p > 0)   return 'correct';
+  return 'wrong';
 }
 
-function bestRound(){
-  // Find the round with the most recent active/upcoming matches
-  const rounds=DATA?.rounds||[];
-  if(!rounds.length)return 0;
-  const now=Date.now();
-  let best=0;
-  for(let i=0;i<rounds.length;i++){
-    const matches=rounds[i].matches||[];
-    const hasUpcoming=matches.some(m=>m.kickoff&&new Date(m.kickoff)>now);
-    const hasRecent=matches.some(m=>m.kickoff&&(now-new Date(m.kickoff))/864e5<1);
-    if(hasUpcoming||hasRecent)return i;
-    if(matches.some(m=>m.result))best=i;
-  }
-  return best;
+// ── Timing helpers ───────────────────────────────────────────────────
+function isLive(m) {
+  if (m.result && m.result.home != null) return false;
+  if (!m.kickoff) return false;
+  const now = Date.now(), ko = +new Date(m.kickoff);
+  return now >= ko && now < ko + 115 * 60000;
 }
 
-function renderAll(){
-  document.getElementById('upd').textContent=DATA?.updated_at||'–';
-  renderLive();
-  renderMatches();
-  renderStd();
-  renderMore();
+function isFuture(m) {
+  if (m.result && m.result.home != null) return false;
+  return m.kickoff && +new Date(m.kickoff) > Date.now();
 }
 
-// ── LIVE TAB ─────────────────────────────────────────────────────────────
-function renderLive(){
-  const el=document.getElementById('c-live');
-  const rounds=DATA?.rounds||[];
-  const std=DATA?.standings||[];
-  const now=Date.now();
+function fmtDate(iso) {
+  if (!iso) return '';
+  return new Date(iso).toLocaleString('de-CH', {
+    weekday:'short', day:'numeric', month:'short',
+    hour:'2-digit', minute:'2-digit', timeZone:'Europe/Zurich'
+  });
+}
 
-  // Flatten all matches, find today's + upcoming
-  const allMatches=[];
-  rounds.forEach((r,ri)=>(r.matches||[]).forEach(m=>allMatches.push({...m,_round:r,_ri:ri})));
+function fmtCd(ms) {
+  if (ms <= 0) return null;
+  const h = Math.floor(ms / 3600000);
+  const m = Math.floor((ms % 3600000) / 60000);
+  const s = Math.floor((ms % 60000) / 1000);
+  if (h >= 24) return `${Math.floor(h/24)}d ${h%24}h`;
+  if (h > 0)   return `${h}h ${String(m).padStart(2,'0')}m`;
+  return `${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+}
 
-  const live    =allMatches.filter(m=>m.kickoff&&isLive(m.kickoff,m.result));
-  const upcoming=allMatches.filter(m=>m.kickoff&&new Date(m.kickoff)>now&&!m.result)
-                           .sort((a,b)=>new Date(a.kickoff)-new Date(b.kickoff));
-  const today   =allMatches.filter(m=>m.kickoff&&sameDay(new Date(m.kickoff),new Date())&&!isLive(m.kickoff,m.result)&&new Date(m.kickoff)<=now);
+// ── Match card builder ───────────────────────────────────────────────
+function matchCard(m, isKO, roundIdx, gameIdx) {
+  const hasRes = m.result && m.result.home != null;
+  const live   = isLive(m);
+  const future = isFuture(m);
+  const ls = m.liveScore || (live ? {home:0, away:0} : null);
+  const preds = m.predictions || {};
 
-  let h='';
-
-  if(live.length){h+=sec('🔴 Live Now');live.forEach(m=>h+=matchCard(m,'live',std));}
-
-  if(upcoming.length){
-    // Group simultaneous games
-    const byKO={};
-    upcoming.slice(0,6).forEach(m=>{(byKO[m.kickoff]??=[]).push(m);});
-    h+=sec('⏱ Upcoming');
-    Object.entries(byKO).forEach(([ko,ms])=>{
-      ms.forEach(m=>h+=countdownCard(m));
-    });
+  // -- Top bar
+  let topHtml = '';
+  if (live) {
+    topHtml = `<span class="live-badge">LIVE</span>`;
+    if (ls) topHtml += `<span class="match-time">${ls.home}:${ls.away}</span>`;
+  } else if (m.kickoff) {
+    topHtml = `<span class="match-date">${fmtDate(m.kickoff)}</span>`;
   }
 
-  if(today.length){h+=sec("Today's Results");today.forEach(m=>h+=matchCard(m,'past',std));}
+  // -- Score area
+  let scoreHtml = '';
+  const cdId = `cd_${roundIdx}_${gameIdx}`;
+  if (hasRes) {
+    scoreHtml = `<div class="score">${m.result.home}:${m.result.away}</div><div class="final-label">Abpfiff</div>`;
+  } else if (live && ls) {
+    scoreHtml = `<div class="score live-score">${ls.home}:${ls.away}</div>`;
+  } else if (future) {
+    scoreHtml = `<div class="score upcoming">–:–</div><div class="cd" id="${cdId}" data-ko="${m.kickoff}">…</div>`;
+    // will be populated by countdown ticker
+  } else {
+    scoreHtml = `<div class="score upcoming">–:–</div>`;
+  }
 
-  if(std.length){h+=sec('Standings');h+=stdList(std);}
+  // -- Tips
+  let tipsHtml = '';
+  MEMBERS.forEach(mb => {
+    const tip = preds[mb] || {};
+    const hasTip = tip.home != null && tip.away != null;
+    let pts = null, cls, ptBadge;
 
-  if(!h)h=`<div class="empty"><div class="ei">⏳</div><p>No matches today.<br>Check the Matches tab for the full schedule.</p></div>`;
-
-  el.innerHTML=h;
-  startCDs();
-}
-
-function isLive(kickoff,result){
-  if(result&&result.home!=null)return false; // already has result = finished
-  const e=(Date.now()-new Date(kickoff))/6e4;
-  return e>=0&&e<=110;
-}
-
-function countdownCard(m){
-  const id='cd_'+m.kickoff.replace(/\D/g,'');
-  const ko=new Date(m.kickoff);
-  return`<div class="cdc">
-    <div class="cdlbl">${fmtTime(ko)} · ${m._round?.name||''}</div>
-    <div class="cdteams">
-      <div class="cdteam"><span class="cdflag">${m.homeFlag||'🏳️'}</span><span class="cdname">${m.home}</span></div>
-      <span class="vspill">VS</span>
-      <div class="cdteam"><span class="cdflag">${m.awayFlag||'🏳️'}</span><span class="cdname">${m.away}</span></div>
-    </div>
-    <div class="cdtimer">
-      <div class="cdunit"><span class="cdval" id="${id}_h">--</span><span class="cdulbl">hrs</span></div>
-      <span class="cdsep">:</span>
-      <div class="cdunit"><span class="cdval" id="${id}_m">--</span><span class="cdulbl">min</span></div>
-      <span class="cdsep">:</span>
-      <div class="cdunit"><span class="cdval" id="${id}_s">--</span><span class="cdulbl">sec</span></div>
-    </div>
-  </div>`;
-}
-
-function matchCard(m,ctx,std){
-  const hasRes=m.result&&m.result.home!=null;
-  const isKO=m._round?.isKO||false;
-  const preds=m.predictions||{};
-  const mkey=m.home+'|'+m.away+'|'+(m.kickoff||m.date||'');
-  const ls=liveGoals[mkey]||{home:0,away:0};
-  const live=ctx==='live';
-
-  let h=`<div class="card"><div class="mch">
-    <div class="mct"><span>${m.homeFlag||'🏳️'}</span>
-      <div class="mct-names"><span>${m.home}</span><span class="mcvs">vs</span><span>${m.away}</span></div>
-      <span>${m.awayFlag||'🏳️'}</span>
-    </div>`;
-  if(live)         h+=`<span class="mclive"><span class="ld"></span>LIVE</span>`;
-  else if(hasRes)  h+=`<span class="mcres">${m.result.home} – ${m.result.away}</span>`;
-  else if(m.kickoff)h+=`<span class="mctime">${fmtTime(new Date(m.kickoff))}</span>`;
-  else             h+=`<span class="mctime">${m.date||''}</span>`;
-  h+=`</div>`;
-
-  // Tips grid
-  h+=`<div class="tg">`;
-  MEMBERS.forEach(mb=>{
-    const tip=preds[mb]||{};
-    let p=null,cls,ptBadge;
-    if(hasRes){
-      p=calcPts(tip,m.result,isKO);
-      cls=tipCls(tip,m.result);
-      ptBadge=p!=null?`<div class="tcp won">+${p}</div>`:(tip.home==null?`<div class="tcp">–</div>`:`<div class="tcp">0</div>`);
-    } else if(live){
-      // Show live delta based on current live score
-      p=calcPts(tip,ls,isKO);
-      cls=tip.home!=null?(p>0?(p>=8?'exact':'correct'):'wrong'):'future';
-      ptBadge=tip.home!=null?(p>0?`<div class="tcp live">+${p}</div>`:`<div class="tcp">+0</div>`):`<div class="tcp">?</div>`;
+    if (hasRes) {
+      pts = calcPts(tip, m.result, isKO);
+      cls = tipCls(tip, m.result, isKO);
+      if (pts === null)   ptBadge = `<span class="tcp dash">–</span>`;
+      else if (pts > 0)   ptBadge = `<span class="tcp won">+${pts}</span>`;
+      else                ptBadge = `<span class="tcp nope">0</span>`;
+    } else if (live && ls) {
+      pts = calcPts(tip, ls, isKO);
+      cls = hasTip ? (pts > 0 ? (pts >= 10 ? 'exact' : 'correct') : 'wrong') : 'future';
+      if (hasTip) ptBadge = pts > 0 ? `<span class="tcp live">+${pts}</span>` : `<span class="tcp nope">+0</span>`;
+      else        ptBadge = `<span class="tcp dash">–</span>`;
     } else {
-      cls=tip.home!=null?'open':'future';
-      ptBadge=`<div class="tcp">?</div>`;
+      cls = hasTip ? 'open' : 'future';
+      ptBadge = hasTip ? `<span class="tcp dash">?</span>` : `<span class="tcp dash">–</span>`;
     }
-    const str=tip.home!=null&&tip.away!=null?`${tip.home}:${tip.away}`:'—';
-    h+=`<div class="tc${live&&p>0?' scoring':''}">
-      <div class="tcn">${FIRST[mb]||mb}</div>
-      <div class="tcs ${cls}">${str}</div>
-      ${ptBadge}
-    </div>`;
-  });
-  h+=`</div>`;
 
-  if(live)h+=simBox(m,mkey,std,isKO);
-  h+=`</div>`;return h;
-}
-
-function simBox(m,mkey,std,isKO){
-  // Init sim score from actual result if available
-  if(m.result&&m.result.home!=null&&!liveGoals[mkey]){
-    liveGoals[mkey]={home:m.result.home,away:m.result.away};
-  }
-  const ls=liveGoals[mkey]||{home:0,away:0};
-  const safe=mkey.replace(/\W/g,'_');
-  window._sm=window._sm||{}; window._sm[safe]={mkey,m,isKO};
-  const preds=m.predictions||{};
-  const proj=MEMBERS.map(mb=>{
-    const tip=preds[mb]||{};
-    const hasTip=tip.home!=null&&tip.away!=null;
-    const g=hasTip?(calcPts(tip,ls,isKO)||0):0;
-    const cur=(DATA?.standings||[]).find(s=>s.name===mb)?.points||0;
-    return{name:mb,g,tip:hasTip,tot:cur+g};
-  }).sort((a,b)=>b.tot-a.tot);
-  let h=`<div class="sim">
-    <div class="simt"><span class="ld"></span> Live Simulation</div>
-    <div class="simsr">
-      <div class="simtn">${m.homeFlag} ${m.home}</div>
-      <button class="sb" onclick="adj('${safe}','home',-1)">−</button>
-      <div class="simn" id="snh_${safe}">${ls.home}</div>
-      <div class="simc">:</div>
-      <div class="simn" id="sna_${safe}">${ls.away}</div>
-      <button class="sb" onclick="adj('${safe}','away',-1)">−</button>
-      <div class="simtn r">${m.away} ${m.awayFlag}</div>
-    </div>
-    <div style="display:flex;justify-content:center;gap:8px;margin-bottom:10px">
-      <button class="sb" style="width:auto;padding:0 12px;font-size:11px" onclick="adj('${safe}','home',1)">⚽ ${m.home}</button>
-      <button class="sb" style="width:auto;padding:0 12px;font-size:11px" onclick="adj('${safe}','away',1)">⚽ ${m.away}</button>
-    </div>
-    <div class="simrows">`;
-  proj.forEach((p,i)=>{
-    const dCls=p.g>0?'pos':(p.tip?'zero':'nul');
-    const dTxt=p.g>0?'+'+p.g:(p.tip?'+0':'–');
-    h+=`<div class="simrow">
-      <div class="simrk ${i===0?'g':''}">${i+1}</div>
-      <div class="simnm">${FIRST[p.name]||p.name}</div>
-      <div class="simtot">${p.tot}</div>
-      <div class="simd ${dCls}">${dTxt}</div>
-    </div>`;
-  });
-  return h+`</div></div>`;
-}
-
-function adj(safe,side,d){
-  const ref=(window._sm||{})[safe];if(!ref)return;
-  if(!liveGoals[ref.mkey])liveGoals[ref.mkey]={home:0,away:0};
-  liveGoals[ref.mkey][side]=Math.max(0,(liveGoals[ref.mkey][side]||0)+d);
-  renderLive();
-}
-
-// ── MATCHES TAB ──────────────────────────────────────────────────────────
-function renderMatches(){
-  const el=document.getElementById('c-matches');
-  const rounds=DATA?.rounds||[];
-  if(!rounds.length){
-    el.innerHTML=`<div class="infobar">ℹ️ Full schedule loads after first successful scrape.</div>
-      <div class="empty"><div class="ei">📋</div><p>No data yet. Scraper runs every 10 min.</p></div>`;
-    return;
-  }
-
-  // Round pills
-  let h=`<div class="pills">`;
-  rounds.forEach((r,i)=>h+=`<div class="pill ${i===curRound?'active':''}" onclick="setRound(${i})">${r.name||'Round '+(i+1)}</div>`);
-  h+=`</div>`;
-
-  const round=rounds[curRound]||rounds[0];
-  const isKO=round.isKO||false;
-  const now=Date.now();
-
-  // Group matches by date
-  const byDate={};
-  (round.matches||[]).forEach(m=>{
-    const d=m.kickoff?fmtDate(new Date(m.kickoff)):(m.date||'TBD');
-    (byDate[d]??=[]).push(m);
+    const str = hasTip ? `${tip.home}:${tip.away}` : '—';
+    const scoring = (live && ls && pts > 0) ? ' scoring' : '';
+    tipsHtml += `<div class="tc${scoring}"><div class="tcn">${FIRST[mb]||mb}</div><div class="tcr"><span class="tcs ${cls}">${str}</span>${ptBadge}</div></div>`;
   });
 
-  Object.entries(byDate).forEach(([d,matches])=>{
-    h+=`<div class="date-lbl">${d}</div>`;
-    matches.forEach(m=>{
-      const hasRes=m.result&&m.result.home!=null;
-      const future=m.kickoff&&new Date(m.kickoff)>now&&!hasRes;
-      const live=m.kickoff&&isLive(m.kickoff,m.result);
-      const preds=m.predictions||{};
-      const hasTips=MEMBERS.some(mb=>preds[mb]&&preds[mb].home!=null);
+  // -- Live sim ranking
+  let simHtml = '';
+  if (live && ls && _data) {
+    const standings = _data.standings || [];
+    const proj = MEMBERS.map(mb => {
+      const tip = preds[mb] || {};
+      const hasTip = tip.home != null;
+      const g = hasTip ? (calcPts(tip, ls, isKO) || 0) : 0;
+      const cur = (standings.find(s => s.name === mb) || {}).points || 0;
+      return {name: mb, g, hasTip, tot: cur + g};
+    }).sort((a,b) => b.tot - a.tot || b.g - a.g);
 
-      h+=`<div class="card"><div class="mch">
-        <div class="mct">
-          <span>${m.homeFlag||'🏳️'}</span>
-          <div class="mct-names"><span>${m.home}</span><span class="mcvs">vs</span><span>${m.away}</span></div>
-          <span>${m.awayFlag||'🏳️'}</span>
-        </div>`;
-
-      if(live)         h+=`<span class="mclive"><span class="ld"></span>LIVE</span>`;
-      else if(hasRes)  h+=`<span class="mcres">${m.result.home} – ${m.result.away}</span>`;
-      else if(m.kickoff)h+=`<span class="mctime">${fmtTime(new Date(m.kickoff))}</span>`;
-      else             h+=`<span class="mctime">${m.date||''}</span>`;
-      h+=`</div>`;
-
-      // Mini countdown inside card for upcoming games
-      if(future&&!live&&m.kickoff){
-        const id='mcd_'+m.kickoff.replace(/\D/g,'')+'_'+m.home.replace(/\W/g,'');
-        h+=`<div class="mc-cd">
-          <div class="mc-cd-unit"><span class="mc-cd-val" id="${id}_h">--</span><span class="mc-cd-lbl">h</span></div>
-          <span class="mc-cd-sep">:</span>
-          <div class="mc-cd-unit"><span class="mc-cd-val" id="${id}_m">--</span><span class="mc-cd-lbl">min</span></div>
-          <span class="mc-cd-sep">:</span>
-          <div class="mc-cd-unit"><span class="mc-cd-val" id="${id}_s">--</span><span class="mc-cd-lbl">sec</span></div>
-        </div>`;
-      }
-
-      // Tips grid (always shown, greyed out if future)
-      h+=`<div class="tg">`;
-      MEMBERS.forEach(mb=>{
-        const tip=preds[mb]||{};
-        const p=hasRes?calcPts(tip,m.result,isKO):null;
-        const cls=hasRes?tipCls(tip,m.result):(tip.home!=null?(future?'future':'open'):'future');
-        const str=tip.home!=null&&tip.away!=null?`${tip.home}:${tip.away}`:(future?'🔒':'—');
-        h+=`<div class="tc">
-          <div class="tcn">${FIRST[mb]||mb}</div>
-          <div class="tcs ${cls}">${str}</div>
-          ${p!=null?`<div class="tcp won">+${p}</div>`:`<div class="tcp">${future?'':( hasTips?'–':'?')}</div>`}
-        </div>`;
-      });
-      h+=`</div></div>`;
+    simHtml = `<div class="sim"><div class="sim-title">Live Ranking (bei diesem Ergebnis)</div>`;
+    proj.forEach((p,i) => {
+      const dCls = p.g > 0 ? 'pos' : (p.hasTip ? 'zero' : 'nul');
+      const dTxt = p.g > 0 ? `+${p.g}` : (p.hasTip ? '+0' : '–');
+      simHtml += `<div class="simr"><span class="simr-rank">${i+1}</span><span class="simr-name">${FIRST[p.name]||p.name}</span><span class="simd ${dCls}">${dTxt}</span></div>`;
     });
-  });
-
-  if(!Object.keys(byDate).length)h+=`<div class="empty"><div class="ei">📭</div><p>No matches in this round yet.</p></div>`;
-  el.innerHTML=h;
-  startCDs();
-}
-
-function setRound(i){curRound=i;renderMatches();}
-
-// ── STANDINGS TAB ────────────────────────────────────────────────────────
-function renderStd(){
-  const el=document.getElementById('c-std');
-  const std=DATA?.standings||[];
-  const ts=DATA?.tournament_stats||{};
-  let h='';
-
-  h+=sec('🏆 Leaderboard');
-  h+=std.length?stdList(std):`<div class="empty"><div class="ei">📊</div><p>No data yet.</p></div>`;
-
-  h+=sec('🎯 Bonus Questions');
-  const bqs=DATA?.bonus_questions||[];
-  bqs.forEach(bq=>{
-    h+=`<div class="card" style="margin-bottom:10px">
-      <div class="bqq">${bq.q}</div>
-      <div class="bqg">`;
-    MEMBERS.forEach(mb=>{
-      const ans=(bq.a||{})[mb]||'?';
-      h+=`<div class="bqc"><div class="bqcn">${FIRST[mb]||mb}</div><div class="bqcv">${ans}</div></div>`;
-    });
-    h+=`</div>`;
-    if(bq.current!=null)h+=`<div class="bq-stat">Current status: ${bq.current_label||bq.current}</div>`;
-    h+=`</div>`;
-  });
-
-  // Overall stats
-  if(ts.top_scorer_goals){
-    h+=sec('📈 Tournament Stats');
-    h+=`<div class="card" style="margin-bottom:10px">
-      <div style="padding:12px 14px;border-bottom:1px solid var(--border)">
-        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">Top Scorer right now</div>
-        <div style="font-size:16px;font-weight:800">${ts.top_scorer_flag||''} ${ts.top_scorer_name||'–'} — ${ts.top_scorer_goals} goals</div>
-      </div>
-      <div style="padding:12px 14px">
-        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">0-0 draws so far</div>
-        <div style="font-size:16px;font-weight:800">${ts.zero_zero_count??'–'} games</div>
-      </div>
-    </div>`;
+    simHtml += `</div>`;
   }
 
-  el.innerHTML=h;
+  return `
+<div class="match-card${live ? ' is-live' : ''}">
+  <div class="match-top">${topHtml}</div>
+  <div class="match-body">
+    <div class="team"><span class="flag">${m.homeFlag||''}</span><span class="tname">${m.home}</span></div>
+    <div class="score-area">${scoreHtml}</div>
+    <div class="team"><span class="flag">${m.awayFlag||''}</span><span class="tname">${m.away}</span></div>
+  </div>
+  <div class="tips">${tipsHtml}</div>
+  ${simHtml}
+</div>`;
 }
 
-function stdList(std){
-  const leader=std[0]?.points||0;
-  let h='';
-  std.forEach((s,i)=>{
-    h+=`<div class="str ${i===0?'first':''}">
-      <div class="rr rr${s.rank}">${s.rank}</div>
-      <div class="stn">${s.name}</div>
-      ${i>0?`<div class="stg">−${leader-s.points}</div>`:''}
-      <div><div class="stp">${s.points}</div><div class="stpl">pts</div></div>
-    </div>`;
-  });
-  return h;
-}
+// ── Render ───────────────────────────────────────────────────────────
+function render(DATA) {
+  _data = DATA;
+  _countdowns = [];
 
-// ── MORE TAB ─────────────────────────────────────────────────────────────
-function renderMore(){
-  const el=document.getElementById('c-more');
-  let h=sec('👟 Top Scorers');
-  const sc=DATA?.top_scorers||[];
-  if(sc.length){
-    h+=`<div class="card">`;
-    sc.forEach((s,i)=>{
-      h+=`<div class="sc-row">
-        <div style="font-size:13px;font-weight:800;color:var(--text2);width:20px">${i+1}</div>
-        <div style="flex:1">
-          <div style="font-size:14px;font-weight:800">${s.flag||''} ${s.name}</div>
-          <div style="font-size:10px;color:var(--text2)">${s.country||''}</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-size:18px;font-weight:900;color:var(--gold)">${s.goals}</div>
-          <div style="font-size:9px;color:var(--text2)">goals</div>
-        </div>
-      </div>`;
-    });
-    h+=`</div>`;
-  }else{
-    h+=`<div class="empty" style="padding:24px"><div class="ei">👟</div><p>Top scorers appear here once loaded.</p></div>`;
+  // Standings
+  const maxPts = Math.max(...DATA.standings.map(s=>s.points), 1);
+  document.getElementById('standings-section').innerHTML =
+    `<div class="section-title">Rangliste</div>` +
+    DATA.standings.map(s => `
+<div class="s-row">
+  <span class="s-rank">#${s.rank}</span>
+  <span class="s-name">${s.name}</span>
+  <div class="s-bar-wrap"><div class="s-bar" style="width:${(s.points/maxPts*100).toFixed(1)}%"></div></div>
+  <span class="s-pts">${s.points} Pkt</span>
+</div>`).join('');
+
+  // Decide default active tab: last round with a live game, or most recent with results
+  let defaultTab = DATA.rounds.length - 1;
+  DATA.rounds.forEach((r,i) => { if (r.matches.some(m => isLive(m))) defaultTab = i; });
+
+  // If no live, default to the last round with any results
+  if (!DATA.rounds[defaultTab].matches.some(m => isLive(m))) {
+    DATA.rounds.forEach((r,i) => { if (r.matches.some(m => m.result)) defaultTab = i; });
   }
 
-  h+=sec('📅 All Rounds');
-  const rounds=DATA?.rounds||[];
-  rounds.forEach((r,ri)=>{
-    const done=(r.matches||[]).filter(m=>m.result).length;
-    const total=(r.matches||[]).length;
-    h+=`<div class="card" style="margin-bottom:8px;cursor:pointer" onclick="go('matches');setRound(${ri})">
-      <div style="display:flex;align-items:center;gap:12px;padding:13px 14px">
-        <div style="flex:1;font-size:14px;font-weight:700">${r.name||'Round '+(ri+1)}</div>
-        <div style="font-size:11px;color:var(--text2)">${done}/${total} played</div>
-        <div style="color:var(--text2);font-size:14px">›</div>
-      </div>
-    </div>`;
-  });
+  if (_activeTab < 0) _activeTab = defaultTab;
 
-  el.innerHTML=h;
-}
+  // Tabs
+  const tabsEl = document.getElementById('tabs');
+  tabsEl.innerHTML = DATA.rounds.map((r,i) =>
+    `<div class="tab${i===_activeTab?' active':''}" onclick="switchTab(${i})">${r.name}</div>`
+  ).join('');
 
-// ── Countdown ticks ──────────────────────────────────────────────────────
-function startCDs(){
-  clearInterval(window._cdt);
-  window._cdt=setInterval(tickCDs,1000);
-  tickCDs();
-}
-function tickCDs(){
-  const now=Date.now();
-  document.querySelectorAll('[id$="_h"]').forEach(hEl=>{
-    const base=hEl.id.slice(0,-2);
-    const mEl=document.getElementById(base+'_m');
-    const sEl=document.getElementById(base+'_s');
-    if(!mEl||!sEl)return;
-    // Reverse engineer kickoff from id
-    // Parse: cd_20260624190000 or mcd_20260624190000_Switzerland
-    const raw=base.replace(/^(?:cd_|mcd_)/,'').replace(/_\w+$/,'');
-    if(!/^\d{14,}$/.test(raw))return;
-    const y=raw.slice(0,4),mo=raw.slice(4,6),d=raw.slice(6,8),hh=raw.slice(8,10),mm=raw.slice(10,12),ss=raw.slice(12,14);
-    const ko=new Date(`${y}-${mo}-${d}T${hh}:${mm}:${ss}Z`);
-    if(isNaN(ko))return;
-    const diff=ko-now;
-    if(diff<=0){hEl.textContent=mEl.textContent=sEl.textContent='00';return;}
-    hEl.textContent=pad(Math.floor(diff/36e5));
-    mEl.textContent=pad(Math.floor((diff%36e5)/6e4));
-    sEl.textContent=pad(Math.floor((diff%6e4)/1e3));
+  // Panels
+  document.getElementById('panels').innerHTML = DATA.rounds.map((r,i) => `
+<div class="round-panel${i===_activeTab?' active':''}" id="panel-${i}">
+  ${r.matches.map((m,j) => matchCard(m, r.isKO||false, i, j)).join('')}
+</div>`).join('');
+
+  // Updated
+  if (DATA.updated) {
+    document.getElementById('updated').textContent =
+      'Aktualisiert: ' + new Date(DATA.updated).toLocaleString('de-CH',{timeZone:'Europe/Zurich'});
+  }
+
+  // Gather countdown elements
+  document.querySelectorAll('[data-ko]').forEach(el => {
+    _countdowns.push({el, ko: +new Date(el.dataset.ko)});
   });
 }
 
-// ── Tab switching ────────────────────────────────────────────────────────
-function go(t){
-  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
-  document.querySelectorAll('.nb').forEach(e=>e.classList.remove('active'));
-  document.getElementById('tab-'+t).classList.add('active');
-  document.querySelectorAll('.nb').forEach(e=>{if(e.getAttribute('onclick')===`go('${t}')`)e.classList.add('active');});
-  // Re-render if needed
-  if(t==='matches')renderMatches();
+function switchTab(i) {
+  _activeTab = i;
+  document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active', j===i));
+  document.querySelectorAll('.round-panel').forEach((p,j) => p.classList.toggle('active', j===i));
 }
 
-// ── Helpers ──────────────────────────────────────────────────────────────
-function sec(t){return`<div class="sh"><h2>${t}</h2></div>`;}
-function fmtTime(d){return d.toLocaleTimeString('en-CH',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Zurich'});}
-function fmtDate(d){return d.toLocaleDateString('en-CH',{weekday:'short',day:'numeric',month:'short',timeZone:'Europe/Zurich'});}
-function sameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
-function pad(n){return String(Math.max(0,n)).padStart(2,'0');}
+// ── Countdown ticker ─────────────────────────────────────────────────
+function tickCountdowns() {
+  const now = Date.now();
+  _countdowns.forEach(({el, ko}) => {
+    if (!el.isConnected) return;
+    const cd = fmtCd(ko - now);
+    el.textContent = cd ? `⏱ ${cd}` : 'Jetzt!';
+  });
+}
 
-// ── Init ─────────────────────────────────────────────────────────────────
-loadData();
-setInterval(loadData,2*60*1000);
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
+// ── Data loading ─────────────────────────────────────────────────────
+let _lastUpdated = '';
+async function loadData() {
+  const res = await fetch('./data/data.json?t=' + Date.now());
+  return res.json();
+}
+
+async function refresh() {
+  try {
+    const data = await loadData();
+    if (data.updated !== _lastUpdated) {
+      _lastUpdated = data.updated;
+      render(data);
+    }
+  } catch(e) { console.warn('Refresh failed', e); }
+}
+
+// ── Init ─────────────────────────────────────────────────────────────
+(async () => {
+  try {
+    const data = await loadData();
+    _lastUpdated = data.updated;
+    render(data);
+  } catch(e) {
+    document.getElementById('panels').innerHTML = '<div style="padding:32px;text-align:center;color:var(--text2)">Daten werden geladen…</div>';
+    console.error(e);
+  }
+})();
+
+// ntfy link
+document.getElementById('notif-link').href = NTFY;
+
+// Countdown every second
+setInterval(tickCountdowns, 1000);
+
+// Data refresh every 60s; faster when live game running
+setInterval(() => {
+  const hasLive = _data?.rounds?.some(r => r.matches.some(m => isLive(m)));
+  if (hasLive) refresh(); // always refresh during live
+}, 60000);
+setInterval(() => {
+  const hasLive = _data?.rounds?.some(r => r.matches.some(m => isLive(m)));
+  if (!hasLive) refresh();
+}, 5 * 60000);
+
+// Refresh on tab focus
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') refresh();
+});
+
+// Service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
 </script>
 </body>
 </html>

@@ -1,17 +1,16 @@
 {
   "name": "Gruppe Schibli – WM 2026",
   "short_name": "Schibli WM",
-  "description": "Tippspiel Rangliste für Gruppe Schibli",
-  "start_url": "/gruppe-schibli/",
-  "scope": "/gruppe-schibli/",
+  "description": "Tippspiel-Tracker für Gruppe Schibli",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#0d1b2a",
-  "theme_color": "#0d1b2a",
+  "background_color": "#0d0d1a",
+  "theme_color": "#0d0d1a",
   "orientation": "portrait",
   "icons": [
     {
       "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>",
-      "sizes": "any",
+      "sizes": "192x192",
       "type": "image/svg+xml"
     }
   ]

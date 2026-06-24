@@ -25,75 +25,1412 @@
     {
       "name": "Round 1",
       "isKO": false,
-      "matches": []
+      "matches": [
+        {
+          "home": "Mexico",
+          "away": "South Africa",
+          "homeFlag": "🇲🇽",
+          "awayFlag": "🇿🇦",
+          "kickoff": "2026-06-11T19:00:00Z",
+          "result": {
+            "home": 2,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "South Korea",
+          "away": "Czechia",
+          "homeFlag": "🇰🇷",
+          "awayFlag": "🇨🇿",
+          "kickoff": "2026-06-12T02:00:00Z",
+          "result": {
+            "home": 2,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Canada",
+          "away": "Bosnia-Herzeg.",
+          "homeFlag": "🇨🇦",
+          "awayFlag": "🇧🇦",
+          "kickoff": "2026-06-12T19:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "USA",
+          "away": "Paraguay",
+          "homeFlag": "🇺🇸",
+          "awayFlag": "🇵🇾",
+          "kickoff": "2026-06-13T01:00:00Z",
+          "result": {
+            "home": 4,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Qatar",
+          "away": "Switzerland",
+          "homeFlag": "🇶🇦",
+          "awayFlag": "🇨🇭",
+          "kickoff": "2026-06-13T19:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 0,
+              "away": 2
+            },
+            "Alice B": {
+              "home": 0,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 0,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 3
+            }
+          }
+        },
+        {
+          "home": "Brazil",
+          "away": "Morocco",
+          "homeFlag": "🇧🇷",
+          "awayFlag": "🇲🇦",
+          "kickoff": "2026-06-13T22:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 1,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 3,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Haiti",
+          "away": "Scotland",
+          "homeFlag": "🇭🇹",
+          "awayFlag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+          "kickoff": "2026-06-14T01:00:00Z",
+          "result": {
+            "home": 0,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 0,
+              "away": 3
+            },
+            "Alice B": {
+              "home": 0,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 0,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Australia",
+          "away": "Turkey",
+          "homeFlag": "🇦🇺",
+          "awayFlag": "🇹🇷",
+          "kickoff": "2026-06-14T04:00:00Z",
+          "result": {
+            "home": 2,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 1,
+              "away": 3
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 2
+            }
+          }
+        },
+        {
+          "home": "Germany",
+          "away": "Curaçao",
+          "homeFlag": "🇩🇪",
+          "awayFlag": "🇨🇼",
+          "kickoff": "2026-06-14T17:00:00Z",
+          "result": {
+            "home": 7,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 5,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 4,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 4,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 5,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Netherlands",
+          "away": "Japan",
+          "homeFlag": "🇳🇱",
+          "awayFlag": "🇯🇵",
+          "kickoff": "2026-06-14T20:00:00Z",
+          "result": {
+            "home": 2,
+            "away": 2
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Ivory Coast",
+          "away": "Ecuador",
+          "homeFlag": "🇨🇮",
+          "awayFlag": "🇪🇨",
+          "kickoff": "2026-06-14T23:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 0,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Sweden",
+          "away": "Tunisia",
+          "homeFlag": "🇸🇪",
+          "awayFlag": "🇹🇳",
+          "kickoff": "2026-06-15T02:00:00Z",
+          "result": {
+            "home": 5,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 2
+            }
+          }
+        },
+        {
+          "home": "Spain",
+          "away": "Cape Verde",
+          "homeFlag": "🇪🇸",
+          "awayFlag": "🇨🇻",
+          "kickoff": "2026-06-15T16:00:00Z",
+          "result": {
+            "home": 0,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 6,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 4,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 4,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Belgium",
+          "away": "Egypt",
+          "homeFlag": "🇧🇪",
+          "awayFlag": "🇪🇬",
+          "kickoff": "2026-06-15T19:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 3,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Saudi Arabia",
+          "away": "Uruguay",
+          "homeFlag": "🇸🇦",
+          "awayFlag": "🇺🇾",
+          "kickoff": "2026-06-15T22:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 1,
+              "away": 2
+            },
+            "Alice B": {
+              "home": 0,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 2
+            }
+          }
+        },
+        {
+          "home": "Iran",
+          "away": "New Zealand",
+          "homeFlag": "🇮🇷",
+          "awayFlag": "🇳🇿",
+          "kickoff": "2026-06-16T01:00:00Z",
+          "result": {
+            "home": 2,
+            "away": 2
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 1,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "France",
+          "away": "Senegal",
+          "homeFlag": "🇫🇷",
+          "awayFlag": "🇸🇳",
+          "kickoff": "2026-06-16T19:00:00Z",
+          "result": {
+            "home": 3,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 3,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Iraq",
+          "away": "Norway",
+          "homeFlag": "🇮🇶",
+          "awayFlag": "🇳🇴",
+          "kickoff": "2026-06-16T22:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 4
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 0,
+              "away": 2
+            },
+            "Alice B": {
+              "home": 0,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 0,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 2
+            }
+          }
+        },
+        {
+          "home": "Argentina",
+          "away": "Algeria",
+          "homeFlag": "🇦🇷",
+          "awayFlag": "🇩🇿",
+          "kickoff": "2026-06-17T01:00:00Z",
+          "result": {
+            "home": 3,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Austria",
+          "away": "Jordan",
+          "homeFlag": "🇦🇹",
+          "awayFlag": "🇯🇴",
+          "kickoff": "2026-06-17T04:00:00Z",
+          "result": {
+            "home": 3,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Portugal",
+          "away": "DR Congo",
+          "homeFlag": "🇵🇹",
+          "awayFlag": "🇨🇩",
+          "kickoff": "2026-06-17T17:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 3,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 4,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "England",
+          "away": "Croatia",
+          "homeFlag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+          "awayFlag": "🇭🇷",
+          "kickoff": "2026-06-17T20:00:00Z",
+          "result": {
+            "home": 4,
+            "away": 2
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Ghana",
+          "away": "Panama",
+          "homeFlag": "🇬🇭",
+          "awayFlag": "🇵🇦",
+          "kickoff": "2026-06-17T23:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Uzbekistan",
+          "away": "Colombia",
+          "homeFlag": "🇺🇿",
+          "awayFlag": "🇨🇴",
+          "kickoff": "2026-06-18T02:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 3
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 0,
+              "away": 3
+            },
+            "Alice B": {
+              "home": 0,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 0,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 0,
+              "away": 2
+            }
+          }
+        }
+      ]
     },
     {
       "name": "Round 2",
       "isKO": false,
-      "matches": []
-    },
-    {
-      "name": "Round 3",
-      "isKO": false,
       "matches": [
+        {
+          "home": "Czechia",
+          "away": "South Africa",
+          "homeFlag": "🇨🇿",
+          "awayFlag": "🇿🇦",
+          "kickoff": "2026-06-18T16:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Switzerland",
+          "away": "Bosnia-Herzeg.",
+          "homeFlag": "🇨🇭",
+          "awayFlag": "🇧🇦",
+          "kickoff": "2026-06-18T19:00:00Z",
+          "result": {
+            "home": 4,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Canada",
+          "away": "Qatar",
+          "homeFlag": "🇨🇦",
+          "awayFlag": "🇶🇦",
+          "kickoff": "2026-06-18T22:00:00Z",
+          "result": {
+            "home": 6,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Mexico",
+          "away": "South Korea",
+          "homeFlag": "🇲🇽",
+          "awayFlag": "🇰🇷",
+          "kickoff": "2026-06-19T01:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "USA",
+          "away": "Australia",
+          "homeFlag": "🇺🇸",
+          "awayFlag": "🇦🇺",
+          "kickoff": "2026-06-19T19:00:00Z",
+          "result": {
+            "home": 2,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Scotland",
+          "away": "Morocco",
+          "homeFlag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+          "awayFlag": "🇲🇦",
+          "kickoff": "2026-06-19T22:00:00Z",
+          "result": {
+            "home": 0,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 0,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Brazil",
+          "away": "Haiti",
+          "homeFlag": "🇧🇷",
+          "awayFlag": "🇭🇹",
+          "kickoff": "2026-06-20T00:30:00Z",
+          "result": {
+            "home": 3,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 4,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 3,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Turkey",
+          "away": "Paraguay",
+          "homeFlag": "🇹🇷",
+          "awayFlag": "🇵🇾",
+          "kickoff": "2026-06-20T03:00:00Z",
+          "result": {
+            "home": 0,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Netherlands",
+          "away": "Sweden",
+          "homeFlag": "🇳🇱",
+          "awayFlag": "🇸🇪",
+          "kickoff": "2026-06-20T17:00:00Z",
+          "result": {
+            "home": 5,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 1,
+              "away": 2
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Germany",
+          "away": "Ivory Coast",
+          "homeFlag": "🇩🇪",
+          "awayFlag": "🇨🇮",
+          "kickoff": "2026-06-20T20:00:00Z",
+          "result": {
+            "home": 2,
+            "away": 1
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 3,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Ecuador",
+          "away": "Curaçao",
+          "homeFlag": "🇪🇨",
+          "awayFlag": "🇨🇼",
+          "kickoff": "2026-06-21T00:00:00Z",
+          "result": {
+            "home": 0,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Tunisia",
+          "away": "Japan",
+          "homeFlag": "🇹🇳",
+          "awayFlag": "🇯🇵",
+          "kickoff": "2026-06-21T04:00:00Z",
+          "result": {
+            "home": 0,
+            "away": 4
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 0,
+              "away": 3
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 2
+            }
+          }
+        },
+        {
+          "home": "Spain",
+          "away": "Saudi Arabia",
+          "homeFlag": "🇪🇸",
+          "awayFlag": "🇸🇦",
+          "kickoff": "2026-06-21T16:00:00Z",
+          "result": {
+            "home": 4,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 3,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Belgium",
+          "away": "Iran",
+          "homeFlag": "🇧🇪",
+          "awayFlag": "🇮🇷",
+          "kickoff": "2026-06-21T19:00:00Z",
+          "result": {
+            "home": 0,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Uruguay",
+          "away": "Cape Verde",
+          "homeFlag": "🇺🇾",
+          "awayFlag": "🇨🇻",
+          "kickoff": "2026-06-21T22:00:00Z",
+          "result": {
+            "home": 2,
+            "away": 2
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "New Zealand",
+          "away": "Egypt",
+          "homeFlag": "🇳🇿",
+          "awayFlag": "🇪🇬",
+          "kickoff": "2026-06-22T01:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 3
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 0,
+              "away": 2
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 2
+            }
+          }
+        },
+        {
+          "home": "Argentina",
+          "away": "Austria",
+          "homeFlag": "🇦🇷",
+          "awayFlag": "🇦🇹",
+          "kickoff": "2026-06-22T17:00:00Z",
+          "result": {
+            "home": 2,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 3,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "France",
+          "away": "Iraq",
+          "homeFlag": "🇫🇷",
+          "awayFlag": "🇮🇶",
+          "kickoff": "2026-06-22T21:00:00Z",
+          "result": {
+            "home": 3,
+            "away": 0
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 3,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 3,
+              "away": 0
+            }
+          }
+        },
+        {
+          "home": "Norway",
+          "away": "Senegal",
+          "homeFlag": "🇳🇴",
+          "awayFlag": "🇸🇳",
+          "kickoff": "2026-06-23T00:00:00Z",
+          "result": {
+            "home": 3,
+            "away": 2
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 1
+            }
+          }
+        },
+        {
+          "home": "Jordan",
+          "away": "Algeria",
+          "homeFlag": "🇯🇴",
+          "awayFlag": "🇩🇿",
+          "kickoff": "2026-06-23T03:00:00Z",
+          "result": {
+            "home": 1,
+            "away": 2
+          },
+          "predictions": {
+            "Sandro S": {
+              "home": 1,
+              "away": 1
+            },
+            "Alice B": {
+              "home": 1,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 1,
+              "away": 1
+            },
+            "Adi S": {
+              "home": 1,
+              "away": 2
+            }
+          }
+        },
         {
           "home": "Portugal",
           "away": "Uzbekistan",
           "homeFlag": "🇵🇹",
           "awayFlag": "🇺🇿",
-          "date": "24 Jun",
-          "kickoff": "2026-06-24T15:00:00Z",
+          "kickoff": "2026-06-23T17:00:00Z",
           "result": {
             "home": 5,
             "away": 0
           },
-          "predictions": {}
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 0
+            }
+          }
         },
         {
           "home": "England",
           "away": "Ghana",
           "homeFlag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
           "awayFlag": "🇬🇭",
-          "date": "24 Jun",
-          "kickoff": "2026-06-24T15:00:00Z",
+          "kickoff": "2026-06-23T20:00:00Z",
           "result": {
             "home": 0,
             "away": 0
           },
-          "predictions": {}
+          "predictions": {
+            "Sandro S": {
+              "home": 3,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 3,
+              "away": 1
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 4,
+              "away": 1
+            }
+          }
         },
         {
           "home": "Panama",
           "away": "Croatia",
           "homeFlag": "🇵🇦",
           "awayFlag": "🇭🇷",
-          "date": "24 Jun",
-          "kickoff": "2026-06-24T18:00:00Z",
+          "kickoff": "2026-06-23T23:00:00Z",
           "result": {
             "home": 0,
             "away": 1
           },
-          "predictions": {}
+          "predictions": {
+            "Sandro S": {
+              "home": 0,
+              "away": 2
+            },
+            "Alice B": {
+              "home": 0,
+              "away": 2
+            },
+            "Karin S": {
+              "home": 0,
+              "away": 2
+            },
+            "Adi S": {
+              "home": 0,
+              "away": 2
+            }
+          }
         },
         {
           "home": "Colombia",
           "away": "DR Congo",
           "homeFlag": "🇨🇴",
           "awayFlag": "🇨🇩",
-          "date": "24 Jun",
-          "kickoff": "2026-06-24T18:00:00Z",
+          "kickoff": "2026-06-24T02:00:00Z",
           "result": {
             "home": 1,
             "away": 0
           },
-          "predictions": {}
-        },
+          "predictions": {
+            "Sandro S": {
+              "home": 2,
+              "away": 0
+            },
+            "Alice B": {
+              "home": 2,
+              "away": 0
+            },
+            "Karin S": {
+              "home": 2,
+              "away": 0
+            },
+            "Adi S": {
+              "home": 2,
+              "away": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Round 3",
+      "isKO": false,
+      "matches": [
         {
           "home": "Switzerland",
           "away": "Canada",
           "homeFlag": "🇨🇭",
           "awayFlag": "🇨🇦",
-          "date": "24 Jun",
           "kickoff": "2026-06-24T19:00:00Z",
           "predictions": {}
         },
@@ -102,7 +1439,6 @@
           "away": "Qatar",
           "homeFlag": "🇧🇦",
           "awayFlag": "🇶🇦",
-          "date": "24 Jun",
           "kickoff": "2026-06-24T19:00:00Z",
           "predictions": {}
         },
@@ -111,7 +1447,6 @@
           "away": "Brazil",
           "homeFlag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
           "awayFlag": "🇧🇷",
-          "date": "25 Jun",
           "kickoff": "2026-06-24T22:00:00Z",
           "predictions": {}
         },
@@ -120,7 +1455,6 @@
           "away": "Haiti",
           "homeFlag": "🇲🇦",
           "awayFlag": "🇭🇹",
-          "date": "25 Jun",
           "kickoff": "2026-06-24T22:00:00Z",
           "predictions": {}
         },
@@ -129,7 +1463,6 @@
           "away": "South Korea",
           "homeFlag": "🇿🇦",
           "awayFlag": "🇰🇷",
-          "date": "25 Jun",
           "kickoff": "2026-06-25T01:00:00Z",
           "predictions": {}
         },
@@ -138,7 +1471,6 @@
           "away": "Mexico",
           "homeFlag": "🇨🇿",
           "awayFlag": "🇲🇽",
-          "date": "25 Jun",
           "kickoff": "2026-06-25T01:00:00Z",
           "predictions": {}
         },
@@ -147,7 +1479,6 @@
           "away": "Germany",
           "homeFlag": "🇪🇨",
           "awayFlag": "🇩🇪",
-          "date": "25 Jun",
           "kickoff": "2026-06-25T20:00:00Z",
           "predictions": {}
         },
@@ -156,7 +1487,6 @@
           "away": "Ivory Coast",
           "homeFlag": "🇨🇼",
           "awayFlag": "🇨🇮",
-          "date": "25 Jun",
           "kickoff": "2026-06-25T20:00:00Z",
           "predictions": {}
         },
@@ -165,7 +1495,6 @@
           "away": "Netherlands",
           "homeFlag": "🇹🇳",
           "awayFlag": "🇳🇱",
-          "date": "26 Jun",
           "kickoff": "2026-06-25T23:00:00Z",
           "predictions": {}
         },
@@ -174,7 +1503,6 @@
           "away": "Sweden",
           "homeFlag": "🇯🇵",
           "awayFlag": "🇸🇪",
-          "date": "26 Jun",
           "kickoff": "2026-06-25T23:00:00Z",
           "predictions": {}
         },
@@ -183,7 +1511,6 @@
           "away": "Australia",
           "homeFlag": "🇵🇾",
           "awayFlag": "🇦🇺",
-          "date": "26 Jun",
           "kickoff": "2026-06-26T02:00:00Z",
           "predictions": {}
         },
@@ -192,7 +1519,6 @@
           "away": "USA",
           "homeFlag": "🇹🇷",
           "awayFlag": "🇺🇸",
-          "date": "26 Jun",
           "kickoff": "2026-06-26T02:00:00Z",
           "predictions": {}
         },
@@ -201,231 +1527,99 @@
           "away": "France",
           "homeFlag": "🇳🇴",
           "awayFlag": "🇫🇷",
-          "date": "26 Jun",
           "kickoff": "2026-06-26T19:00:00Z",
-          "predictions": {}
-        },
-        {
-          "home": "Spain",
-          "away": "New Zealand",
-          "homeFlag": "🇪🇸",
-          "awayFlag": "🇳🇿",
-          "date": "26 Jun",
-          "kickoff": "2026-06-26T19:00:00Z",
-          "predictions": {}
-        },
-        {
-          "home": "Argentina",
-          "away": "Ireland",
-          "homeFlag": "🇦🇷",
-          "awayFlag": "🇮🇪",
-          "date": "27 Jun",
-          "kickoff": "2026-06-26T22:00:00Z",
-          "predictions": {}
-        },
-        {
-          "home": "Kenya",
-          "away": "Chile",
-          "homeFlag": "🇰🇪",
-          "awayFlag": "🇨🇱",
-          "date": "27 Jun",
-          "kickoff": "2026-06-26T22:00:00Z",
           "predictions": {}
         },
         {
           "home": "Senegal",
-          "away": "Austria",
+          "away": "Iraq",
           "homeFlag": "🇸🇳",
+          "awayFlag": "🇮🇶",
+          "kickoff": "2026-06-26T19:00:00Z",
+          "predictions": {}
+        },
+        {
+          "home": "Uruguay",
+          "away": "Spain",
+          "homeFlag": "🇺🇾",
+          "awayFlag": "🇪🇸",
+          "kickoff": "2026-06-27T00:00:00Z",
+          "predictions": {}
+        },
+        {
+          "home": "Cape Verde",
+          "away": "Saudi Arabia",
+          "homeFlag": "🇨🇻",
+          "awayFlag": "🇸🇦",
+          "kickoff": "2026-06-27T00:00:00Z",
+          "predictions": {}
+        },
+        {
+          "home": "New Zealand",
+          "away": "Belgium",
+          "homeFlag": "🇳🇿",
+          "awayFlag": "🇧🇪",
+          "kickoff": "2026-06-27T03:00:00Z",
+          "predictions": {}
+        },
+        {
+          "home": "Egypt",
+          "away": "Iran",
+          "homeFlag": "🇪🇬",
+          "awayFlag": "🇮🇷",
+          "kickoff": "2026-06-27T03:00:00Z",
+          "predictions": {}
+        },
+        {
+          "home": "Croatia",
+          "away": "Ghana",
+          "homeFlag": "🇭🇷",
+          "awayFlag": "🇬🇭",
+          "kickoff": "2026-06-27T21:00:00Z",
+          "predictions": {}
+        },
+        {
+          "home": "Panama",
+          "away": "England",
+          "homeFlag": "🇵🇦",
+          "awayFlag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+          "kickoff": "2026-06-27T21:00:00Z",
+          "predictions": {}
+        },
+        {
+          "home": "Colombia",
+          "away": "Portugal",
+          "homeFlag": "🇨🇴",
+          "awayFlag": "🇵🇹",
+          "kickoff": "2026-06-27T23:30:00Z",
+          "predictions": {}
+        },
+        {
+          "home": "DR Congo",
+          "away": "Uzbekistan",
+          "homeFlag": "🇨🇩",
+          "awayFlag": "🇺🇿",
+          "kickoff": "2026-06-27T23:30:00Z",
+          "predictions": {}
+        },
+        {
+          "home": "Algeria",
+          "away": "Austria",
+          "homeFlag": "🇩🇿",
           "awayFlag": "🇦🇹",
-          "date": "27 Jun",
-          "kickoff": "2026-06-27T01:00:00Z",
-          "predictions": {}
-        },
-        {
-          "home": "Ukraine",
-          "away": "Costa Rica",
-          "homeFlag": "🇺🇦",
-          "awayFlag": "🇨🇷",
-          "date": "27 Jun",
-          "kickoff": "2026-06-27T01:00:00Z",
-          "predictions": {}
-        },
-        {
-          "home": "Belgium",
-          "away": "Romania",
-          "homeFlag": "🇧🇪",
-          "awayFlag": "🇷🇴",
-          "date": "27 Jun",
-          "kickoff": "2026-06-27T20:00:00Z",
-          "predictions": {}
-        },
-        {
-          "home": "Peru",
-          "away": "Albania",
-          "homeFlag": "🇵🇪",
-          "awayFlag": "🇦🇱",
-          "date": "27 Jun",
-          "kickoff": "2026-06-27T20:00:00Z",
-          "predictions": {}
-        },
-        {
-          "home": "Canada",
-          "away": "Bosnia-Herzeg.",
-          "homeFlag": "🇨🇦",
-          "awayFlag": "🇧🇦",
-          "date": "28 Jun",
-          "kickoff": "2026-06-27T23:00:00Z",
-          "predictions": {}
-        },
-        {
-          "home": "Qatar",
-          "away": "Switzerland",
-          "homeFlag": "🇶🇦",
-          "awayFlag": "🇨🇭",
-          "date": "28 Jun",
-          "kickoff": "2026-06-27T23:00:00Z",
-          "predictions": {}
-        },
-        {
-          "home": "Denmark",
-          "away": "Nigeria",
-          "homeFlag": "🇩🇰",
-          "awayFlag": "🇳🇬",
-          "date": "28 Jun",
           "kickoff": "2026-06-28T02:00:00Z",
           "predictions": {}
         },
         {
-          "home": "Poland",
-          "away": "Serbia",
-          "homeFlag": "🇵🇱",
-          "awayFlag": "🇷🇸",
-          "date": "28 Jun",
+          "home": "Jordan",
+          "away": "Argentina",
+          "homeFlag": "🇯🇴",
+          "awayFlag": "🇦🇷",
           "kickoff": "2026-06-28T02:00:00Z",
           "predictions": {}
         }
       ]
-    },
-    {
-      "name": "Round of 32",
-      "isKO": true,
-      "matches": []
-    },
-    {
-      "name": "Round of 16",
-      "isKO": true,
-      "matches": []
-    },
-    {
-      "name": "Quarter-finals",
-      "isKO": true,
-      "matches": []
-    },
-    {
-      "name": "Semi-finals",
-      "isKO": true,
-      "matches": []
-    },
-    {
-      "name": "Third Place",
-      "isKO": true,
-      "matches": []
-    },
-    {
-      "name": "Final",
-      "isKO": true,
-      "matches": []
     }
   ],
-  "bonus_questions": [
-    {
-      "q": "🏆 World Champion",
-      "a": {
-        "Sandro S": "Spain",
-        "Alice B": "Spain",
-        "Karin S": "Spain",
-        "Adi S": "Spain"
-      }
-    },
-    {
-      "q": "🇨🇭 How far does Switzerland go?",
-      "a": {
-        "Sandro S": "Round of 16",
-        "Alice B": "Round of 16",
-        "Karin S": "Round of 16",
-        "Adi S": "Quarter-final"
-      }
-    },
-    {
-      "q": "⚽ Switzerland total goals (excl. shootouts)",
-      "a": {
-        "Sandro S": "7",
-        "Alice B": "7",
-        "Karin S": "4",
-        "Adi S": "9"
-      }
-    },
-    {
-      "q": "👟 Top scorer total goals (excl. shootouts)",
-      "a": {
-        "Sandro S": "5",
-        "Alice B": "7",
-        "Karin S": "8",
-        "Adi S": "7"
-      },
-      "current": 5,
-      "current_label": "Messi leads with 5 goals"
-    },
-    {
-      "q": "0️⃣ Matches ending 0-0 in tournament",
-      "a": {
-        "Sandro S": "4",
-        "Alice B": "10",
-        "Karin S": "9",
-        "Adi S": "8"
-      },
-      "current": 2,
-      "current_label": "2 so far"
-    }
-  ],
-  "top_scorers": [
-    {
-      "name": "Lionel Messi",
-      "country": "Argentina",
-      "flag": "🇦🇷",
-      "goals": 5
-    },
-    {
-      "name": "Erling Haaland",
-      "country": "Norway",
-      "flag": "🇳🇴",
-      "goals": 4
-    },
-    {
-      "name": "Jonathan David",
-      "country": "Canada",
-      "flag": "🇨🇦",
-      "goals": 3
-    },
-    {
-      "name": "Cristiano Ronaldo",
-      "country": "Portugal",
-      "flag": "🇵🇹",
-      "goals": 3
-    },
-    {
-      "name": "Kylian Mbappé",
-      "country": "France",
-      "flag": "🇫🇷",
-      "goals": 3
-    }
-  ],
-  "tournament_stats": {
-    "top_scorer_name": "Lionel Messi",
-    "top_scorer_flag": "🇦🇷",
-    "top_scorer_goals": 5,
-    "zero_zero_count": 2
-  },
-  "groups": {},
-  "updated_at": "24.06.2026 16:13 UTC"
+  "updated": "2026-06-24T17:04:10Z"
 }

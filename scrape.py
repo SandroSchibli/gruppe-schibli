@@ -9,7 +9,8 @@ import json
 import logging
 import os
 import re
-from datetime import datetime
+import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 from playwright.async_api import async_playwright
@@ -127,71 +128,58 @@ async def run():
         page = await ctx.new_page()
 
         # ── Load & login ───────────────────────────────────────────────────
-        log.info(f"Loading {BASE} ...")
-        await page.goto(BASE, wait_until="domcontentloaded", timeout=30000)
-        await dismiss_cookie_banner(page)
-        await page.screenshot(path="/tmp/01_loaded.png")
+        # SRF uses SRG SSO via OIDC — redirects to account.srgssr.ch
+        # Two-step flow: email → Weiter → password → submit → back to tippspiel
+        log.info("Navigating to SRG SSO login...")
+        await page.goto(f"{BASE}/auth/oidc?intent=signin", wait_until="domcontentloaded", timeout=30000)
+        await page.screenshot(path="/tmp/01_sso_login.png")
+        log.info(f"After OIDC redirect: {page.url}")
 
-        if await page.locator("text=Willkommen").count() == 0:
-            log.info("Not logged in — clicking login...")
-            for sel in ["text=JETZT ANMELDEN", "text=Anmelden", "a[href*='login']"]:
-                try:
-                    if await page.locator(sel).count() > 0:
-                        await page.locator(sel).first.click()
-                        log.info(f"Clicked: {sel}")
-                        break
-                except Exception:
-                    continue
+        if "account.srgssr.ch" in page.url:
+            log.info("On SSO page — filling email...")
+            # Step 1: enter email
+            email_input = page.locator("input[placeholder='E-Mail'], input[type='email'], input[name='email']").first
+            await email_input.wait_for(timeout=10000)
+            await email_input.fill(username)
+            await page.screenshot(path="/tmp/02_email_filled.png")
 
-            await page.wait_for_load_state("domcontentloaded", timeout=20000)
-            await dismiss_cookie_banner(page)
-            await page.screenshot(path="/tmp/02_after_click.png")
+            # Click "Weiter"
+            await page.locator("button:has-text('Weiter'), button[type='submit']").first.click()
+            log.info("Clicked Weiter...")
 
-            for sel in ["text=Ich habe bereits ein Konto", "text=Bereits registriert", "text=Einloggen"]:
-                try:
-                    if await page.locator(sel).count() > 0:
-                        await page.locator(sel).first.click()
-                        await page.wait_for_load_state("domcontentloaded", timeout=10000)
-                        break
-                except Exception:
-                    continue
+            # Step 2: wait for password field
+            try:
+                await page.wait_for_selector("input[type='password']", timeout=10000)
+                log.info("Password field appeared")
+                await page.screenshot(path="/tmp/03_password_form.png")
 
-            for sel in ["input[type='email']", "input[name='email']", "input[id*='email']"]:
-                try:
-                    if await page.locator(sel).count() > 0:
-                        await page.locator(sel).first.fill(username)
-                        break
-                except Exception:
-                    continue
+                await page.locator("input[type='password']").first.fill(password)
+                await page.screenshot(path="/tmp/04_password_filled.png")
 
-            for sel in ["input[type='password']", "input[name='password']"]:
-                try:
-                    if await page.locator(sel).count() > 0:
-                        await page.locator(sel).first.fill(password)
-                        break
-                except Exception:
-                    continue
+                # Submit login
+                await page.locator("button[type='submit'], button:has-text('Anmelden')").first.click()
+                log.info("Submitted login form...")
 
-            await page.screenshot(path="/tmp/03_filled.png")
+                # Wait for redirect back to tippspiel
+                await page.wait_for_url(f"{BASE}/**", timeout=25000)
+                await page.screenshot(path="/tmp/05_after_login.png")
+                log.info(f"Redirected back: {page.url}")
 
-            for sel in ["button[type='submit']", "text=Anmelden", "text=Login"]:
-                try:
-                    if await page.locator(sel).count() > 0:
-                        await page.locator(sel).first.click()
-                        break
-                except Exception:
-                    continue
+            except Exception as e:
+                log.error(f"Login step failed: {e}")
+                await page.screenshot(path="/tmp/error_login.png")
+        else:
+            # Already logged in (session cookie still valid)
+            log.info(f"Already logged in or unexpected redirect: {page.url}")
 
-            await page.wait_for_load_state("domcontentloaded", timeout=20000)
-            await page.screenshot(path="/tmp/04_after_login.png")
-            log.info(f"After login URL: {page.url}")
-
+        # Make sure we're on the tippspiel homepage
         if BASE not in page.url:
+            log.info("Navigating back to tippspiel...")
             await page.goto(BASE, wait_until="domcontentloaded", timeout=20000)
-            await dismiss_cookie_banner(page)
 
-        await page.screenshot(path="/tmp/05_tippspiel.png")
-        log.info("Logged in — collecting data...")
+        await dismiss_cookie_banner(page)
+        await page.screenshot(path="/tmp/06_tippspiel.png")
+        log.info(f"Ready to scrape — URL: {page.url}")
 
         # ── Standings ──────────────────────────────────────────────────────
         standings = await get_standings(page)
@@ -227,15 +215,80 @@ async def run():
             "top_scorers": existing.get("top_scorers", []),
             "tournament_stats": existing.get("tournament_stats", {}),
             "groups": existing.get("groups", {}),
-            "updated_at": datetime.utcnow().strftime("%d.%m.%Y %H:%M") + " UTC",
+            "updated": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
         }
 
         Path("data").mkdir(exist_ok=True)
         ep.write_text(json.dumps(data, ensure_ascii=False, indent=2))
         log.info(f"Saved: {len(standings)} standings, {len(rounds)} rounds")
 
+        # ── Push notifications for games starting now ──────────────────────
+        send_kickoff_notifications(data)
+
         await browser.close()
     return data
+
+
+# ── Push notifications via ntfy.sh ────────────────────────────────────────
+def send_kickoff_notifications(data: dict):
+    topic = os.environ.get("NTFY_TOPIC", "")
+    if not topic:
+        log.info("NTFY_TOPIC not set — skipping notifications")
+        return
+
+    now = datetime.now(timezone.utc)
+    members = ["Sandro S", "Alice B", "Karin S", "Adi S"]
+    first = {"Sandro S": "Sandro", "Alice B": "Alice", "Karin S": "Karin", "Adi S": "Adi"}
+
+    for rnd in data.get("rounds", []):
+        for match in rnd.get("matches", []):
+            kickoff_str = match.get("kickoff")
+            if not kickoff_str:
+                continue
+            try:
+                ko = datetime.fromisoformat(kickoff_str.replace("Z", "+00:00"))
+            except Exception:
+                continue
+
+            # Send notification if kickoff was within the last 6 minutes
+            mins_since = (now - ko).total_seconds() / 60
+            if not (0 <= mins_since <= 6):
+                continue
+
+            home = match.get("home", "?")
+            away = match.get("away", "?")
+            hf   = match.get("homeFlag", "")
+            af   = match.get("awayFlag", "")
+            preds = match.get("predictions", {})
+
+            # Build tip line per member
+            tip_parts = []
+            for mb in members:
+                tip = preds.get(mb, {})
+                h, a = tip.get("home"), tip.get("away")
+                if h is not None and a is not None:
+                    tip_parts.append(f"{first[mb]}: {h}-{a}")
+                else:
+                    tip_parts.append(f"{first[mb]}: ?")
+
+            title   = f"⚽ {hf} {home} vs {away} {af} — ANSTOSS!"
+            message = "  ·  ".join(tip_parts)
+
+            try:
+                req = urllib.request.Request(
+                    f"https://ntfy.sh/{topic}",
+                    data=message.encode("utf-8"),
+                    headers={
+                        "Title":    title,
+                        "Priority": "high",
+                        "Tags":     "soccer,world_cup",
+                    },
+                    method="POST",
+                )
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    log.info(f"Notification sent for {home} vs {away}: {resp.status}")
+            except Exception as e:
+                log.warning(f"Notification failed for {home} vs {away}: {e}")
 
 
 # ── Standings ──────────────────────────────────────────────────────────────
